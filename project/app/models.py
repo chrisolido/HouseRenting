@@ -74,4 +74,3 @@ class House(Document):
     information = fields.DynamicField(verbose_name="Description")
     vars()['type'] = fields.StringField(required=True, choices=['Group', 'Alone'])
     # pictures = fields.ListField(fields.ImageField(), required=False)
-

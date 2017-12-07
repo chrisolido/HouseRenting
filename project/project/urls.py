@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include, url
-from django.contrib import admin
 
 from app.views import *
 from users.views import *
@@ -30,8 +29,7 @@ urlpatterns = [
 
     # index page should be served by django to set cookies, headers etc.
     url(r'^$', index_view, {}, name='index'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # let django built-in server serve static and media content
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
