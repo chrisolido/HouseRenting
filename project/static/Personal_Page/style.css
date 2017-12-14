@@ -1,0 +1,195 @@
+body{
+    margin: 0px;
+}
+#wrapper{
+    width: 1440px;
+}
+#head{
+    width: inherit;
+    height: 100px;
+    background-color: #1288c3;
+}
+#p1{
+    position: absolute;
+    left:97px;
+    top: 15px;
+    font-size: 48px;
+    margin: 0px;
+    color: white;
+}
+#p2{
+    position: absolute;
+    right:70px;
+    top: 40px;
+    font-size: 20px;
+    margin: 0px;
+    color: white;
+
+}
+#left{
+    position: absolute;
+    left: 52px;
+    top:142px;
+    width:338px;
+    height:390px;
+    background-color: #f2edf2;
+
+}
+
+#hr1{
+    position: absolute;
+    left: 92px;
+    top:215px;
+    color: #bbbbbb;
+    width: 221px;
+}
+#wrapper hr{
+    margin: 0px;
+}
+#wrapper a{
+    text-decoration: none;
+}
+#center{
+    position: absolute;
+    left: 94px;
+    top:171px;
+    color: #5e5c5e;
+    font-size: 28px;
+    margin: 0px;
+}
+#release{
+    position: absolute;
+    left: 97px;
+    top:261px;
+    color: #7d7b7d;
+    font-size: 28px;
+    margin: 0px;
+}
+#history{
+    position: absolute;
+    left: 97px;
+    top:331px;
+    color: #7d7b7d;
+    font-size: 28px;
+    margin: 0px;
+}
+#information{
+    position: absolute;
+    left: 97px;
+    top:401px;
+    color: #7d7b7d;
+    font-size: 28px;
+    margin: 0px;
+}
+
+#right_title{
+    position: absolute;
+    left:421px;
+    top:167px;
+    font-size: 28px;
+    color:#1288c3;
+    margin: 0px;
+}
+#hr2{
+    position: absolute;
+    left: 410px;
+    top:215px;
+    color: #bbbbbb;
+    width: 1007px;
+
+}
+#submit{
+    position: relative;
+    left: 300px;
+    width: 150px;
+    height: 43px;
+    font-size: 28px;
+    color: white;
+    background-color:#1288c3 ;
+    border-width: 0px;
+    text-align: center;
+}
+#add{
+    position: absolute;
+    left: 1200px;
+    top:144px;
+    width: 150px;
+    height: 43px;
+    font-size: 28px;
+    color: white;
+    background-color:#1288c3 ;
+    border-width: 0px;
+    text-align: center;
+
+}
+#right{
+    position: absolute;
+    left: 500px;
+    top: 261px;
+}
+input{
+    height: 28px;
+    margin-right: 5px;
+    margin-left: 15px;
+    font-size: 20px;
+
+}
+textarea{
+    height: 200px;
+    width: 250px;
+    margin-left: 20px;
+    border-color:  #bbbbbb;
+    font-size: 20px;
+}
+.add_info {
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+.p_div{
+    display: inline-block;
+    font-size: 28px;
+    color: #7d7b7d;
+    width: 300px;
+}
+.s_input{
+    width: 70px;
+}
+.house_img{
+    display: inline-block;
+    float: left;
+}
+.house_right{
+    position: absolute;
+    left: 400px;
+    top: 230px;
+    margin-left: 20px;
+}
+.house_info{
+    width: 1000px;
+    border-bottom-width: 1px;
+    border-bottom-color:#bbbbbb;
+    border-bottom-style: solid;
+    margin-bottom: 20px;
+}
+.house_content{
+    display: inline-block;
+    margin-left: 10px;
+    width: 800px;
+}
+.house_content p{
+    margin-top: 0px;
+    margin-bottom: 8px;
+
+}
+.house_title{
+    display: inline-block;
+    width: 650px;
+    font-size: 20px;
+    color: black
+}
+.house_rent{
+    display: inline-block;
+    color: #1288c3;
+    font-size: 20px;
+    font-style: oblique;
+}

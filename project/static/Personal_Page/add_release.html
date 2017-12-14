@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my release</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="head">
+        <a href="release.html"><p id="p1">House Renting</p></a>
+        <a href="renting_history.html"><p id="p2">15901776523(log out)</p></a>
+    </div>
+    <div id="left"></div>
+    <p id="center">personal center</p>
+    <hr id="hr1"/>
+    <a href="release.html"><p id="release" style="color: #1288c3">my release</p></a>
+    <a href="renting_history.html"><p id="history">my renting history</p></a>
+    <a href="personal_information.html"><p id="information">personal information</p></a>
+    <p id="right_title">add release</p>
+    <hr id="hr2"/>
+    <div id="right">
+        <div class="add_info">
+            <div class="p_div">rent type:</div>
+                <input type="radio" name="rent_type" />individual
+                <input type="radio" name="rent_type" />group
+        </div>
+        <div class="add_info">
+            <div class="p_div">rent title:</div>
+            <input  type="text" name="rent_title" style="width: 250px;"></div>
+        <div class="add_info">
+            <div class="p_div">community address:</div>
+            <input class="s_input"  type="text"  >city
+            <input  type="text" class="s_input">district
+            <input  type="text" class="s_input">address
+        </div>
+        <div class="add_info">
+            <div class="p_div">house type:</div>
+            <input  type="text" class="s_input">room
+            <input  type="text" class="s_input">hall
+            <input  type="text" class="s_input">㎡
+            <input  type="text" class="s_input">floor
+        </div>
+        <div class="add_info">
+            <div class="p_div">rent:</div>
+            <input  type="text" >$/month
+        </div>
+        <div class="add_info">
+            <div class="p_div">suitable renting time:</div>
+            <input  type="date" >
+            <hr style="width: 30px;display: inline-block;margin-left: 10px"/>
+            <input  type="date" >
+        </div>
+        <div class="add_info">
+            <div class="p_div" style="float: left;">detail information:</div>
+            <textarea></textarea>
+        </div>
+        <div class="add_info">
+            <div class="p_div">upload picture:</div>
+            <input type="file" style="height: 50px;font-size: 15px">
+        </div>
+        <a href="release.html" onclick="alert('add success!')"><div id="submit">+add</div></a></button>
+    </div>
+
+
+</div>
+
+</body>
+</html>

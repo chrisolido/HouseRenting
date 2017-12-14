@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my release</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<script>
+    function change_password_style() {
+        if(document.getElementById("p_btn").getAttribute("src")=="close.png")
+        {
+            document.getElementById("p_btn").setAttribute("src","open.png");
+            document.getElementById("p_value").setAttribute("type","text");
+        }
+        else
+        {
+            document.getElementById("p_btn").setAttribute("src","close.png");
+            document.getElementById("p_value").setAttribute("type","password");
+
+        }
+
+    }
+</script>
+<body>
+<div id="wrapper">
+    <div id="head">
+        <a href="release.html"><p id="p1">House Renting</p></a>
+        <a href="renting_history.html"><p id="p2">15901776523(log out)</p></a>
+    </div>
+    <div id="left"></div>
+    <p id="center">personal center</p>
+    <hr id="hr1"/>
+    <a href="release.html"><p id="release" >my release</p></a>
+    <a href="renting_history.html"><p id="history">my renting history</p></a>
+    <a href="personal_information.html"><p id="information" style="color: #1288c3">personal information</p></a>
+    <p id="right_title">personal information</p>
+    <hr id="hr2"/>
+    <a href="personal_information.html" onclick="alert('modify success!')"><div id="add">modify</div></a>
+    <div id="right">
+        <div class="add_info">
+            <div class="p_div">user name:</div>
+            <input type="text" value="Alice" >
+        </div>
+        <div class="add_info">
+            <div class="p_div">pass word:</div>
+            <input id="p_value"  type="password" value="password_01" >
+            <button style="background-color: white;border: none;outline: none" onclick="change_password_style()">
+                <img id="p_btn" src="close.png">
+            </button>
+        </div>
+        <div class="add_info">
+            <div class="p_div">mobile phone:</div>
+            <input   type="text" value="13862390738" >
+        </div>
+            <div class="add_info">
+                <div class="p_div">wechat ID:</div>
+                <input  type="text"  value="123456789">
+            </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
