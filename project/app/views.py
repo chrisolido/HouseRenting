@@ -13,6 +13,10 @@ def index_view(request):
     context = {}
     return TemplateResponse(request, 'index.html', context)
 
+def personal_page_view(request):
+    context = {}
+    return TemplateResponse(request, 'Personal_Page/personal_information.html', context)
+
 
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'

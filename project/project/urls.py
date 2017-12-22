@@ -29,6 +29,7 @@ urlpatterns = [
 
     # index page should be served by django to set cookies, headers etc.
     url(r'^$', index_view, {}, name='index'),
+    url(r'personal_page', personal_page_view, {}, name='personal_page'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # let django built-in server serve static and media content
