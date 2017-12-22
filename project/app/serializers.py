@@ -5,6 +5,7 @@ from app.models import Tool, Author, Book, House
 
 
 class HouseSerializer(mongoserializers.DocumentSerializer):
+
     class Meta:
         model = House
         field = '__all__'

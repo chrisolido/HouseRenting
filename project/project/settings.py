@@ -103,7 +103,7 @@ MONGODB_DATABASES = {
     },
 
     "test": {
-        "name": "test_project",
+        "name": "project",
         "host": "localhost",
         "port": 27017,
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)

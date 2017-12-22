@@ -29,10 +29,12 @@
  +						'</div><br><br><br>'
  +						'<div class="house_list_text2">'
  +							'<div style="float:left;">Address:&nbsp;&nbsp;</div>'
- +							'<div style="float:left;">'+address+'</div>'
+ +							'<div style="float:left;">'+address["country"] + " " + address["city"] + " " + address["district"] + " " + address["road"] + '</div>'
+ +						    '<br>'
+ +                          '<div style="float:left;"> Floor :' + address["floor"] + '</div>'
  +						'</div><br><br><br><br>'
  +					'<div class="house_list_text2">'
- +					'<div style="float:left;">Floor Number:&nbsp;&nbsp;</div><div style="float:left;">'+floor_number+'</div></div>'
+ +					'<div style="float:left;">Type :&nbsp;&nbsp;</div><div style="float:left;">'+floor_number+'</div></div>'
  +					'</div>'
  +					'<div style="float:left;position:relative;left:30px;"><div class="house_list_text3">￥'+price+'/Month</div></div>'
  +					'</div><br><br>';
@@ -49,19 +51,26 @@ window.onload=function(){
 	//var address = "Room403,No.37";
 	var floor_num = 4;
 	var price = 2400;
-	append_house_list(image, topic, size, address, floor_num, price);
-	append_house_list(image, topic, size, address, floor_num, price);
-	append_house_list(image, topic, size, address, floor_num, price);
-	append_house_list(image, topic, size, address, floor_num, price);
-}
-
-
+	{#append_house_list(image, topic, size, address, floor_num, price);#}
+	{#append_house_list(image, topic, size, address, floor_num, price);#}
+	{#append_house_list(image, topic, size, address, floor_num, price);#}
+	{#append_house_list(image, topic, size, address, floor_num, price);#}
+};
+$(document).ready(function() {
+   $.getJSON("./api/houses/", {"test": "lol"}, function (data) {
+       {#console.log(data);#}
+       $.each(data,function (index, value) {
+           console.log(value);
+           append_house_list("/static/img/house_pic1.jpg",
+               value["title"], value["size"], value["address"], value["type"], value["price"]);
+       });
+   });
+});
 </script>
 
 
 </head>
 <body>
-<!--顶部-->
 <div class="city" style="float:left;position:absolute;left:10px;" >Shanghai</div>
 	<div class="change_city" style="float:left;position:absolute;left:110px;"><a href="javascript:void(0)">[Change]</a></div>
 	<div style="float:left;position:absolute;right:5%;">
@@ -85,7 +94,6 @@ window.onload=function(){
     </section>  
 </div>
 </div>
-<!--筛选-->
 <br><br><br>
 <div>
 <section id="filtratePage" class="screening-conditions">

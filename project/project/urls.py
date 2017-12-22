@@ -15,7 +15,7 @@ router = HybridRouter()
 # router.register(r'tool', ToolViewSet, r"tool")
 # router.register(r'author', AuthorViewSet, r"author")
 # router.register(r'book', BookViewSet, r"book")
-router.register(r'house', HouseViewSet, r"house")
+router.register(r'houses', HouseViewSet, r"houses")
 router.register(r'user', UserViewSet, r"user")
 router.add_api_view(r'auth', url(r'^auth/$', ObtainAuthToken.as_view(), name=r"auth"))
 

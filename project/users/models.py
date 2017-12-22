@@ -29,14 +29,14 @@ class User(Document):
     200 lines of boilerplate code from mongoengine.django.auth.User.
     """
 
-    def number() -> int:
+    def number() -> str:
         no = User.objects.count()
         if no is None:
-            return 1
+            return "1"
         else:
-            return no + 1
+            return str(int(no) + 1)
 
-    id = fields.IntField(primary_key=True, default=number)
+    # id = fields.StringField(primary_key=True, required=True, validation=number)
     username = fields.StringField(required=True)
     email = fields.EmailField()
 

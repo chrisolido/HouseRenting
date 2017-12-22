@@ -6,6 +6,7 @@ from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSe
 
 from app.serializers import *
 from app.models import Tool, Book, Author, House
+from users.models import User
 
 
 def index_view(request):
@@ -22,6 +23,14 @@ class HouseViewSet(MongoModelViewSet):
     serializer_class = HouseSerializer
 
     def get_queryset(self):
+        print(self.request.GET)
+        print(House.objects.filter(address__country="China"))
+        houses = House.objects.filter(address__country="China")
+        for user in User.objects.all():
+            print(user)
+        for house in houses:
+            print(house.contact)
+            # print(User.objects.filter(id=house.contact))
         return House.objects.all()
 
 
