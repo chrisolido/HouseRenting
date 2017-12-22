@@ -57,7 +57,7 @@ window.onload=function(){
 	{#append_house_list(image, topic, size, address, floor_num, price);#}
 };
 $(document).ready(function() {
-   $.getJSON("./api/houses/", {"test": "lol"}, function (data) {
+   $.getJSON("./api/houses/", {"search": "blue"}, function (data) {
        {#console.log(data);#}
        $.each(data,function (index, value) {
            console.log(value);

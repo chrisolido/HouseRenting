@@ -22,11 +22,14 @@ class HouseViewSet(MongoModelViewSet):
         print(self.request.GET)
         print(House.objects.filter(address__country="China"))
         houses = House.objects.filter(address__country="China")
+        userid = None
         for user in User.objects.all():
-            print(user)
+            # userid = user.id
+            print(user.id)
         for house in houses:
-            print(house.contact)
-            # print(User.objects.filter(id=house.contact))
+            # house.update(contact=userid)
+            house.save()
+            print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
 
 
