@@ -42,20 +42,6 @@
  }
 </script>
 <script>
-window.onload=function(){
-    //alert("hello");
-	var image = "{% static "img/house_pic1.jpg" %}";
-	var topic = "Cost Effective, near subway, suitable for young people to live.";
-	var size = 45;
-	var address = "Room403,No.37,ShiFan Residential Quarter,BaoShan District";
-	//var address = "Room403,No.37";
-	var floor_num = 4;
-	var price = 2400;
-	{#append_house_list(image, topic, size, address, floor_num, price);#}
-	{#append_house_list(image, topic, size, address, floor_num, price);#}
-	{#append_house_list(image, topic, size, address, floor_num, price);#}
-	{#append_house_list(image, topic, size, address, floor_num, price);#}
-};
 $(document).ready(function() {
    $.getJSON("./api/houses/", {"search": "blue"}, function (data) {
        {#console.log(data);#}
