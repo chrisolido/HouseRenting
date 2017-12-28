@@ -17,6 +17,9 @@ def personal_page_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/personal_information.html', context)
 
+def add_release_view(request):
+    context = {}
+    return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'
