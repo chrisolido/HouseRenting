@@ -10,6 +10,10 @@
         function click_add()
         {
             alert('add success!');
+            var formD=new FormData();
+            formD.append("rent_title",$("#rent_title").val());
+            formD.append("detail_text",$("#detail_text").val());
+
             {#$.post("https://neutrinoapi.com/bad-word-filter", { "user-id": "stucafall", "api-key": "pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH","content": "fuck u"},#}
             {#    function(data){#}
             {#        alert(data);#}
@@ -26,13 +30,12 @@
             $.ajax({
                 type:'POST',
                 sync:false,
-                url:'https://neutrinoapi.com/bad-word-filter',
-                contentType:'application/json',
-                data:"{'user-id':'stucafall','api-key':'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH','content':'fuck u'}",
-                //datatype: "json",//"xml", "html", "script", "json", "jsonp", "text".
-                //data:JSON.stringify(sendData),
-                success:function(rdata){
-                    alert(rdata);
+                url:'./api/auto_badword_filter/',
+                data:formD,
+                processData:false,
+                contentType:false,
+                success: function (data) {
+                    console.log(data);
                 },
                 error: function(){
                     alert('error');
@@ -65,7 +68,7 @@
         </div>
         <div class="add_info">
             <div class="p_div">rent title:</div>
-            <input  type="text" name="rent_title" style="width: 250px;"></div>
+            <input id="rent_title" type="text" name="rent_title" style="width: 250px;"></div>
         <div class="add_info">
             <div class="p_div">community address:</div>
             <input class="s_input"  type="text"  >city
@@ -91,7 +94,7 @@
         </div>
         <div class="add_info">
             <div class="p_div" style="float: left;">detail information:</div>
-            <textarea></textarea>
+            <textarea id="detail_text"></textarea>
         </div>
         <div class="add_info">
             <div class="p_div">upload picture:</div>

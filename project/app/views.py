@@ -7,6 +7,7 @@ from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSe
 from app.serializers import *
 from app.models import Tool, Book, Author, House
 from users.models import User
+import urllib, urllib3, json
 
 
 def index_view(request):
@@ -20,6 +21,32 @@ def personal_page_view(request):
 def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
+
+def auto_badword_filter(request):
+    print (request.POST)
+    rent_title = request.POST.get("rent_title", None)
+    detail_text = request.POST.get("detail_text", None)
+    #
+    my_content = rent_title +" "+detail_text;
+    url = 'https://neutrinoapi.com/bad-word-filter'
+    params = {
+        'user-id': 'stucafall',
+        'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
+        'content': my_content
+    }
+
+    req = urllib3.Request(url, urllib.urlencode(params))
+    response = urllib3.urlopen(req)
+    result = json.loads(response.read())
+
+    print (result['is-bad'])
+    print (result['bad-words-total'])
+    print (result['bad-words-list'])
+    #
+    return HttpResponse("ok")
+
+class BadwordsViewSet(MongoModelViewSet):
+
 
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'
