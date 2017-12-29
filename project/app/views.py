@@ -29,12 +29,10 @@ def add_release_view(request):
 
 
 def auto_badword_filter(request):
-<<<<<<< HEAD
     print("value")
 
     if request.method == "GET":
         return HttpResponse("Ok")
->>>>>>> f3ab040d29fc4e217e9426460407b675c5a726a9
 
     if request.method == "POST":
         print ('blabla')
@@ -66,11 +64,9 @@ def auto_badword_filter(request):
         # print(result['bad-words-total'])
         # print(result['bad-words-list'])
         #
-<<<<<<< HEAD
         return HttpResponse("ok")
 
     return HttpResponse("Get request")
->>>>>>> f3ab040d29fc4e217e9426460407b675c5a726a9
 
 
 class HouseViewSet(MongoModelViewSet):
