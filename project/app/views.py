@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
 
+from django.http import HttpResponse
 from django.template.response import TemplateResponse
 
 from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSet
+from urllib3 import HTTPResponse
 
 from app.serializers import *
 from app.models import Tool, Book, Author, House
@@ -28,6 +30,10 @@ def add_release_view(request):
 
 
 def auto_badword_filter(request):
+    print("value")
+
+    if request.method == "GET":
+        return HttpResponse("Ok")
 
     if request.method == "POST":
         print(request.POST)
@@ -50,9 +56,7 @@ def auto_badword_filter(request):
         print(result['bad-words-total'])
         print(result['bad-words-list'])
         #
-        return urllib3.HttpResponse("ok")
-
-    return urllib3.HttpResponse("Get request")
+        return urllib3.HTTPResponse("ok")
 
 
 class HouseViewSet(MongoModelViewSet):
