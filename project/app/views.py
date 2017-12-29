@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.http import HttpResponse, HttpRequest
 from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSet
+from rest_framework_mongoengine.viewsets import GenericViewSet as MongoGenericViewSet
 from urllib3 import HTTPResponse
-
+from rest_framework.response import Response
+from rest_framework.decorators import detail_route, list_route
 from app.serializers import *
 from app.models import Tool, Book, Author, House
 from users.models import User
@@ -28,47 +30,6 @@ def add_release_view(request):
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
 
-def auto_badword_filter(request):
-    print("value")
-
-    if request.method == "GET":
-        return HttpResponse("Ok")
-
-    if request.method == "POST":
-        print ('blabla')
-        print(request.POST)
-        rent_title = request.POST.get("rent_title", None)
-        detail_text = request.POST.get("detail_text", None)
-        #
-        my_content = str(rent_title)+ " " +str(detail_text)
-        url = 'https://neutrinoapi.com/bad-word-filter'
-        params = {
-            'user-id': 'stucafall',
-            'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
-            'content': str(my_content)
-        }
-
-        # param = urllib.parse.urlencode(params)
-        # params = params.encode('utf-8')
-        # response = urllib.request.urlopen(url % param)
-        # print(response.read().decode('utf-8'))
-        # result = json.loads(response.read())
-        data = urllib.parse.urlencode({'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH', 'content': str(my_content)})
-        data = data.encode('utf-8')
-        request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
-        request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
-        f = urllib.request.urlopen(request, data)
-        print(f.read().decode('utf-8'))
-
-        # print(result['is-bad'])
-        # print(result['bad-words-total'])
-        # print(result['bad-words-list'])
-        #
-        return HttpResponse("ok")
-
-    return HttpResponse("Get request")
-
-
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'
     serializer_class = HouseSerializer
@@ -86,6 +47,48 @@ class HouseViewSet(MongoModelViewSet):
             house.save()
             print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
+
+
+class BadwordView(MongoGenericViewSet):
+
+    @list_route()
+    def list(self, request):
+        return Response({"HA": "HAA"})
+
+    @detail_route(methods=['post'])
+    def bad_worl_filter(self, request):
+        print('blabla')
+        print(request.POST)
+        rent_title = request.POST.get("rent_title", None)
+        detail_text = request.POST.get("detail_text", None)
+        #
+        my_content = str(rent_title) + " " + str(detail_text)
+        url = 'https://neutrinoapi.com/bad-word-filter'
+        params = {
+            'user-id': 'stucafall',
+            'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
+            'content': str(my_content)
+        }
+
+        # param = urllib.parse.urlencode(params)
+        # params = params.encode('utf-8')
+        # response = urllib.request.urlopen(url % param)
+        # print(response.read().decode('utf-8'))
+        # result = json.loads(response.read())
+        data = urllib.parse.urlencode(
+            {'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
+             'content': str(my_content)})
+        data = data.encode('utf-8')
+        request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
+        request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+        f = urllib.request.urlopen(request, data)
+        print(f.read().decode('utf-8'))
+
+        # print(result['is-bad'])
+        # print(result['bad-words-total'])
+        # print(result['bad-words-list'])
+        #
+        return Response({"ok": "ok"})
 
 
 class ToolViewSet(MongoModelViewSet):
