@@ -2,16 +2,15 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
-
+from django.http import HttpResponse, HttpRequest
 from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSet
 from urllib3 import HTTPResponse
 
 from app.serializers import *
 from app.models import Tool, Book, Author, House
 from users.models import User
-import urllib
-import urllib3
 import json
+import urllib
 
 
 def index_view(request):
@@ -30,33 +29,48 @@ def add_release_view(request):
 
 
 def auto_badword_filter(request):
+<<<<<<< HEAD
     print("value")
 
     if request.method == "GET":
         return HttpResponse("Ok")
+>>>>>>> f3ab040d29fc4e217e9426460407b675c5a726a9
 
     if request.method == "POST":
+        print ('blabla')
         print(request.POST)
         rent_title = request.POST.get("rent_title", None)
         detail_text = request.POST.get("detail_text", None)
         #
-        my_content = rent_title + " " + detail_text
+        my_content = str(rent_title)+ " " +str(detail_text)
         url = 'https://neutrinoapi.com/bad-word-filter'
         params = {
             'user-id': 'stucafall',
             'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
-            'content': my_content
+            'content': str(my_content)
         }
 
-        req = urllib3.Request(url, urllib.urlencode(params))
-        response = urllib3.urlopen(req)
-        result = json.loads(response.read())
+        # param = urllib.parse.urlencode(params)
+        # params = params.encode('utf-8')
+        # response = urllib.request.urlopen(url % param)
+        # print(response.read().decode('utf-8'))
+        # result = json.loads(response.read())
+        data = urllib.parse.urlencode({'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH', 'content': str(my_content)})
+        data = data.encode('utf-8')
+        request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
+        request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+        f = urllib.request.urlopen(request, data)
+        print(f.read().decode('utf-8'))
 
-        print(result['is-bad'])
-        print(result['bad-words-total'])
-        print(result['bad-words-list'])
+        # print(result['is-bad'])
+        # print(result['bad-words-total'])
+        # print(result['bad-words-list'])
         #
-        return urllib3.HTTPResponse("ok")
+<<<<<<< HEAD
+        return HttpResponse("ok")
+
+    return HttpResponse("Get request")
+>>>>>>> f3ab040d29fc4e217e9426460407b675c5a726a9
 
 
 class HouseViewSet(MongoModelViewSet):

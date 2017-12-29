@@ -13,21 +13,23 @@
             var formD=new FormData();
             formD.append("rent_title",$("#rent_title").val());
             formD.append("detail_text",$("#detail_text").val());
+<<<<<<< HEAD
             formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+>>>>>>> f3ab040d29fc4e217e9426460407b675c5a726a9
 
 
-            {#$.post("https://neutrinoapi.com/bad-word-filter", { "user-id": "stucafall", "api-key": "pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH","content": "fuck u"},#}
-            {#    function(data){#}
-            {#        alert(data);#}
-            {#        console.log(data);#}
-            {##}
-            {#        var result = JSON.parse(data);#}
-            {#        console.log(result['is-bad']);#}
-            {#    }, "json");#}
-            {#var sendData = {#}
-            {#    'user-id' : "stucafall",#}
-            {#    'api-key' : "pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH",#}
-            {#    'content' : "fuck u"#}
+            // {#$.post("https://neutrinoapi.com/bad-word-filter", { "user-id": "stucafall", "api-key": "pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH","content": "fuck u"},#}
+            // {#    function(data){#}
+            // {#        alert(data);#}
+            // {#        console.log(data);#}
+            // {##}
+            // {#        var result = JSON.parse(data);#}
+            // {#        console.log(result['is-bad']);#}
+            // {#    }, "json");#}
+            // {#var sendData = {#}
+            // {#    'user-id' : "stucafall",#}
+            // {#    'api-key' : "pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH",#}
+            // {#    'content' : "fuck u"#}
 
             $.ajax({
                 type:'POST',
@@ -37,7 +39,9 @@
                 processData:false,
                 contentType:false,
                 success: function (data) {
+<<<<<<< HEAD
                     console.log(data);
+>>>>>>> f3ab040d29fc4e217e9426460407b675c5a726a9
                     alert(data);
                 },
                 error: function(){
