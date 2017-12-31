@@ -9,6 +9,8 @@ from app.models import Tool, Book, Author, House
 from users.models import User
 import json
 import urllib
+import smtplib
+from email.mime.text import MIMEText
 
 
 def index_view(request):
@@ -30,39 +32,61 @@ def auto_badword_filter(request):
     print ('in bad words')
 
     if request.method == "POST":
-        print ('blabla')
         print(request.POST)
         rent_title = request.POST.get("rent_title", None)
         detail_text = request.POST.get("detail_text", None)
         #
         my_content = str(rent_title)+ " " +str(detail_text)
-        url = 'https://neutrinoapi.com/bad-word-filter'
-        params = {
-            'user-id': 'stucafall',
-            'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
-            'content': str(my_content)
-        }
 
-        # param = urllib.parse.urlencode(params)
-        # params = params.encode('utf-8')
-        # response = urllib.request.urlopen(url % param)
-        # print(response.read().decode('utf-8'))
-        # result = json.loads(response.read())
         data = urllib.parse.urlencode({'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH', 'content': str(my_content)})
         data = data.encode('utf-8')
         request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
         request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
         f = urllib.request.urlopen(request, data)
-        print(f.read().decode('utf-8'))
+        response = f.read().decode('utf-8')
+        print(response)
+        result = json.loads(response)
+
+        if result['is-bad']: #have bad words
+            to_email_address = "2606449422@qq.com"
+            username = "SmallCircle"
+            email_topic = "Add House Release Information Fail"
+            email_content = ("Dear "+username+", your adding house release information failed"
+                            " due to bad words in topic/house_detail, please check on House Renting Website")
+            email_inst = Email_Service()
+            email_inst.send_email(to_email_address,username,email_topic,email_content)
+            return HttpResponse("bad")
+            #send an e-mail to user to inform him post failure
+        else:
+            return HttpResponse("good")
+            #Wait for  Manual Check Service
+
 
         # print(result['is-bad'])
         # print(result['bad-words-total'])
         # print(result['bad-words-list'])
-        #
-        return HttpResponse("ok")
 
-    return HttpResponse("Get request")
+class Email_Service:
+    def send_email(self, to_email_address, username, email_topic, email_content):
+        msg_from = '2606449422@qq.com'  #from my email address
+        passwd = 'cwnspgrabbfsebjg'  # privilege code
+        msg_to = str(to_email_address)  # user's email address
 
+        subject = email_topic  # topic
+        content = email_content # content
+        msg = MIMEText(content)
+        msg['Subject'] = subject
+        msg['From'] = msg_from
+        msg['To'] = msg_to
+        try:
+            s = smtplib.SMTP_SSL("smtp.qq.com", 465) #qq email server
+            s.login(msg_from, passwd)
+            s.sendmail(msg_from, msg_to, msg.as_string())
+            print ("mail success")
+        except s.SMTPException:
+            print ("mail failure")
+        finally:
+            s.quit()
 
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'
