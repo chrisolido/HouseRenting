@@ -56,10 +56,10 @@ class HouseViewSetTestCase(APITestCase):
 
     house_list = None
 
-    def setUp(self):
+    def setUp(self): #first
         self.house_list = json.loads(house_info)
 
-    def doCleanups(self):
+    def doCleanups(self): #last
         for house in House.objects.all():
             print(house.to_json())
         # House.drop_collection()

@@ -1,0 +1,253 @@
+#position {
+    color: red;
+    font-family: "Times New Roman";
+    font-size: 45px;
+    margin-left: 0.7%;
+    display: inline;
+}
+
+body {
+    margin: 0 0 0 0;
+    overflow:auto;
+}
+
+#change:link, #change:visited {
+    text-decoration: none;
+    font-size: 45px;
+    margin-left: 0;
+    display: inline;
+    font-family: "Times New Roman";
+    color: dimgrey;
+}
+
+#change:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#Register:link, #Register:visited {
+    margin-left: 66%;
+    font-size: 45px;
+    font-family: "Times New Roman";
+    display: inline;
+    color: dimgray;
+    padding-top: 0;
+    text-decoration: none;
+}
+
+#Register:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#Login:link, #Login:visited {
+    font-size: 45px;
+    font-family: "Times New Roman";
+    color: dimgray;
+    text-decoration: none;
+
+}
+
+#Login:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#PersonalCenter:link, #PersonalCenter:visited {
+    margin-left: 2%;
+    font-size: 45px;
+    font-family: "Times New Roman";
+    color: dimgrey;
+    text-decoration: none;
+
+}
+
+#PersonalCenter:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+#title{
+    color:deepskyblue;
+    font-family:"Arial Unicode MS";
+    font-size: 100px;
+    margin-top: 0;
+    margin-bottom:1%;
+}
+#up{
+    padding:0.2% 4.5%;
+    background-color: darkgrey;
+    left:39.1%;
+    top:25.5%;
+    position:absolute;
+    font-size:5%;
+    color:white;
+}
+#down{
+    padding:0.2% 4.5%;
+    background-color: darkgrey;
+    left:39.1%;
+    top:81%;
+    position:absolute;
+    font-size:5%;
+    color:white;
+}
+#price{
+    left:52%;
+    top:20%;
+    position:absolute;
+    font-size:75px;
+    color:red;
+    font-family: "Times New Roman";
+}
+#type{
+    left:52%;
+    top:30%;
+    position:absolute;
+    font-size:60px;
+    color:grey;
+    font-family: "Times New Roman";
+}
+#typecontent{
+    left:63%;
+    top:30%;
+    position:absolute;
+    font-size:60px;
+    color:black;
+    font-family: "Times New Roman";
+}
+#housetype{
+    left:52%;
+    top:36%;
+    position:absolute;
+    font-size:60px;
+    color:grey;
+    font-family: "Times New Roman";
+}
+#housecontent{
+    left:63%;
+    top:36%;
+    position:absolute;
+    font-size:60px;
+    color:black;
+    font-family: "Times New Roman";
+}
+#floor{
+    left:52%;top:42%;position:absolute;font-size:60px;color:grey;font-family: 'Times New Roman';
+}
+#floornumber{
+    left:63%;top:42%;position:absolute;font-size:60px;color:black;font-family: 'Times New Roman'
+}
+#time{
+    left:52%;top:48%;position:absolute;font-size:60px;color:grey;font-family: 'Times New Roman';
+}
+#rentingtime{
+    left:63%;top:48%;position:absolute;font-size:60px;color:black;font-family: 'Times New Roman';
+}
+#size{
+    left:52%;top:54%;position:absolute;font-size:60px;color:grey;font-family: 'Times New Roman';
+}
+#sizeroom{
+    left:63%;top:54%;position:absolute;font-size:60px;color:black;font-family: 'Times New Roman';
+}
+#address{
+    left:52%;top:60%;position:absolute;font-size:60px;color:grey;font-family: 'Times New Roman';
+}
+#detailaddress{
+    left:63%;top:60%;position:absolute;font-size:60px;color:black;font-family: 'Times New Roman';
+}
+#number{
+    left:52%;
+    top:73%;
+    position:absolute;
+    font-size: 60px;
+    width:20%;
+    height:8%;
+    background-color: whitesmoke;
+    border:5px solid #5cc0f7;
+    text-align: right;
+    color:#5cc0f7;
+}
+#talk:link,#talk:visited{
+    left:76.5%;
+    top:78%;
+    position:absolute;
+    font-size:55px;
+    color:black;
+    font-family:'Times New Roman';
+    text-decoration: none;
+}
+#talk:hover{
+    color:#5cc0f7;
+    text-decoration: blink;
+}
+#housebutton:link{
+    left:3%;
+    top:86%;
+    display:inline-block;
+    position:absolute;
+    font-size:60px;
+    color:gray;
+    text-decoration: none;
+    font-family: "Times New Roman";
+}
+#housebutton:hover,#housebutton:visited{
+    color:black;
+    text-decoration: blink;
+}
+#mapbutton:link{
+    left:12%;
+    top:86%;
+    position:absolute;
+    display:inline-block;
+    font-size:60px;
+    color:gray;
+    text-decoration: none;
+    font-family: "Times New Roman";
+}
+#mapbutton:visited{
+    color:black;
+    text-decoration: blink;
+}
+#mapbutton:hover{
+    color:black;
+    text-decoration: blink;
+}
+#housedescription{
+    left:3%;
+    top:90%;
+    color:black;
+    position:absolute;
+    font-size: 50px;
+    font-family: "Times New Roman";
+    width:45%;
+    height:50%;
+    background-color: aliceblue;
+}
+#allmap{
+    left:3%;
+    top:147%;
+    position:absolute;
+    width:45%;
+    height:50%;
+    overflow:hidden;
+}
+#district{
+    left:3%;
+    top:140%;
+    position:absolute;
+}
+#last{
+    top:200%;
+    position:absolute;
+}
+#like{
+    left:52%;
+    top:82%;
+    position:absolute;
+
+}
+#ad{
+    left:52%;
+    top:145%;
+    position:absolute;
+}

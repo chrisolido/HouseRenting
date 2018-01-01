@@ -1,0 +1,225 @@
+.font01:link,.font01:visited {
+    font-size: 50px;
+    color: #ffffff;
+    font-style: italic;
+    font-family: "Times New Roman";
+    text-decoration:none;
+    left: 1700px;
+    top: 50px;
+    position: absolute;
+}
+
+.font01:hover {
+    color: dimgrey;
+    text-decoration: underline;
+}
+
+.font01:active {
+    color: #5cc0f7;
+    text-decoration: none;
+}
+.font02:link,.font02:visited{
+    font-size: 50px;
+    color:#ffffff;
+    font-style: italic;
+    font-family: "Times New Roman";
+    text-decoration: none;
+    position: absolute;
+    left:3240px;
+    top: 50px;
+
+
+}
+.font02:hover{
+    color:dimgrey;
+    text-decoration: underline;
+}
+.font02:active{
+    color: #5cc0f7;
+text-decoration: none;
+}
+
+
+body {
+    background: url("background.png");
+    background-size: cover;
+    margin: 0px;
+    overflow:auto;
+    width:3955px;
+    height:2012px;
+}
+#whole{
+    width:3955px;
+}
+#first{
+    position:inherit;
+    height:60px;
+}
+#section {
+    background-color:ghostwhite;
+    left: 1700px;
+    width: 1700px;
+    height: 1750px;
+    top: 150px;
+    position: absolute;
+}
+#title{
+    color:deepskyblue;
+    font-family:"Arial Unicode MS";
+    font-size: 120px;
+    margin-left: 26%;
+    margin-top:2%;
+}
+#in{
+    border:4px solid lightgray;
+    padding:4% 34%;
+    margin-left:16%;
+    padding-left: 20px;
+    background:transparent;
+    font-size: 45px;
+    color:black;
+    poositon:absolute;
+    margin-top: 50px;
+}
+#in2{
+    border:4px solid lightgray;
+    padding:4% 34%;
+    margin-left:16%;
+    padding-left: 20px;
+    background:transparent;
+    font-size: 45px;
+    color:black;
+    poositon:absolute;
+    margin-top: 120px;
+
+}
+#in3{
+    padding:3% 29%;
+    margin-left:16%;
+    margin-top:220px;
+    background-color: deepskyblue;
+    font-family: "Times New Roman";
+    font-size: 65px;
+    color:white;
+}
+input::-webkit-input-placeholder{
+    color:gray;
+    font-style: italic;
+    font-size: 45px;
+    font-family:"Times New Roman";
+
+}
+input::-moz-placeholder{
+    color:gray;
+    font-style: italic;
+    font-size: 45px;
+    font-family:"Times New Roman";
+    padding-left:20px;
+}
+input:-moz-placeholder{
+    color:gray;
+    font-style: italic;
+    font-size: 40px;
+    font-family:"Times New Roman";
+    padding-left: 20px;
+}
+input:-ms-input-placeholder{
+    color:gray;
+    font-style: italic;
+    font-size: 40px;
+    font-family:"Times New Roman";
+    padding-left:20px;
+}
+#wechat{
+    margin-left: 45%;
+    margin-top:70px;
+}
+#wechat_font:link,#wechat_font:visited{
+    margin-left: 43%;
+    font-family: "Times New Roman";
+    font-size: 40px;
+    font-style: italic;
+    color:gray;
+    text-decoration: none;
+}
+#wechat_font:hover{
+    color: dimgrey;
+    text-decoration: underline;
+}
+#wechat_font:active{
+    color: #5cc0f7;
+    text-decoration: none;
+}
+.font03:link,.font03:visited{
+    font-size: 50px;
+    color:#ffffff;
+    font-style: italic;
+    font-family: "Times New Roman";
+    text-decoration: none;
+    position: absolute;
+    left:3280px;
+    top: 50px;
+
+
+}
+.font03:hover{
+    color:dimgrey;
+    text-decoration: underline;
+}
+.font03:active{
+    color: #5cc0f7;
+    text-decoration: none;
+}
+#Inrd{
+    border:4px solid lightgray;
+    padding:4% 34%;
+    margin-left:16%;
+    padding-left: 20px;
+    background:transparent;
+    font-size: 45px;
+    color:black;
+    poositon:absolute;
+    margin-top: 60px;
+}
+#Insp{
+    border:4px solid lightgray;
+    padding:4% 34%;
+    margin-left:16%;
+    padding-left: 20px;
+    background:transparent;
+    font-size: 45px;
+    color:black;
+    poositon:absolute;
+    margin-top: 60px;
+}
+#Incp{
+    border:4px solid lightgray;
+    padding:4% 34%;
+    margin-left:16%;
+    padding-left: 20px;
+    background:transparent;
+    font-size: 45px;
+    color:black;
+    poositon:absolute;
+    margin-top: 60px;
+}
+#InRE{
+    padding:4% 27%;
+    margin-left:16%;
+    margin-top:130px;
+    background-color: deepskyblue;
+    font-family: "Times New Roman";
+    font-size: 65px;
+    color:white;
+}
+#get{
+    font-style: italic;
+    font-family: "Times New Roman";
+    font-size: 45px;
+    left:55%;
+    top:23%;
+    position: absolute;
+    background-color: darkgrey;
+    color:ghostwhite;
+    padding:2% 1.5%;
+}
