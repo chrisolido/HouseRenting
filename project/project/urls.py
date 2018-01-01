@@ -18,6 +18,7 @@ router = HybridRouter()
 router.register(r'houses', HouseViewSet, r"houses")
 router.register(r'user', UserViewSet, r"user")
 router.register(r'badwords', BadwordView,r'badwords')
+router.register(r'/bad_word_filter/', bad_word_filter,r'/bad_word_filter/')
 router.add_api_view(r'auth', url(r'^auth/$', ObtainAuthToken.as_view(), name=r"auth"))
 
 

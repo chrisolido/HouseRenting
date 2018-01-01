@@ -31,6 +31,38 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
+def bad_word_filter(request):
+    if request.method == "POST":
+        print(request.POST)
+        rent_title = request.POST.get("rent_title", None)
+        detail_text = request.POST.get("detail_text", None)
+
+        my_content = str(rent_title) + " " + str(detail_text)
+
+        data = urllib.parse.urlencode(
+                {'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
+                'content': str(my_content)})
+        data = data.encode('utf-8')
+        request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
+        request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+        f = urllib.request.urlopen(request, data)
+        response = f.read().decode('utf-8')
+        print(response)
+        result = json.loads(response)
+
+        if result['is-bad']: #have bad words
+            to_email_address = "2606449422@qq.com"
+            username = "SmallCircle"
+            email_topic = "Add House Release Information Fail"
+            email_content = ("Dear "+username+", your adding house release information failed"
+                            " due to bad words in topic/house_detail, please check on House Renting Website")
+            email_inst = Email_Service()
+            email_inst.send_email(to_email_address,username,email_topic,email_content)
+            return HttpResponse("bad")
+            #send an e-mail to user to inform him post failure
+        else:
+            return HttpResponse("good")
+            #Wait for  Manual Check Service
 
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'
