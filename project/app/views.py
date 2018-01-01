@@ -7,7 +7,6 @@ from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSe
 from rest_framework_mongoengine.viewsets import GenericViewSet as MongoGenericViewSet
 from urllib3 import HTTPResponse
 from rest_framework.response import Response
-from rest_framework.decorators import detail_route, list_route
 from app.serializers import *
 from app.models import Tool, Book, Author, House
 from users.models import User
@@ -32,9 +31,18 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
-def HouseDetail_view(request):
+
+def house_detail_view(request):
     context = {}
     return TemplateResponse(request, 'House_detail/HouseDetail.html', context)
+
+
+def user_register_view(request):
+    context = {}
+    if request.method == "POST":
+        print(request.POST)
+    return TemplateResponse(request, 'House_detail/Register.html', context)
+
 
 class HouseViewSet(MongoModelViewSet):
     lookup_field = 'id'
@@ -56,12 +64,6 @@ class HouseViewSet(MongoModelViewSet):
 
 
 class BadwordView(viewsets.ViewSet):
-
-    # http_method_names = ['get', 'post', 'head']
-
-    # @list_route()
-    # def list(self, request):
-    #     return Response({"HA": "HAA"})
 
     def create(self, request):
         print("Bad word")
@@ -97,7 +99,6 @@ class BadwordView(viewsets.ViewSet):
                 return HttpResponse("good")
             # Wait for  Manual Check Service
 
-
         # print(result['is-bad'])
         # print(result['bad-words-total'])
         # print(result['bad-words-list'])
@@ -125,50 +126,29 @@ class Email_Service:
         finally:
             s.quit()
 
-
-class HouseViewSet(MongoModelViewSet):
-    lookup_field = 'id'
-    serializer_class = HouseSerializer
-
-    def get_queryset(self):
-        print(self.request.GET)
-        print(House.objects.filter(address__country="China"))
-        houses = House.objects.filter(address__country="China")
-        userid = None
-        for user in User.objects.all():
-            # userid = user.id
-            print(user.id)
-        for house in houses:
-            # house.update(contact=userid)
-            house.save()
-            print(User.objects.filter(id=house.contact.id))
-        return House.objects.all()
-        # return Response({"ok": "ok"})
-
-
-class ToolViewSet(MongoModelViewSet):
-    """
-    Contains information about inputs/outputs of a single program
-    that may be used in Universe workflows.
-    """
-    lookup_field = 'id'
-    serializer_class = ToolSerializer
-
-    def get_queryset(self):
-        return Tool.objects.all()
-
-
-class BookViewSet(MongoModelViewSet):
-    lookup_field = 'id'
-    serializer_class = BookSerializer
-
-    def get_queryset(self):
-        return Book.objects.all()
-
-
-class AuthorViewSet(MongoModelViewSet):
-    lookup_field = 'id'
-    serializer_class = AuthorSerializer
-
-    def get_queryset(self):
-        return Author.objects.all()
+# class ToolViewSet(MongoModelViewSet):
+#     """
+#     Contains information about inputs/outputs of a single program
+#     that may be used in Universe workflows.
+#     """
+#     lookup_field = 'id'
+#     serializer_class = ToolSerializer
+#
+#     def get_queryset(self):
+#         return Tool.objects.all()
+#
+#
+# class BookViewSet(MongoModelViewSet):
+#     lookup_field = 'id'
+#     serializer_class = BookSerializer
+#
+#     def get_queryset(self):
+#         return Book.objects.all()
+#
+#
+# class AuthorViewSet(MongoModelViewSet):
+#     lookup_field = 'id'
+#     serializer_class = AuthorSerializer
+#
+#     def get_queryset(self):
+#         return Author.objects.all()

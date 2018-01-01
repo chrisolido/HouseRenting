@@ -53,6 +53,10 @@ class Tool(Document):
     permanentFailCodes = fields.ListField(fields.IntField(), required=False)
 
 
+# class Advertisement(Document):
+
+
+
 class Address(EmbeddedDocument):
     country = fields.StringField(required=True)
     city = fields.StringField(required=True)
