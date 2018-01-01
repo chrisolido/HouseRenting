@@ -125,7 +125,7 @@ def is_test():
         return False
 
 if is_test():
-    db = 'test'
+    db = 'default'
 else:
     db = 'default'
 

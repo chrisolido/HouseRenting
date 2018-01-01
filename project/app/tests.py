@@ -19,6 +19,7 @@ house_info = '''
         "information": null,
         "type": "Group",
         "contact": "5a2e135a59bfed19ea856ff7",
+        "check": false,
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -34,6 +35,7 @@ house_info = '''
         "from_date": {"$date": 1512980682785},
         "to_date": {"$date": 1512980682785},
         "size": 5,
+        "check": true,
         "information": "Information of house",
         "type": "Group",
         "contact": "5a2e135a59bfed19ea856ff7",
@@ -67,3 +69,10 @@ class HouseViewSetTestCase(APITestCase):
         for house in self.house_list:
             local_house = House.from_json(json.dumps(house))
             local_house.save()
+
+    def test_is_check(self):
+        for house in House.objects.all():
+            if house.check:
+                print("House has been checked")
+            else:
+                print("Tou need check")
