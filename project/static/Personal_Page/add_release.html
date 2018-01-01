@@ -7,29 +7,27 @@
     <script src={% static "js/jquery-1.10.1.min.js" %}></script>
     <link rel="stylesheet" media="screen" href="{% static "css/personal_page/style.css" %}"/>
     <script>
-        function click_add()
-        {
-            var formD=new FormData();
-            formD.append("rent_title",$("#rent_title").val());
-            formD.append("detail_text",$("#detail_text").val());
+        function click_add() {
+            var formD = new FormData();
+            formD.append("rent_title", $("#rent_title").val());
+            formD.append("detail_text", $("#detail_text").val());
             formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
-
+            console.log(formD);
             $.ajax({
-                type:'POST',
-                sync:false,
-                url:'/bad_word_filter/',
-                data:formD,
-                processData:false,
-                contentType:false,
+                type: 'POST',
+                sync: false,
+                url: '/api/badwords/',
+                data: formD,
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     console.log(data);
                     alert(data);
                 },
-                error: function(){
+                error: function () {
                     alert('error');
-                }
+                }});
 
-            });
         }
     </script>
 </head>
@@ -50,34 +48,34 @@
     <div id="right">
         <div class="add_info">
             <div class="p_div">rent type:</div>
-                <input type="radio" name="rent_type" />individual
-                <input type="radio" name="rent_type" />group
+            <input type="radio" name="rent_type"/>individual
+            <input type="radio" name="rent_type"/>group
         </div>
         <div class="add_info">
             <div class="p_div">rent title:</div>
             <input id="rent_title" type="text" name="rent_title" style="width: 250px;"></div>
         <div class="add_info">
             <div class="p_div">community address:</div>
-            <input class="s_input"  type="text"  >city
-            <input  type="text" class="s_input">district
-            <input  type="text" class="s_input">address
+            <input class="s_input" type="text">city
+            <input type="text" class="s_input">district
+            <input type="text" class="s_input">address
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
-            <input  type="text" class="s_input">room
-            <input  type="text" class="s_input">hall
-            <input  type="text" class="s_input">㎡
-            <input  type="text" class="s_input">floor
+            <input type="text" class="s_input">room
+            <input type="text" class="s_input">hall
+            <input type="text" class="s_input">㎡
+            <input type="text" class="s_input">floor
         </div>
         <div class="add_info">
             <div class="p_div">rent:</div>
-            <input  type="text" >$/month
+            <input type="text">$/month
         </div>
         <div class="add_info">
             <div class="p_div">suitable renting time:</div>
-            <input  type="date" >
+            <input type="date">
             <hr style="width: 30px;display: inline-block;margin-left: 10px"/>
-            <input  type="date" >
+            <input type="date">
         </div>
         <div class="add_info">
             <div class="p_div" style="float: left;">detail information:</div>
@@ -87,7 +85,9 @@
             <div class="p_div">upload picture:</div>
             <input type="file" style="height: 50px;font-size: 15px">
         </div>
-        <a href="#" onclick="click_add()"><div id="submit">+add</div></a></button>
+        <a href="#" onclick="click_add()">
+            <div id="submit">+add</div>
+        </a></button>
     </div>
 
 
