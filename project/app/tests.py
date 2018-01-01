@@ -67,3 +67,5 @@ class HouseViewSetTestCase(APITestCase):
         for house in self.house_list:
             local_house = House.from_json(json.dumps(house))
             local_house.save()
+
+

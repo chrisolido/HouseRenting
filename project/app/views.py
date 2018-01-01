@@ -31,6 +31,10 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
+def HouseDetail_view(request):
+    context = {}
+    return TemplateResponse(request, 'House_detail/HouseDetail.html', context)
+
 def bad_word_filter(request):
     if request.method == "POST":
         print(request.POST)

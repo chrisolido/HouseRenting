@@ -1,0 +1,600 @@
+body {
+    margin: 0;
+}
+
+#whole {
+    width: 1440px;
+}
+
+#head {
+    width: inherit;
+    bottom: 0;
+}
+
+#position {
+    color: red;
+    font-family: "Times New Roman";
+    font-size: 15px;
+    left: 60px;
+    top: 0px;
+    margin: 0px;
+    position: absolute;
+}
+
+#change:link, #change:visited {
+    text-decoration: none;
+    font-size: 15px;
+    left: 120px;
+    position: absolute;
+    margin: 0px;
+    font-family: "Times New Roman";
+    color: dimgrey;
+
+}
+
+#change:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#Register:link, #Register:visited {
+    right: 200px;
+    position: absolute;
+    font-size: 15px;
+    font-family: "Times New Roman";
+    color: dimgray;
+    text-decoration: none;
+
+}
+
+#Register:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#Login:link, #Login:visited {
+    right: 160px;
+    font-size: 15px;
+    font-family: "Times New Roman";
+    color: dimgray;
+    text-decoration: none;
+    position: absolute;
+
+}
+
+#Login:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#PersonalCenter:link, #PersonalCenter:visited {
+    right: 30px;
+    font-size: 15px;
+    font-family: "Times New Roman";
+    color: dimgrey;
+    text-decoration: none;
+    position: absolute;
+
+}
+
+#PersonalCenter:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#hr1 {
+    top: 10px;
+    width: 100%;
+    position: absolute;
+}
+
+#title {
+    color: deepskyblue;
+    font-family: "Arial Unicode MS";
+    font-size: 50px;
+    top: 0px;
+    left: 60px;
+    position: absolute;
+}
+
+#Des_title {
+    font-size: 30px;
+    font-family: 'Times New Roman';
+    top: 80px;
+    left: 60px;
+    position: absolute;
+}
+
+#number {
+    color: grey;
+    font-family: 'Times New Roman';
+    font-size: 10px;
+    top: 150px;
+    left: 60px;
+    position: absolute;
+}
+
+#date {
+    color: grey;
+    font-family: 'Times New Roman';
+    font-size: 10px;
+    top: 150px;
+    left: 170px;
+    position: absolute;
+}
+
+#mainpic {
+    width: 500px;
+    height: 400px;
+    left: 60px;
+    top: 180px;
+    position: absolute;
+}
+
+#up {
+    width: 110px;
+    height: 20px;
+    left: 570px;
+    top: 180px;
+    font-size: 20px;
+    position: absolute;
+    background-color: lightgray;
+}
+
+#example {
+    width: 110px;
+    height: 110px;
+    left: 570px;
+    top: 205px;
+    position: absolute;
+}
+
+#example2 {
+    width: 110px;
+    height: 120px;
+    left: 570px;
+    top: 320px;
+    position: absolute;
+}
+
+#example3 {
+    width: 110px;
+    height: 110px;
+    left: 570px;
+    top: 445px;
+    position: absolute;
+}
+
+#down {
+    width: 110px;
+    height: 20px;
+    left: 570px;
+    top: 560px;
+    font-size: 20px;
+    position: absolute;
+    background-color: lightgray;
+}
+
+#bd {
+    left: 750px;
+    width: 700px;
+    top: 170px;
+    height: 400px;
+    position: absolute;
+    background-color: whitesmoke;
+}
+
+#price {
+    left: 780px;
+    top: 140px;
+    position: absolute;
+    font-size: 35px;
+    color: red;
+    font-family: "Times New Roman";
+}
+
+#type {
+    left: 780px;
+    top: 210px;
+    position: absolute;
+    font-size: 20px;
+    color: grey;
+    font-family: "Times New Roman";
+}
+
+#typecontent {
+    left: 900px;
+    top: 210px;
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    font-family: "Times New Roman";
+}
+
+#housetype {
+    left: 780px;
+    top: 250px;
+    position: absolute;
+    font-size: 20px;
+    color: grey;
+    font-family: "Times New Roman";
+}
+
+#housecontent {
+    left: 900px;
+    top: 250px;
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    font-family: "Times New Roman";
+}
+
+#floor {
+    left: 780px;
+    top: 290px;
+    position: absolute;
+    font-size: 20px;
+    color: grey;
+    font-family: 'Times New Roman';
+}
+
+#floornumber {
+    left: 900px;
+    top: 290px;
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    font-family: 'Times New Roman'
+}
+
+#time {
+    left: 780px;
+    top: 330px;
+    position: absolute;
+    font-size: 20px;
+    color: grey;
+    font-family: 'Times New Roman';
+}
+
+#rentingtime {
+    left: 900px;
+    top: 330px;
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    font-family: 'Times New Roman';
+}
+
+#size {
+    left: 780px;
+    top: 370px;
+    position: absolute;
+    font-size: 20px;
+    color: grey;
+    font-family: 'Times New Roman';
+}
+
+#sizeroom {
+    left: 900px;
+    top: 370px;
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    font-family: 'Times New Roman';
+}
+
+#address {
+    left: 780px;
+    top: 410px;
+    position: absolute;
+    font-size: 20px;
+    color: grey;
+    font-family: 'Times New Roman';
+}
+
+#detailaddress {
+    left: 900px;
+    top: 410px;
+    position: absolute;
+    font-size: 20px;
+    color: black;
+    font-family: 'Times New Roman';
+}
+
+#pnum {
+    left: 800px;
+    top: 490px;
+    position: absolute;
+    font-size: 20px;
+    width: 220px;
+    height: 50px;
+    background-color: whitesmoke;
+    border: 1px solid #5cc0f7;
+    text-align: right;
+    color: #5cc0f7;
+    padding: 2px;
+}
+
+#ppic {
+    width: 40px;
+    height: 40px;
+    left: 803px;
+    top: 498px;
+    position: absolute
+}
+
+#wetalk {
+    top: 485px;
+    left: 1200px;
+    width: 50px;
+    height: 45px;
+    position: absolute
+}
+
+#talk:link, #talk:visited {
+    left: 1200px;
+    top: 530px;
+    position: absolute;
+    font-size: 25px;
+    color: black;
+    font-family: 'Times New Roman';
+    text-decoration: none;
+}
+
+#talk:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+
+#buttonbd1 {
+    left: 60px;
+    top: 600px;
+    position: absolute;
+    width: 180px;
+    height: 40px;
+    background-color: gainsboro;
+}
+
+#housebutton:link {
+    left: 60px;
+    top: 0px;
+    position: absolute;
+    font-size: 30px;
+    color: gray;
+    text-decoration: none;
+    font-family: "Times New Roman";
+}
+
+#housebutton:hover, #housebutton:visited {
+    color: black;
+    text-decoration: blink;
+}
+
+#buttonbd2 {
+    left: 250px;
+    top: 600px;
+    position: absolute;
+    width: 180px;
+    height: 40px;
+    background-color: gainsboro;
+}
+
+#mapbutton:link {
+    left: 60px;
+    top: 0px;
+    position: absolute;
+    font-size: 30px;
+    color: gray;
+    text-decoration: none;
+    font-family: "Times New Roman";
+}
+
+#mapbutton:visited, #mapbutton:hover {
+    color: black;
+    text-decoration: blink;
+}
+
+#housedescription {
+    left: 60px;
+    top: 640px;
+    position: absolute;
+    width: 620px;
+    height: 250px;
+    background-color: whitesmoke;
+}
+
+#description {
+    color: skyblue;
+    font-size: 20px;
+    font-family: Constantia;
+    left: 70px;
+    top: 10px;
+    position: absolute;
+}
+
+#district {
+    left: 60px;
+    top: 895px;
+    position: absolute;
+    background-color: gainsboro;
+    width: 180px;
+    height: 40px;
+}
+
+#content {
+    left: 65px;
+    top: 865px;
+    position: absolute;
+    color: gray;
+    font-size: 30px;
+    font-family: "Times New Roman";
+}
+
+#allmap {
+    left: 60px;
+    top: 940px;
+    position: absolute;
+    width: 620px;
+    height: 500px;
+    overflow: hidden;
+}
+
+#like {
+    left: 750px;
+    top: 600px;
+    position: absolute;
+    width: 350px;
+    height: 40px;
+    background-color: gainsboro;
+}
+
+#liketitle {
+    font-size: 30px;
+    color: gray;
+    font-family: "Times New Roman";
+    left: 760px;
+    top: 570px;
+    position: absolute;
+}
+
+#likecontentbd {
+    left: 750px;
+    top: 635px;
+    position: absolute;
+    width: 700px;
+    height: 500px;
+    background-color: whitesmoke;
+}
+
+#likepc1 {
+    width: 200px;
+    height: 200px;
+    left: 780px;
+    top: 670px;
+    position: absolute;
+}
+
+#pc1price {
+    left: 780px;
+    background-color: white;
+    color: red;
+    top: 850px;
+    font-size: 14px;
+    position: absolute;
+    width: 120px;
+    height: 20px;
+}
+
+#likepc2 {
+    width: 200px;
+    height: 200px;
+    left: 1100px;
+    top: 670px;
+    position: absolute
+}
+
+#pc2price {
+    left: 1100px;
+    background-color: white;
+    color: red;
+    top: 850px;
+    font-size: 14px;
+    position: absolute;
+    width: 120px;
+    height: 20px;
+}
+
+#likepc3 {
+    width: 200px;
+    height: 200px;
+    left: 780px;
+    top: 925px;
+    position: absolute
+}
+#pc3price{
+    left: 780px;
+    background-color: white;
+    color: red;
+    top: 1105px;
+    font-size: 14px;
+    position: absolute;
+    width: 120px;
+    height: 20px;
+}
+#likepc4{
+    width: 200px;
+    height: 200px;
+    left: 1100px;
+    top: 925px;
+    position: absolute
+}
+#pc4price{
+    left: 1100px;
+    background-color: white;
+    color: red;
+    top: 1105px;
+    font-size: 14px;
+    position: absolute;
+    width: 120px;
+    height: 20px;
+}
+#ad{
+    width:700px;
+    height:300px;
+    background-color: whitesmoke;
+    left:750px;
+    top:1140px;
+    position: absolute;
+}
+#ad1{
+    width:200px;
+    height:200px;
+    left:760px;
+    top:1190px;
+    position: absolute;
+}
+#ad2{
+    width:200px;
+    height:200px;
+    left:1150px;
+    top:1190px;
+    position: absolute;
+}
+#adtitle{
+    left:760px;
+    top:1120px;
+    font-style: italic;
+    font-size: 28px;
+    position: absolute;
+    font-family: "Times New Roman";
+    color:gray;
+}
+#ad1p:link,#ad1p:visited{
+    left:810px;
+    top:1390px;
+    position: absolute;
+    font-size: 20px;
+    color:gray;
+    font-family: "Times New Roman";
+}
+#ad1p:hover{
+    color:black;
+}
+#ad2p:link,#ad2p:visited{
+    left:1200px;
+    top:1390px;
+    position:absolute;
+    font-size: 20px;
+    color:gray;
+    font-family: "Times New Roman";
+}
+#ad2p:hover{
+    color:black;
+}
+#hr2{
+    bottom: 10px;
+    width: 100%;
+    position: absolute;
+    top:1450px;
+
+}
