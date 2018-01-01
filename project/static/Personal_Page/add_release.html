@@ -12,16 +12,17 @@
             var formD=new FormData();
             formD.append("rent_title",$("#rent_title").val());
             formD.append("detail_text",$("#detail_text").val());
-            formD.append("csrfmiddlewaretoken", '{{ csrf_token }}');
+            formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
 
             $.ajax({
                 type:'POST',
                 sync:false,
-                url:'/badwords',
+                url:'/badwords/bad_worl_filter',
                 data:formD,
                 processData:false,
                 contentType:false,
                 success: function (data) {
+                    console.log(data);
                     alert(data);
                 },
                 error: function(){

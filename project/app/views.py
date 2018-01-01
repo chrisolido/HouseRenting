@@ -1,9 +1,13 @@
 from __future__ import unicode_literals
 
+from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.http import HttpResponse, HttpRequest
 from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSet
-
+from rest_framework_mongoengine.viewsets import GenericViewSet as MongoGenericViewSet
+from urllib3 import HTTPResponse
+from rest_framework.response import Response
+from rest_framework.decorators import detail_route, list_route
 from app.serializers import *
 from app.models import Tool, Book, Author, House
 from users.models import User
@@ -28,39 +32,63 @@ def add_release_view(request):
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
 
-def auto_badword_filter(request):
-    print ('in bad words')
+class HouseViewSet(MongoModelViewSet):
+    lookup_field = 'id'
+    serializer_class = HouseSerializer
 
-    if request.method == "POST":
-        print(request.POST)
-        rent_title = request.POST.get("rent_title", None)
-        detail_text = request.POST.get("detail_text", None)
-        #
-        my_content = str(rent_title)+ " " +str(detail_text)
+    def get_queryset(self):
+        print(self.request.GET)
+        print(House.objects.filter(address__country="China"))
+        houses = House.objects.filter(address__country="China")
+        userid = None
+        for user in User.objects.all():
+            # userid = user.id
+            print(user.id)
+        for house in houses:
+            # house.update(contact=userid)
+            house.save()
+            print(User.objects.filter(id=house.contact.id))
+        return House.objects.all()
 
-        data = urllib.parse.urlencode({'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH', 'content': str(my_content)})
-        data = data.encode('utf-8')
-        request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
-        request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
-        f = urllib.request.urlopen(request, data)
-        response = f.read().decode('utf-8')
-        print(response)
-        result = json.loads(response)
 
-        if result['is-bad']: #have bad words
-            to_email_address = "2606449422@qq.com"
-            username = "SmallCircle"
-            email_topic = "Add House Release Information Fail"
-            email_content = ("Dear "+username+", your adding house release information failed"
+class BadwordView(MongoGenericViewSet):
+    @list_route()
+    def list(self, request):
+        return Response({"HA": "HAA"})
+
+    @detail_route(methods=['post'])
+    def bad_worl_filter(self, request):
+        if request.method == "POST":
+            print(request.POST)
+            rent_title = request.POST.get("rent_title", None)
+            detail_text = request.POST.get("detail_text", None)
+
+            my_content = str(rent_title) + " " + str(detail_text)
+
+            data = urllib.parse.urlencode(
+                {'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
+                'content': str(my_content)})
+            data = data.encode('utf-8')
+            request = urllib.request.Request("https://neutrinoapi.com/bad-word-filter")
+            request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+            f = urllib.request.urlopen(request, data)
+            response = f.read().decode('utf-8')
+            print(response)
+            result = json.loads(response)
+
+            if result['is-bad']: #have bad words
+                to_email_address = "2606449422@qq.com"
+                username = "SmallCircle"
+                email_topic = "Add House Release Information Fail"
+                email_content = ("Dear "+username+", your adding house release information failed"
                             " due to bad words in topic/house_detail, please check on House Renting Website")
-            email_inst = Email_Service()
-            email_inst.send_email(to_email_address,username,email_topic,email_content)
-            return HttpResponse("bad")
-            #send an e-mail to user to inform him post failure
-        else:
-            return HttpResponse("good")
+                email_inst = Email_Service()
+                email_inst.send_email(to_email_address,username,email_topic,email_content)
+                return HttpResponse("bad")
+                #send an e-mail to user to inform him post failure
+            else:
+                return HttpResponse("good")
             #Wait for  Manual Check Service
-
 
         # print(result['is-bad'])
         # print(result['bad-words-total'])
@@ -105,6 +133,7 @@ class HouseViewSet(MongoModelViewSet):
             house.save()
             print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
+        #return Response({"ok": "ok"})
 
 
 class ToolViewSet(MongoModelViewSet):
