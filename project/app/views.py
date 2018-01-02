@@ -13,6 +13,7 @@ from users.models import User
 import json
 import urllib
 import smtplib
+import time
 from email.mime.text import MIMEText
 from rest_framework import viewsets
 
@@ -31,11 +32,13 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
-
 def house_detail_view(request):
     context = {}
     return TemplateResponse(request, 'House_detail/HouseDetail.html', context)
 
+def manual_check_view(request):
+    context = {}
+    return TemplateResponse(request, 'Manual_Check/Manual_Check.html', context)
 
 def user_register_view(request):
     context = {}
@@ -71,6 +74,23 @@ class BadwordView(viewsets.ViewSet):
             print(request.POST)
             rent_title = request.POST.get("rent_title", None)
             detail_text = request.POST.get("detail_text", None)
+            price = request.POST.get("price", None)
+            from_date = time.mktime(time.strptime(request.POST.get("from_date", None), "%Y-%m-%d"))
+            from_date = int(from_date*1000)
+            from_date = str(from_date)
+            #print(from_date)
+            to_date = time.mktime(time.strptime(request.POST.get("to_date", None), "%Y-%m-%d"))
+            to_date = int(to_date * 1000)
+            to_date = str(to_date)
+
+            size = request.POST.get("size", None)
+            check = request.POST.get("check", None)
+            type = request.POST.get("type", None)
+            province = request.POST.get("province", None)
+            city = request.POST.get("city", None)
+            district = request.POST.get("district", None)
+            address = request.POST.get("address", None)
+            floor = request.POST.get("floor", None)
 
             my_content = str(rent_title) + " " + str(detail_text)
 
@@ -82,7 +102,7 @@ class BadwordView(viewsets.ViewSet):
             request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
             f = urllib.request.urlopen(request, data)
             response = f.read().decode('utf-8')
-            print(response)
+            #print(response)
             result = json.loads(response)
 
             if result['is-bad']:  # have bad words
@@ -96,6 +116,37 @@ class BadwordView(viewsets.ViewSet):
                 return HttpResponse("bad")
                 # send an e-mail to user to inform him post failure
             else:
+                #insert house info into DB but check is false
+                print("in else")
+
+                house_info = '''
+                                [
+                                    {
+                                    "title":"'''+rent_title+'''",
+                                    "price": '''+price+''',
+                                    "from_date": {"$date": '''+from_date+'''},
+                                    "to_date": {"$date": '''+to_date+'''},
+                                    "size": '''+size+''',
+                                    "check":'''+check+''',
+                                "information": "'''+detail_text+'''",
+                                "type": "'''+type+'''",
+                                "contact": "5a2e135a59bfed19ea856ff7",
+                                "address": {
+                                        "country": "China",
+                                        "city": "'''+city+'''",
+                                        "road": "'''+address+'''",
+                                        "province": "'''+province+'''",
+                                        "district": "'''+district+'''",
+                                        "floor": '''+floor+'''
+                                        }
+                                    }
+                                ]
+                                '''
+                print(house_info)
+                house_list = json.loads(house_info)
+                insert_inst = Insert_Service()
+                insert_inst.insert_house_data(house_list)
+
                 return HttpResponse("good")
             # Wait for  Manual Check Service
 
@@ -103,6 +154,13 @@ class BadwordView(viewsets.ViewSet):
         # print(result['bad-words-total'])
         # print(result['bad-words-list'])
 
+class Insert_Service:
+    def insert_house_data(self,json_file):
+        for house in json_file:
+            local_house = House.from_json(json.dumps(house))
+            local_house.save()
+        for house in House.objects.all():
+            print(house.title)
 
 class Email_Service:
     def send_email(self, to_email_address, username, email_topic, email_content):

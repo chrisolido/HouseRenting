@@ -1,0 +1,68 @@
+{% load staticfiles %}{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my release</title>
+    <link rel="stylesheet" media="screen" href="{% static "css/Manual_Check/style.css" %}"/>
+    
+</head>
+<body>
+<div id="wrapper">
+    <div id="head">
+        <p id="p1">House Renting</p>
+        <p id="p2">Admin</p>
+    </div>
+   
+    <p id="right_title">Manual Check</p>
+    <hr id="hr2"/>
+    <div id="right">
+        <div class="add_info">
+            <div class="p_div">rent type:</div>
+                <input type="radio" name="rent_type" disabled="disabled"/>Alone
+                <input type="radio" name="rent_type" disabled="disabled"/>Group
+        </div>
+        <div class="add_info">
+            <div class="p_div">rent title:</div>
+            <input  type="text" name="rent_title" style="width: 250px;" disabled="disabled">
+		</div>
+        <div class="add_info">
+            <div class="p_div">community address:</div>
+            <input class="s_input"  type="text" disabled="disabled">city
+            <input  type="text" class="s_input" disabled="disabled">district
+            <input  type="text" class="s_input" disabled="disabled">address
+        </div>
+        <div class="add_info">
+            <div class="p_div">house type:</div>
+            <input  type="text" class="s_input" disabled="disabled">room
+            <input  type="text" class="s_input" disabled="disabled">hall
+            <input  type="text" class="s_input" disabled="disabled">㎡
+            <input  type="text" class="s_input" disabled="disabled">floor
+        </div>
+        <div class="add_info">
+            <div class="p_div">rent:</div>
+            <input type="text" disabled="disabled">$/month
+        </div>
+        <div class="add_info">
+            <div class="p_div">suitable renting time:</div>
+            <input  type="date" disabled="disabled">
+            <hr style="width: 30px;display: inline-block;margin-left: 10px"/>
+            <input  type="date" disabled="disabled">
+        </div>
+        <div class="add_info">
+            <div class="p_div" style="float: left;">detail information:</div>
+            <textarea disabled="disabled"></textarea>
+        </div>
+        <div class="add_info">
+            <div class="p_div" style="float: left;">upload picture:</div>
+            <img id="show_image" src="{% static 'img/Manual_Check/house.png' %}" ></img>
+        </div>
+		<div id="submit_pass" onclick="click_add()" style="cursor:pointer" >Pass</div>
+        <div id="submit_reject" onclick="click_add()" style="cursor:pointer" >Reject</div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

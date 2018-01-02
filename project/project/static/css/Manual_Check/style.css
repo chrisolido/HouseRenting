@@ -84,7 +84,7 @@ body{
 
 #right_title{
     position: absolute;
-    left:421px;
+    left:121px;
     top:167px;
     font-size: 28px;
     color:#1288c3;
@@ -92,15 +92,15 @@ body{
 }
 #hr2{
     position: absolute;
-    left: 410px;
+    left: 110px;
     top:215px;
     color: #bbbbbb;
     width: 1007px;
 
 }
-#submit{
+#submit_pass{
     position: relative;
-    left: 300px;
+    left: 250px;
     width: 150px;
     height: 43px;
     font-size: 28px;
@@ -108,8 +108,25 @@ body{
     background-color:#1288c3 ;
     border-width: 0px;
     text-align: center;
-    line-height:43px;
-    cursor: pointer;
+	line-height: 43px;
+	float:left;
+}
+#submit_reject{
+    position: relative;
+    left: 450px;
+	float:left;
+    width: 150px;
+    height: 43px;
+    font-size: 28px;
+    color: white;
+    background-color:#1288c3;
+    border-width: 0px;
+    text-align: center;
+	line-height: 43px;
+}
+#show_image{
+	width: 350px;
+    height: 270px;
 }
 #add{
     position: absolute;
@@ -126,7 +143,7 @@ body{
 }
 #right{
     position: absolute;
-    left: 500px;
+    left: 100px;
     top: 261px;
 }
 input{

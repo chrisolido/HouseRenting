@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'personal_page', personal_page_view, {}, name='personal_page'),
     url(r'add_release', add_release_view, {}, name='add_release'),
     url(r'housedetail', house_detail_view, {}, name='housedetail'),
+    url(r'manualcheck', manual_check_view, {}, name='manualcheck'),
     url(r'registration', user_register_view, {}, name='registration'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

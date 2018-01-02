@@ -11,6 +11,17 @@
             var formD = new FormData();
             formD.append("rent_title", $("#rent_title").val());
             formD.append("detail_text", $("#detail_text").val());
+            formD.append("price", $("#price").val());
+            formD.append("from_date", $("#from_date").val());
+            formD.append("to_date", $("#to_date").val());
+            formD.append("size", $("#size").val());
+            formD.append("check", false);
+            formD.append("type", $('input:radio:checked').val());
+            formD.append("province", $("#province").val());
+            formD.append("city", $("#city").val());
+            formD.append("district", $("#district").val());
+            formD.append("address", $("#address").val());
+            formD.append("floor", $("#floor").val());
             formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
             console.log(formD);
             $.ajax({
@@ -22,6 +33,8 @@
                 contentType: false,
                 success: function (data) {
                     console.log(data);
+                    //if(data == "good")//insert house info into DB but check is false
+
                     alert(data);
                 },
                 error: function () {
@@ -48,34 +61,35 @@
     <div id="right">
         <div class="add_info">
             <div class="p_div">rent type:</div>
-            <input type="radio" name="rent_type"/>individual
-            <input type="radio" name="rent_type"/>group
+            <input type="radio" name="rent_type" value="Alone"/>Alone
+            <input type="radio" name="rent_type" value="Group"/>Group
         </div>
         <div class="add_info">
             <div class="p_div">rent title:</div>
             <input id="rent_title" type="text" name="rent_title" style="width: 250px;"></div>
         <div class="add_info">
             <div class="p_div">community address:</div>
-            <input class="s_input" type="text">city
-            <input type="text" class="s_input">district
-            <input type="text" class="s_input">address
+            <input class="s_input" type="text" id="province">province
+            <input class="s_input" type="text" id="city">city
+            <input type="text" class="s_input" id="district">district
+            <input type="text" class="s_input" id="address">address <!--road==address-->
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
             <input type="text" class="s_input">room
             <input type="text" class="s_input">hall
-            <input type="text" class="s_input">㎡
-            <input type="text" class="s_input">floor
+            <input type="text" id="size" class="s_input">㎡
+            <input type="text" class="s_input" id="floor">floor
         </div>
         <div class="add_info">
             <div class="p_div">rent:</div>
-            <input type="text">$/month
+            <input id="price" type="text">$/month
         </div>
         <div class="add_info">
             <div class="p_div">suitable renting time:</div>
-            <input type="date">
+            <input id="from_date" type="date">
             <hr style="width: 30px;display: inline-block;margin-left: 10px"/>
-            <input type="date">
+            <input id="to_date" type="date">
         </div>
         <div class="add_info">
             <div class="p_div" style="float: left;">detail information:</div>
@@ -85,9 +99,7 @@
             <div class="p_div">upload picture:</div>
             <input type="file" style="height: 50px;font-size: 15px">
         </div>
-        <a href="#" onclick="click_add()">
-            <div id="submit">+add</div>
-        </a></button>
+            <div id="submit" onclick="click_add()">+add</div>
     </div>
 
 
