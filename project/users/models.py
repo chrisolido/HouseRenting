@@ -39,6 +39,7 @@ class User(Document):
     # id = fields.StringField(primary_key=True, required=True, validation=number)
     username = fields.StringField(required=True)
     email = fields.EmailField()
+    phone = fields.StringField(required=False)
 
     # name is a human-readable name used to refer to user e.g. "Martin Taylor"
     # longest full name registered in guinness book is 744 letters-long
@@ -68,7 +69,7 @@ class User(Document):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.username
+        return "{} {} {} {}".format(self.username, self.name, self.email, self.is_superuser)
 
     def get_short_name(self):
         return self.username

@@ -31,11 +31,12 @@ def create_user():
         email="user@example.com",
         name="user",
         is_active=True,
-        is_staff=False
+        is_staff=False,
+        phone="06787654"
     )
     new_user.set_password('foobar')
     new_user.save()
-    print(new_user)
+    # print(new_user)
     return new_user
 
 
@@ -45,6 +46,7 @@ class ObtainAuthTokenTestCase(APITestCase):
         self.url = reverse("api:auth")
 
     def doCleanups(self):
+        print(User.objects.all())
         User.drop_collection()
 
     def test_post_correct_credentials(self):
@@ -69,13 +71,15 @@ class ObtainAuthTokenTestCase(APITestCase):
 class UserViewSetTestCase(APITestCase):
     def setUp(self):
         self.new_user = create_user()
-        print(self.new_user.to_json())
+        # print(self.new_user.to_json())
         self.url = reverse("api:user-list")
         self.auth_header = 'Token 2c7e9e9465e917dcd34e620193ed2a7447140e5b'
 
         Token.objects.create(key='2c7e9e9465e917dcd34e620193ed2a7447140e5b', user=self.new_user)
 
     def doCleanups(self):
+        print(User.objects.all())
+        print(Token.objects.all())
         User.drop_collection()
         Token.drop_collection()
 

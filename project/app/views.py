@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSet
 from rest_framework_mongoengine.viewsets import GenericViewSet as MongoGenericViewSet
 from urllib3 import HTTPResponse
@@ -16,6 +16,9 @@ import smtplib
 import time
 from email.mime.text import MIMEText
 from rest_framework import viewsets
+from rest_framework.reverse import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def index_view(request):
@@ -32,19 +35,40 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
+
 def house_detail_view(request):
     context = {}
     return TemplateResponse(request, 'House_detail/HouseDetail.html', context)
 
+
+# @login_required(redirect_field_name='login')
 def manual_check_view(request):
     context = {}
     return TemplateResponse(request, 'Manual_Check/Manual_Check.html', context)
+
 
 def user_register_view(request):
     context = {}
     if request.method == "POST":
         print(request.POST)
+        return HttpResponseRedirect(reverse('index', request=request))
     return TemplateResponse(request, 'House_detail/Register.html', context)
+
+
+def user_logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    HttpResponseRedirect(reverse('index', request=request))
+
+
+def user_login_view(request):
+    context = {}
+    if request.method == "POST":
+        print(request.POST)
+        # user = authenticate(username=request.POST.get("PhoneNumber"), password=request.POST.get("Password"))
+        # login(user, request)
+        return HttpResponseRedirect(reverse('index', request=request))
+    return TemplateResponse(request, 'House_detail/login.html', context)
 
 
 class HouseViewSet(MongoModelViewSet):
@@ -76,9 +100,9 @@ class BadwordView(viewsets.ViewSet):
             detail_text = request.POST.get("detail_text", None)
             price = request.POST.get("price", None)
             from_date = time.mktime(time.strptime(request.POST.get("from_date", None), "%Y-%m-%d"))
-            from_date = int(from_date*1000)
+            from_date = int(from_date * 1000)
             from_date = str(from_date)
-            #print(from_date)
+            # print(from_date)
             to_date = time.mktime(time.strptime(request.POST.get("to_date", None), "%Y-%m-%d"))
             to_date = int(to_date * 1000)
             to_date = str(to_date)
@@ -102,7 +126,7 @@ class BadwordView(viewsets.ViewSet):
             request.add_header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
             f = urllib.request.urlopen(request, data)
             response = f.read().decode('utf-8')
-            #print(response)
+            # print(response)
             result = json.loads(response)
 
             if result['is-bad']:  # have bad words
@@ -116,28 +140,28 @@ class BadwordView(viewsets.ViewSet):
                 return HttpResponse("bad")
                 # send an e-mail to user to inform him post failure
             else:
-                #insert house info into DB but check is false
+                # insert house info into DB but check is false
                 print("in else")
 
                 house_info = '''
                                 [
                                     {
-                                    "title":"'''+rent_title+'''",
-                                    "price": '''+price+''',
-                                    "from_date": {"$date": '''+from_date+'''},
-                                    "to_date": {"$date": '''+to_date+'''},
-                                    "size": '''+size+''',
-                                    "check":'''+check+''',
-                                "information": "'''+detail_text+'''",
-                                "type": "'''+type+'''",
+                                    "title":"''' + rent_title + '''",
+                                    "price": ''' + price + ''',
+                                    "from_date": {"$date": ''' + from_date + '''},
+                                    "to_date": {"$date": ''' + to_date + '''},
+                                    "size": ''' + size + ''',
+                                    "check":''' + check + ''',
+                                "information": "''' + detail_text + '''",
+                                "type": "''' + type + '''",
                                 "contact": "5a2e135a59bfed19ea856ff7",
                                 "address": {
                                         "country": "China",
-                                        "city": "'''+city+'''",
-                                        "road": "'''+address+'''",
-                                        "province": "'''+province+'''",
-                                        "district": "'''+district+'''",
-                                        "floor": '''+floor+'''
+                                        "city": "''' + city + '''",
+                                        "road": "''' + address + '''",
+                                        "province": "''' + province + '''",
+                                        "district": "''' + district + '''",
+                                        "floor": ''' + floor + '''
                                         }
                                     }
                                 ]
@@ -154,13 +178,15 @@ class BadwordView(viewsets.ViewSet):
         # print(result['bad-words-total'])
         # print(result['bad-words-list'])
 
+
 class Insert_Service:
-    def insert_house_data(self,json_file):
+    def insert_house_data(self, json_file):
         for house in json_file:
             local_house = House.from_json(json.dumps(house))
             local_house.save()
         for house in House.objects.all():
             print(house.title)
+
 
 class Email_Service:
     def send_email(self, to_email_address, username, email_topic, email_content):

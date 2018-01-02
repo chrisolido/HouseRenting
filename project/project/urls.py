@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'housedetail', house_detail_view, {}, name='housedetail'),
     url(r'manualcheck', manual_check_view, {}, name='manualcheck'),
     url(r'registration', user_register_view, {}, name='registration'),
+    url(r'login', user_login_view, {}, name='login'),
+    url(r'logout', user_logout_view, r'logout')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # let django built-in server serve static and media content
