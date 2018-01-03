@@ -150,10 +150,6 @@ class BadwordView(viewsets.ViewSet):
                 return HttpResponse("good")
             # Wait for  Manual Check Service
 
-        # print(result['is-bad'])
-        # print(result['bad-words-total'])
-        # print(result['bad-words-list'])
-
 class Insert_Service:
     def insert_house_data(self,json_file):
         for house in json_file:
