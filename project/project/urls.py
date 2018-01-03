@@ -18,6 +18,9 @@ router = HybridRouter()
 router.register(r'houses', HouseViewSet, r"houses")
 router.register(r'user', UserViewSet, r"user")
 router.register(r'badwords', BadwordView,r'badwords')
+router.register(r'ManualCheck', ManualCheckView,r'ManualCheck')
+router.register(r'ManualCheckPass', ManualCheckPassView,r'ManualCheckPass')
+router.register(r'ManualCheckReject', ManualCheckRejectView,r'ManualCheckReject')
 router.register(r'users', UserInteraction, r'users')
 router.add_api_view(r'auth', url(r'^auth/$', ObtainAuthToken.as_view(), name=r"auth"))
 
@@ -36,6 +39,8 @@ urlpatterns = [
     url(r'housedetail', house_detail_view, {}, name='housedetail'),
     url(r'manualcheck', manual_check_view, {}, name='manualcheck'),
     url(r'registration', user_register_view, {}, name='registration'),
+    url(r'login', user_login_view, {}, name='login'),
+    url(r'logout', user_logout_view, r'logout')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # let django built-in server serve static and media content

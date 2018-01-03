@@ -25,7 +25,8 @@
     </div>
     <div id="section">
         <p id="title"><strong>House Renting</strong></p>
-        <form action="">
+        <form action="" method="post">
+            {% csrf_token %}
             <input type="submit" name="get" value="Get Dynamic Code" id="get"/>
             <input type="text" name="PhoneNumber" value="" id="in" placeholder="Phone Number"/>
             <input type="text" name="DynamicCode" value="" id="Inrd" placeholder="Dynamic code"/>
