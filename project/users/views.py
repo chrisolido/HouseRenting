@@ -14,8 +14,8 @@ class UserViewSet(mixins.ListModelMixin,
     """
     Read-only User endpoint
     """
-    permission_classes = (permissions.IsAuthenticated, )  # IsAdminUser?
-    authentication_classes = (TokenAuthentication, )
+    permission_classes = (permissions.IsAuthenticated,)  # IsAdminUser?
+    authentication_classes = (TokenAuthentication,)
     serializer_class = UserSerializer
 
     def get_queryset(self):
@@ -23,6 +23,9 @@ class UserViewSet(mixins.ListModelMixin,
 
 
 class UserInteraction(views.APIView):
+
+    def get(self):
+        return Response({'': ''})
 
     def post(self, request):
         print(request.POST)
@@ -32,7 +35,7 @@ class UserInteraction(views.APIView):
 class ObtainAuthToken(views.APIView):
     throttle_classes = ()
     permission_classes = ()
-    authentication_classes = (TokenAuthentication, )
+    authentication_classes = (TokenAuthentication,)
     # parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
     # renderer_classes = (renderers.JSONRenderer,)
     serializer_class = AuthTokenSerializer

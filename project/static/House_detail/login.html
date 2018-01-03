@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static "css/House_detail/web.css" %}" >
+    <link rel="stylesheet" type="text/css" href="{% static "css/House_detail/web.css" %}">
     <title>HouseRenting</title>
 </head>
 
@@ -15,18 +15,18 @@
         <a href="#" class="font02">Register</a>
     </div>
     <div id="section">
-    <p id="title"><strong>House Renting</strong></p>
-        <form action="">
-        <input type="text" name="PhoneNumber" value="" id="in" placeholder="Phone Number"/>
-        <input type="text" name="Password" value="" id="in2" placeholder="Password"/>
+        <p id="title"><strong>House Renting</strong></p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="PhoneNumber" value="" id="in" placeholder="Phone Number"/>
+            <input type="text" name="Password" value="" id="in2" placeholder="Password"/>
+            <input type="submit" name="enroll" value="Login" id="InRE"/>
         </form>
-        <a href="#" ><img src="{% static "img/House_detail/wechat.jpg" %}" id="wechat"/></a>
+        <a href="#"><img src="{% static "img/House_detail/wechat.jpg" %}" id="wechat"/></a>
         <a href="#" id="wechat_font">WeChat Login</a>
-</div>
+    </div>
 
 </div>
-
-
 
 
 </body>

@@ -1,6 +1,6 @@
-from __future__ import unicode_literals
-
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.template.response import TemplateResponse
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from rest_framework_mongoengine.viewsets import ModelViewSet as MongoModelViewSet
@@ -16,13 +16,18 @@ import smtplib
 import time
 from email.mime.text import MIMEText
 from rest_framework import viewsets
-from rest_framework.reverse import reverse
+from rest_framework.reverse import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from users.models import *
+from urllib import parse
+
+USER = ("user", "{\"user\": \"\", \"auth\": \"\"}")
 
 
 def index_view(request):
     context = {}
+    print(request.COOKIES)
     return TemplateResponse(request, 'index.html', context)
 
 
@@ -51,6 +56,16 @@ def user_register_view(request):
     context = {}
     if request.method == "POST":
         print(request.POST)
+        new_user = User(
+            username=request.POST.get("PhoneNumber"),
+            email=None,
+            name=request.POST.get("PhoneNumber"),
+            is_active=True,
+            is_staff=False,
+            phone=request.POST.get("PhoneNumber")
+        )
+        new_user.set_password(request.POST.get("setP"))
+        new_user.save()
         return HttpResponseRedirect(reverse('index', request=request))
     return TemplateResponse(request, 'House_detail/Register.html', context)
 
@@ -62,12 +77,16 @@ def user_logout_view(request):
 
 
 def user_login_view(request):
-    context = {}
+    context = RequestContext(request)
     if request.method == "POST":
-        print(request.POST)
-        # user = authenticate(username=request.POST.get("PhoneNumber"), password=request.POST.get("Password"))
-        # login(user, request)
-        return HttpResponseRedirect(reverse('index', request=request))
+        userauth = request.COOKIES.get(*USER)
+        userauth = json.loads(parse.unquote(userauth))
+        user = authenticate(username=request.POST.get("PhoneNumber"), password=request.POST.get("Password"))
+        userauth["user"] = user.name
+        userauth["auth"] = str(Token.objects.get_or_create(user=user)[0])
+        response = HttpResponseRedirect(reverse('index', request=request))
+        response.set_cookie("user", json.dumps(userauth))
+        return response
     return TemplateResponse(request, 'House_detail/login.html', context)
 
 

@@ -10,7 +10,6 @@ def create_superuser():
     Creates and retuns a superuser - instance of settings.MONGOENGINE_USER_DOCUMENT
     """
     new_admin = User(
-        id=1,
         username="admin@example.com",
         email="admin@example.com",
         name="admin",

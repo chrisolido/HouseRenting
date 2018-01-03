@@ -29,7 +29,7 @@ class User(Document):
     200 lines of boilerplate code from mongoengine.django.auth.User.
     """
 
-    def number() -> str:
+    def number(self) -> str:
         no = User.objects.count()
         if no is None:
             return "1"
@@ -38,7 +38,7 @@ class User(Document):
 
     # id = fields.StringField(primary_key=True, required=True, validation=number)
     username = fields.StringField(required=True)
-    email = fields.EmailField()
+    email = fields.EmailField(required=False)
     phone = fields.StringField(required=False)
 
     # name is a human-readable name used to refer to user e.g. "Martin Taylor"
@@ -69,7 +69,7 @@ class User(Document):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return "{} {} {} {}".format(self.username, self.name, self.email, self.is_superuser)
+        return "username:{} name:{} email:{} is_superuser:{}".format(self.username, self.name, self.email, self.is_superuser)
 
     def get_short_name(self):
         return self.username
