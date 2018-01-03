@@ -108,13 +108,72 @@ class HouseViewSet(MongoModelViewSet):
             print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
 
+class ManualCheckView(viewsets.ViewSet):
+    def create(self, request):
+        print("ManualCheck")
+        if request.method == "POST":
+            for house in House.objects.all():
+                if not house.check:
+                    #return a unchecked house json
+                    #from_date_sec = time.mktime(time.strptime(house.from_date, "%Y-%m-%d %H:%M:%S"))
+                    #from_date_sec = int(from_date_sec * 1000)
+                    #from_date_sec = str(from_date_sec)
+                    # print(from_date_sec)
+                    # to_date_sec = time.mktime(time.strptime(house.to_date, "%Y-%m-%d %H:%M:%S"))
+                    # to_date_sec = int(to_date_sec * 1000)
+                    # to_date_sec = str(to_date_sec)
+
+                    print(house.information)
+                    rhouse_json = {
+                        "title": house.title,
+                        "price": house.price,
+                        "from_date": str(house.from_date),
+                        "to_date": str(house.to_date),
+                        "size": house.size,
+                        "check": house.check,
+                        "information": house.information,
+                        "type": house.type,
+                        "contact": "5a2e135a59bfed19ea856ff7",
+                        "address": {
+                            "country": "China",
+                            "city": house.address.city,
+                            "road": house.address.road,
+                            "province": house.address.province,
+                            "district": house.address.district,
+                            "floor": house.address.floor
+                        }
+                    }
+                    return HttpResponse(json.dumps(rhouse_json), content_type="application/json")
+            return HttpResponse("")
+
+
+class ManualCheckPassView(viewsets.ViewSet):
+    def create(self, request):
+        print("ManualCheckPass")
+        title = request.POST.get("title", None)
+        if request.method == "POST":
+            for house in House.objects.all():
+                if house.title == title:
+                    house.check = True
+                    house.save()
+        return HttpResponse("OK")
+
+class ManualCheckRejectView(viewsets.ViewSet):
+    def create(self, request):
+        print("ManualCheckReject")
+        title = request.POST.get("title", None)
+        if request.method == "POST":
+            for house in House.objects.all():
+                if house.title == title:
+                    house.delete()
+        return HttpResponse("OK")
+
 
 class BadwordView(viewsets.ViewSet):
 
     def create(self, request):
         print("Bad word")
         if request.method == "POST":
-            print(request.POST)
             rent_title = request.POST.get("rent_title", None)
             detail_text = request.POST.get("detail_text", None)
             price = request.POST.get("price", None)
@@ -192,10 +251,6 @@ class BadwordView(viewsets.ViewSet):
 
                 return HttpResponse("good")
             # Wait for  Manual Check Service
-
-        # print(result['is-bad'])
-        # print(result['bad-words-total'])
-        # print(result['bad-words-list'])
 
 
 class Insert_Service:

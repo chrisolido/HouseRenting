@@ -3,9 +3,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>my release</title>
+    <title>manual check</title>
     <link rel="stylesheet" media="screen" href="{% static "css/Manual_Check/style.css" %}"/>
-    
+    <script src={% static "js/jquery-1.10.1.min.js" %}></script>
+    <script>
+        function ClearAll()
+            {
+                $("input[name='rent_type'][value='Alone']").attr("checked",false);
+                $("input[name='rent_type'][value='Group']").attr("checked",false);
+                    $("#title").val("");
+                    $("#city").val("");
+                    $("#district").val("");
+                    $("#address").val("");
+                    $("#size").val("");
+                    $("#floor").val("");
+                    $("#price").val("");
+
+                    $('#from_date').val("yyyy/mm/dd");
+                    $('#to_date').val("yyyy/mm/dd");
+                    $("#detail_text").val("");
+            }
+        function ShowAnUnchecked()
+        {
+            $.ajax({
+                type: 'POST',
+                sync: false,
+                url: '/api/ManualCheck/',
+                data: "",
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    //data is a house info wait to be checked manually
+                    console.log(data);
+                    if(data == "")
+                        ClearAll();
+                    else {
+                        //$("input[name='rent_type'][value=" + data.type + "]").checked = true;
+                        var selects = document.getElementsByName("rent_type");
+                        for (var i=0; i<selects.length; i++){
+                            if (selects[i].value==data.type) {
+                                selects[i].checked= true;
+                                break;
+                            }
+                        }
+                        $("#title").val(data.title);
+                        $("#city").val(data.address.city);
+                        $("#district").val(data.address.district);
+                        $("#address").val(data.address.road);
+                        $("#size").val(data.size);
+                        $("#floor").val(data.address.floor);
+                        $("#price").val(data.price);
+
+                        var val = Date.parse(data.from_date);
+                        var newDate = new Date(val);
+                        var day = ("0" + newDate.getDate()).slice(-2);
+                        var month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+                        var f_date = newDate.getFullYear() + "-" + (month) + "-" + (day);
+                        $('#from_date').val(f_date);
+                        val = Date.parse(data.to_date);
+                        newDate = new Date(val);
+                        day = ("0" + newDate.getDate()).slice(-2);
+                        month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+                        f_date = newDate.getFullYear() + "-" + (month) + "-" + (day);
+                        $('#to_date').val(f_date);
+                        $("#detail_text").val(data.information);
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }});
+        }
+        </script>
+        <script>
+
+        $(document).ready(function () {
+            ClearAll();
+           ShowAnUnchecked();
+        });
+    </script>
+    <script>
+        function click_pass()
+        {//set 'check' of this info to true
+            //alert($("#title").val());
+            var formD = new FormData();
+            formD.append("title", $("#title").val());
+            formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+            $.ajax({
+                type: 'POST',
+                sync: false,
+                url: '/api/ManualCheckPass/',
+                data: formD,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    ClearAll();
+                    ShowAnUnchecked();
+                },
+                error: function () {
+                    alert('error');
+                }});
+        }
+        function click_reject()
+        {//delete this info in DB
+            var formD = new FormData();
+            formD.append("title", $("#title").val());
+            formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+             $.ajax({
+                type: 'POST',
+                sync: false,
+                url: '/api/ManualCheckReject/',
+                data: formD,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    ClearAll();
+                    ShowAnUnchecked();
+                },
+                error: function () {
+                    alert('error');
+                }});
+        }
+
+        </script>
 </head>
 <body>
 <div id="wrapper">
@@ -19,46 +138,45 @@
     <div id="right">
         <div class="add_info">
             <div class="p_div">rent type:</div>
-                <input type="radio" name="rent_type" disabled="disabled"/>Alone
-                <input type="radio" name="rent_type" disabled="disabled"/>Group
+                <input type="radio" name="rent_type" disabled="disabled" value="Alone"/>Alone
+                <input type="radio" name="rent_type" disabled="disabled" value="Group"/>Group
         </div>
         <div class="add_info">
             <div class="p_div">rent title:</div>
-            <input  type="text" name="rent_title" style="width: 250px;" disabled="disabled">
+            <input id="title" type="text" name="rent_title" style="width: 250px;" disabled="disabled">
 		</div>
         <div class="add_info">
             <div class="p_div">community address:</div>
-            <input class="s_input"  type="text" disabled="disabled">city
-            <input  type="text" class="s_input" disabled="disabled">district
-            <input  type="text" class="s_input" disabled="disabled">address
+            <input id="city" class="s_input"  type="text" disabled="disabled">city
+            <input id="district" type="text" class="s_input" disabled="disabled">district
+            <input id="address" type="text" class="s_input" disabled="disabled">address
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
-            <input  type="text" class="s_input" disabled="disabled">room
-            <input  type="text" class="s_input" disabled="disabled">hall
-            <input  type="text" class="s_input" disabled="disabled">㎡
-            <input  type="text" class="s_input" disabled="disabled">floor
+            <input id="size" type="text" class="s_input" disabled="disabled">㎡
+            <input id="floor" type="text" class="s_input" disabled="disabled">floor
         </div>
         <div class="add_info">
             <div class="p_div">rent:</div>
-            <input type="text" disabled="disabled">$/month
+            <input id="price" type="text" disabled="disabled">$/month
         </div>
         <div class="add_info">
             <div class="p_div">suitable renting time:</div>
-            <input  type="date" disabled="disabled">
+            <input id="from_date" type="date" disabled="disabled">
             <hr style="width: 30px;display: inline-block;margin-left: 10px"/>
-            <input  type="date" disabled="disabled">
+            <input id="to_date" type="date" disabled="disabled">
         </div>
         <div class="add_info">
             <div class="p_div" style="float: left;">detail information:</div>
-            <textarea disabled="disabled"></textarea>
+            <textarea id="detail_text" disabled="disabled"></textarea>
         </div>
         <div class="add_info">
             <div class="p_div" style="float: left;">upload picture:</div>
             <img id="show_image" src="{% static 'img/Manual_Check/house.png' %}" ></img>
         </div>
-		<div id="submit_pass" onclick="click_add()" style="cursor:pointer" >Pass</div>
-        <div id="submit_reject" onclick="click_add()" style="cursor:pointer" >Reject</div>
+		<div id="submit_pass" onclick="click_pass()" style="cursor:pointer" >Pass</div>
+        <div id="submit_reject" onclick="click_reject()" style="cursor:pointer" >Reject</div>
+        <!--<div id="submit_next" onclick="click_next()" style="cursor:pointer" >Next</div>-->
     </div>
 
 

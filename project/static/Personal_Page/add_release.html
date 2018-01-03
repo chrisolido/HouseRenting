@@ -9,6 +9,11 @@
     <script>
         function click_add() {
             var formD = new FormData();
+            if($("#rent_title").val() == "")
+            {
+                alert("Title can't be blank!");
+                return;
+            }
             formD.append("rent_title", $("#rent_title").val());
             formD.append("detail_text", $("#detail_text").val());
             formD.append("price", $("#price").val());
@@ -76,8 +81,6 @@
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
-            <input type="text" class="s_input">room
-            <input type="text" class="s_input">hall
             <input type="text" id="size" class="s_input">㎡
             <input type="text" class="s_input" id="floor">floor
         </div>

@@ -16,7 +16,7 @@ house_info = '''
         "from_date": {"$date": 1512980682785},
         "to_date": {"$date": 1512980682785},
         "size": 3,
-        "information": null,
+        "information": "Infolll",
         "type": "Group",
         "contact": "5a2e135a59bfed19ea856ff7",
         "check": false,
