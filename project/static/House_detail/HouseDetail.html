@@ -5,7 +5,69 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="{% static "css/House_detail/house.css" %}" >
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src={% static "js/md5.js" %}></script>
     <title>HouseRenting</title>
+    <script type="text/javascript">
+        function TransEnToCH(EnString) {
+            var appid = '20180104000111874';
+            var key = 'u2GBEsEwnJ4_oJ6knsDP';
+            var salt = (new Date).getTime();
+            var query = EnString;
+            // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+            var from = 'en';
+            var to = 'zh';
+            var str1 = appid + query + salt + key;
+            var sign = MD5(str1);
+            var transstr = "variable";
+            $.ajax({
+                url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+                type: 'post',
+                dataType: 'jsonp',
+                data: {
+                    q: query,
+                    appid: appid,
+                    salt: salt,
+                    from: from,
+                    to: to,
+                    sign: sign
+                },
+                success: function (data) {
+                    transstr = String(data.trans_result[0].dst);
+                    console.log('data'+transstr);
+                    showBaiDuMap(transstr);
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+
+        function showBaiDuMap(transstr)
+        {
+            // 百度地图API功能
+            var map = new BMap.Map("allmap");
+            //var point = new BMap.Point(116.404, 39.915);
+            map.centerAndZoom("上海", 15);
+            map.enableScrollWheelZoom();
+
+            var localSearch = new BMap.LocalSearch(map);
+            localSearch.enableAutoViewport(); //允许自动调节窗体大小
+            function searchByStationName(keyword) {
+                map.clearOverlays();//清空原来的标注
+                localSearch.setSearchCompleteCallback(function (searchResult) {
+                    var poi = searchResult.getPoi(0);
+                    map.centerAndZoom(poi.point, 13);
+                    var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度map.addOverlay(marker);
+                    map.addOverlay(marker);
+                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                });
+                localSearch.search(keyword);
+            }
+            searchByStationName(transstr);
+            //searchByStationName("上海浦东高新区龚华路");
+        }
+    </script>
 </head>
 <body>
 <div id="whole">
@@ -61,41 +123,10 @@
         <p id="content">District Map</p>
     <div id="allmap"></div>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fO4I1gYGQnGC5DbPCH1rRMWdG0vjwMZM"></script>
-    <!--<script>-->
-        <!--function searchByStationName(keyword) {-->
-            <!--map.clearOverlays();//清空原来的标注-->
-            <!--//var keyword = "同济大学嘉定校区";-->
-            <!--localSearch.setSearchCompleteCallback(function (searchResult) {-->
-            <!--var poi = searchResult.getPoi(0);-->
-            <!--map.centerAndZoom(poi.point, 13);-->
-            <!--var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地址对应的经纬度-->
-            <!--map.addOverlay(marker);-->
-        <!--});-->
-            <!--localSearch.search(keyword);-->
-        <!--}-->
-    <!--</script>-->
-    <script type="text/javascript">
-        // 百度地图API功能
-        var map = new BMap.Map("allmap");
-	    //var point = new BMap.Point(116.404, 39.915);
-	    map.centerAndZoom("上海", 15);
-	    map.enableScrollWheelZoom();
-
-	    var localSearch = new BMap.LocalSearch(map);
-        localSearch.enableAutoViewport(); //允许自动调节窗体大小
-        function searchByStationName(keyword) {
-            map.clearOverlays();//清空原来的标注
-            localSearch.setSearchCompleteCallback(function (searchResult) {
-            var poi = searchResult.getPoi(0);
-            map.centerAndZoom(poi.point, 13);
-            var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度map.addOverlay(marker);
-            map.addOverlay(marker);
-            // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        });
-        localSearch.search(keyword);
-    }
-    searchByStationName("同济大学嘉定校区");
+    <script>
+        TransEnToCH("Gong Hua Road,Lane 479,Pudong new district,Shanghai,China");
     </script>
+
    <div id="like">
    </div><p id="liketitle">Do you like these houses?</p>
     <div id="likecontentbd">
