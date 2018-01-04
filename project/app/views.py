@@ -26,7 +26,10 @@ USER = ("user", "{\"user\": \"\", \"auth\": \"\"}")
 
 
 def index_view(request):
-    context = {}
+    username = json.loads(parse.unquote(request.COOKIES.get(*USER)))
+    context = {
+        "user": username["user"]
+    }
     print(request.COOKIES)
     return TemplateResponse(request, 'index.html', context)
 
@@ -59,7 +62,7 @@ def user_register_view(request):
         new_user = User(
             username=request.POST.get("PhoneNumber"),
             email=None,
-            name=request.POST.get("PhoneNumber"),
+            name=request.POST.get("username"),
             is_active=True,
             is_staff=False,
             phone=request.POST.get("PhoneNumber")
@@ -71,9 +74,9 @@ def user_register_view(request):
 
 
 def user_logout_view(request):
-    if request.user.is_authenticated:
-        logout(request)
-    HttpResponseRedirect(reverse('index', request=request))
+    response = HttpResponseRedirect(reverse('index', request=request))
+    response.delete_cookie("user")
+    return response
 
 
 def user_login_view(request):
@@ -108,16 +111,17 @@ class HouseViewSet(MongoModelViewSet):
             print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
 
+
 class ManualCheckView(viewsets.ViewSet):
     def create(self, request):
         print("ManualCheck")
         if request.method == "POST":
             for house in House.objects.all():
                 if not house.check:
-                    #return a unchecked house json
-                    #from_date_sec = time.mktime(time.strptime(house.from_date, "%Y-%m-%d %H:%M:%S"))
-                    #from_date_sec = int(from_date_sec * 1000)
-                    #from_date_sec = str(from_date_sec)
+                    # return a unchecked house json
+                    # from_date_sec = time.mktime(time.strptime(house.from_date, "%Y-%m-%d %H:%M:%S"))
+                    # from_date_sec = int(from_date_sec * 1000)
+                    # from_date_sec = str(from_date_sec)
                     # print(from_date_sec)
                     # to_date_sec = time.mktime(time.strptime(house.to_date, "%Y-%m-%d %H:%M:%S"))
                     # to_date_sec = int(to_date_sec * 1000)
@@ -157,6 +161,7 @@ class ManualCheckPassView(viewsets.ViewSet):
                     house.check = True
                     house.save()
         return HttpResponse("OK")
+
 
 class ManualCheckRejectView(viewsets.ViewSet):
     def create(self, request):
