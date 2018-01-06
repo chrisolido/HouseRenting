@@ -46,6 +46,10 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
+def My_Release_View(request):
+    context = {}
+    return TemplateResponse(request, 'Personal_Page/release.html', context)
+
 def personalinfo_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/personal_information.html', context)
@@ -111,10 +115,6 @@ class HouseViewSet(MongoModelViewSet):
         for user in User.objects.all():
             # userid = user.id
             print(user.id)
-        for house in houses:
-            # house.update(contact=userid)
-            house.save()
-            print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
 
 
