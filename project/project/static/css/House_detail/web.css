@@ -42,7 +42,7 @@ text-decoration: none;
 
 
 body {
-    background: url("background.png");
+    /*background: url("{% static "img/House_detail/background.jpg" %}");*/
     background-size: cover;
     margin: 0px;
     overflow:auto;
@@ -60,7 +60,7 @@ body {
     background-color:ghostwhite;
     left: 425px;/**/
     width: 425px;/**/
-    height: 437px;/**/
+    height: 537px;/**/
     top: 37px;/**/
     position: absolute;
 }
@@ -220,9 +220,11 @@ input:-ms-input-placeholder{
     font-family: "Times New Roman";
     font-size: 11px;/**/
     left:55%;
-    top:23%;
+    top:18%;
     position: absolute;
     background-color: darkgrey;
     color:ghostwhite;
     padding:1% 0.5%;
+    disabled:"disable";
+    cursor:pointer;
 }

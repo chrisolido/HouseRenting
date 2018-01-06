@@ -64,7 +64,7 @@ house_info = '''
         "roomnbr": 2,
         "information": "Infolll",
         "type": "Group",
-        "check": true,
+        "check": false,
         "address": {
             "country": "China",
             "city": "Shanghai",

@@ -5,6 +5,48 @@
     <meta charset="UTF-8">
     <title>my release</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/personal_page/style.css" %}">
+    <script src={% static "js/jquery-1.10.1.min.js" %}></script>
+    <script>
+        function append_house_list(image_path, topic, size, address, roomnbr, price) {
+            var htmlString =
+            '<div class="house_info">'
+            + '<div class="house_img"><img  src="'+image_path+'"></div>'
+            + '<div class="house_content">'
+            +   '<p class="house_title">'+topic+'</p>'
+            +   '<p class="house_rent">¥'+price+'/M</p>'
+            +   '<p class="house_detail_text">'+roomnbr+' room , '+size+'㎡</p>'
+            +   '<p class="house_detail_text">'+address+'</p>'
+            +   '<p class="house_detail_text">from Me</p>'
+            +   '</div></div>';
+            $("#house_right").append(htmlString);
+        }
+        </script>
+    <script>
+        function ShowHouseList()
+        {
+
+            $("#house_right").empty();
+
+            var user = {user: "", token: ""};
+            $.getJSON("./api/houses/", function (data) {
+                console.log("In My Release");
+                {#console.log(data);#}
+                $.each(data, function (index, value) {
+                    console.log(value);
+                    if (value["check"] && value["title"]=="Small House")
+                        append_house_list("/static/img/" + value["pictures"][0],
+                            value["title"], value["size"], value["address"].country+","+value["address"].city+","+
+                                value["address"].district+","+value["address"].road
+                            , value["roomnbr"], value["price"]);
+                });
+            });
+        }
+    </script>
+     <script>
+        $(document).ready(function () {
+            ShowHouseList();
+        });
+    </script>
 </head>
 <body>
 <div id="wrapper">
@@ -21,29 +63,8 @@
     <p id="right_title">my release</p>
     <hr id="hr2"/>
     <a href="add_release.html"><div id="add">+add</div></a>
-    <div class="house_right">
-        <div class="house_info">
-            <div class="house_img"><img  src="{% static 'img/personal_page/house.png' %}"></div>
-            <div class="house_content">
-                <a href="renting_history.html"><p class="house_title">individual renting | good decorations near by subway line10 station</p></a>
-                <p class="house_rent">¥2000/M</p>
-                <p>1 room,1 hall,38㎡</p>
-                <p>position: shanghai jiading caoan road 4800 tongji university</p>
-                <p>from Alice</p>
-            </div>
+    <div id="house_right" class="house_right">
 
-        </div>
-        <div class="house_info">
-            <div class="house_img"><img  src="{% static 'img/personal_page/house.png' %}"></div>
-            <div class="house_content">
-                <a href="renting_history.html"><p style="display: inline-block;width: 650px;font-size: 20px;color: black">individual renting | good decorations near by subway line10 station</p></a>
-                <p  style="display: inline-block;color: #1288c3;font-size: 20px;font-style: oblique">¥2000/M</p>
-                <p>1 room,1 hall,38㎡</p>
-                <p>position: shanghai jiading caoan road 4800 tongji university</p>
-                <p>from Alice</p>
-            </div>
-
-        </div>
     </div>
 
 </div>

@@ -177,6 +177,7 @@ textarea{
     display: inline-block;
     margin-left: 10px;
     width: 800px;
+    /*height: 160px;*/
 }
 .house_content p{
     margin-top: 0px;
@@ -186,12 +187,18 @@ textarea{
 .house_title{
     display: inline-block;
     width: 650px;
-    font-size: 20px;
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+}
+.house_detail_text{
+    display: inline-block;
+    font-size: 30px;
     color: black
 }
 .house_rent{
     display: inline-block;
     color: #1288c3;
-    font-size: 20px;
+    font-size: 40px;
     font-style: oblique;
 }

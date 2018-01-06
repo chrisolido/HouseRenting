@@ -46,6 +46,10 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
+def my_release_view(request):
+    context = {}
+    return TemplateResponse(request, 'Personal_Page/release.html', context)
+
 def personalinfo_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/personal_information.html', context)
@@ -181,7 +185,8 @@ class ManualCheckView(viewsets.ViewSet):
                             "province": house.address.province,
                             "district": house.address.district,
                             "floor": house.address.floor
-                        }
+                        },
+                        "pictures": [house.pictures[0]]
                     }
                     return HttpResponse(json.dumps(rhouse_json), content_type="application/json")
             return HttpResponse("")
