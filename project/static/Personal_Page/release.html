@@ -1,9 +1,10 @@
+{% load staticfiles %}{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>my release</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/personal_page/style.css" %}">
 </head>
 <body>
 <div id="wrapper">
@@ -19,10 +20,10 @@
     <a href="personal_information.html"><p id="information">personal information</p></a>
     <p id="right_title">my release</p>
     <hr id="hr2"/>
-    <a href="add_release.html"><div id="add">+add release</div></a>
+    <a href="add_release.html"><div id="add">+add</div></a>
     <div class="house_right">
         <div class="house_info">
-            <div class="house_img"><img  src="house.png"></div>
+            <div class="house_img"><img  src="{% static 'img/personal_page/house.png' %}"></div>
             <div class="house_content">
                 <a href="renting_history.html"><p class="house_title">individual renting | good decorations near by subway line10 station</p></a>
                 <p class="house_rent">¥2000/M</p>
@@ -33,7 +34,7 @@
 
         </div>
         <div class="house_info">
-            <div class="house_img"><img  src="house.png"></div>
+            <div class="house_img"><img  src="{% static 'img/personal_page/house.png' %}"></div>
             <div class="house_content">
                 <a href="renting_history.html"><p style="display: inline-block;width: 650px;font-size: 20px;color: black">individual renting | good decorations near by subway line10 station</p></a>
                 <p  style="display: inline-block;color: #1288c3;font-size: 20px;font-style: oblique">¥2000/M</p>

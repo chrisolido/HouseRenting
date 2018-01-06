@@ -72,7 +72,8 @@ house_info = '''
             "province": "Shanghai",
             "district": "Pudong",
             "floor": 4
-        }
+        },
+        "pictures": ["pic0007.jpg", "pic0008.jpg"]
     },
     {
         "title":"Small House",
@@ -91,7 +92,8 @@ house_info = '''
             "province": "Shanghai",
             "district": "Jiading",
             "floor": 4
-        }
+        },
+        "pictures": ["pic0005.jpg", "pic0006.jpg"]
     },
     {
         "title":"Middle House",
@@ -111,7 +113,8 @@ house_info = '''
             "province": "Shanghai",
             "district": "Luwan",
             "floor": 4
-        }
+        },
+        "pictures": ["pic0003.jpg", "pic0004.jpg"]
     },
     {
         "title":"Funy house",
@@ -131,7 +134,7 @@ house_info = '''
             "district": "Xuhui",
             "floor": 1
         },
-        "pictures": ["house_pic1.jpg", "house_pic1.jpg"]
+        "pictures": ["house_pic1.jpg", "pic0002.jpg"]
     }
 ]
 '''
