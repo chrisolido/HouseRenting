@@ -102,8 +102,8 @@ class HouseViewSet(MongoModelViewSet):
 
     def get_queryset(self):
         print(self.request.GET)
-        print(House.objects.filter(address__country="China"))
-        houses = House.objects.filter(address__country="China")
+        print(House.objects.filter())
+        houses = House.objects.filter()
         userid = None
         for user in User.objects.all():
             # userid = user.id

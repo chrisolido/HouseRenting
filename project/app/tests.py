@@ -19,7 +19,8 @@ house_info = '''
         "information": "Infolll",
         "type": "Group",
         "contact": "5a2e135a59bfed19ea856ff7",
-        "check": false,
+        "check": true,
+        "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -47,7 +48,7 @@ house_info = '''
             "district": "Xuhui",
             "floor": 1
         },
-        "pictures": ["image.png", "image2.png"]
+        "pictures": ["house_pic1.jpg", "house_pic1.jpg"]
     }
 ]
 '''
