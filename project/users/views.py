@@ -22,16 +22,6 @@ class UserViewSet(mixins.ListModelMixin,
         return User.objects.all()
 
 
-class UserInteraction(views.APIView):
-
-    def get(self):
-        return Response({'': ''})
-
-    def post(self, request):
-        print(request.POST)
-        return Response({'': ''})
-
-
 class ObtainAuthToken(views.APIView):
     throttle_classes = ()
     permission_classes = ()

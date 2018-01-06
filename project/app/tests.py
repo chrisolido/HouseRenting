@@ -61,6 +61,7 @@ house_info = '''
         "type": "Group",
         "contact": "15901962888",
         "check": false,
+        "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -88,7 +89,8 @@ house_info = '''
             "province": "Shanghai",
             "district": "Xuhui",
             "floor": 1
-        }
+        },
+        "pictures": ["house_pic1.jpg", "house_pic1.jpg"]
     }
 ]
 '''

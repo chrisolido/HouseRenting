@@ -21,8 +21,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from users.models import *
 from urllib import parse
-
+from django.core.mail import EmailMessage
 USER = ("user", "{\"user\": \"\", \"auth\": \"\"}")
+
+
+email = EmailMessage('Subject', 'Body verification code is 423455', to=['kevin.barre@epitech.eu', 'ikelive@hotmail.fr'])
 
 
 def index_view(request):
@@ -102,8 +105,8 @@ class HouseViewSet(MongoModelViewSet):
 
     def get_queryset(self):
         print(self.request.GET)
-        print(House.objects.filter(address__country="China"))
-        houses = House.objects.filter(address__country="China")
+        print(House.objects.filter())
+        houses = House.objects.filter()
         userid = None
         for user in User.objects.all():
             # userid = user.id
@@ -113,6 +116,18 @@ class HouseViewSet(MongoModelViewSet):
             house.save()
             print(User.objects.filter(id=house.contact.id))
         return House.objects.all()
+
+
+# class HouseViewSet(MongoModelViewSet):
+#     """
+#     Contains information about inputs/outputs of a single program
+#     that may be used in Universe workflows.
+#     """
+#     lookup_field = 'id'
+#     serializer_class = ToolSerializer
+#
+#     def get_queryset(self):
+#         return Tool.objects.all()
 
 
 class ManualCheckView(viewsets.ViewSet):

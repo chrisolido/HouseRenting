@@ -20,8 +20,8 @@
 
     <script>
         function append_house_list(image_path, topic, size, address, floor_number, price) {
-            var htmlString = '<div class="house_list_block" onclick="jmpToDetailPage('+topic+')">'
-                + '<a href="/housedetail?title='+encodeURI(topic)+'" >'
+            var htmlString = '<div class="house_list_block" onclick="jmpToDetailPage(' + topic + ')">'
+                + '<a href="/housedetail?title=' + encodeURI(topic) + '" >'
                 + '<div style="float:left;">'
                 + '<img src="' + image_path + '" width="400" height="300" alt="house_pic1"></div>'
                 + '<div style="float:left;width:700px;position:relative;left:30px;">'
@@ -44,6 +44,32 @@
                 + '</div><br><br>';
             $("#div_house_list").append(htmlString);
         }
+
+        var search = {search: "", pricemin: null, pricemax: null, district: null, roomnbr: null, renttype: null};
+
+        function setsearch($this) {
+            console.log("info");
+            console.log($this);
+            if ($this.searchbar)
+                search.search = $this.searchbar;
+            if ($this.pricemin)
+                search.pricemin = $this.pricemin;
+            if ($this.pricemax)
+                search.pricemax = $this.pricemax;
+            if ($this.district)
+                search.district = $this.district;
+            if ($this.roomnbr)
+            console.log(search);
+            {#$("#div_house_list").html("");#}
+            $.getJSON("./api/houses/", search, function (data) {
+                $.each(data, function (index, value) {
+                    console.log(value);
+                    if (value["check"])
+                        append_house_list("/static/img/" + value["pictures"][0],
+                            value["title"], value["size"], value["address"], value["type"], value["price"]);
+                });
+            });
+        }
     </script>
     <script>
         function ShowHouseList()
@@ -55,12 +81,13 @@
             }
             $("#div_house_list").empty();
             var user = {user: "", token: ""};
-            $.getJSON("./api/houses/", {"search": "blue"}, function (data) {
+
+            $.getJSON("./api/houses/", search, function (data) {
                 {#console.log(data);#}
                 $.each(data, function (index, value) {
                     console.log(value);
-                    if(value["check"])
-                        append_house_list("/static/img/house_pic1.jpg",
+                    if (value["check"])
+                        append_house_list("/static/img/" + value["pictures"][0],
                             value["title"], value["size"], value["address"], value["type"], value["price"]);
                 });
             });
@@ -97,10 +124,8 @@
 
     <div id="header" class="wap-header" style="float:left;position:absolute;left:450px;top:40px;width:500px;">
         <section class="wap-search">
-            <form method="post">
-                <div class="wap-search-text"><input type="text" placeholder="Search for house for rent"/></div>
-                <input type="submit" value=""/>
-            </form>
+            <div class="wap-search-text"><input type="text" placeholder="Search for house for rent" value=""
+                                                onchange="setsearch({searchbar: this.value})"/></div>
         </section>
     </div>
 </div>
@@ -115,9 +140,9 @@
 
             <div class="filtrate-price">
                 Price
-                <input id="minPrice" type="number"/>
+                <input id="minPrice" type="number" onchange="setsearch({pricemin: this.value})"/>
                 ~
-                <input id="maxPrice" type="number"/>
+                <input id="maxPrice" type="number" onchange="setsearch({pricemax: this.value})"/>
                 yuan
                 <button class="button" onclick="">Confirm</button>
             </div>
@@ -127,8 +152,8 @@
             </div>
             <div class="filtrate-address">
                 <ul class="clearfix">
-                    <li><a href="javascript:void(0)">All</a></li>
-                    <li><a href="javascript:void(0)">Yangpu</a></li>
+                    <li><a onclick="setsearch({district: 'All'})">All</a></li>
+                    <li><a onclick="setsearch({district: 'Yangpu'})">Yangpu</a></li>
                     <li><a href="javascript:void(0)">Jiading</a></li>
                     <li><a href="javascript:void(0)">Jingan</a></li>
                     <li><a href="javascript:void(0)">Pudong</a></li>
