@@ -46,7 +46,14 @@
         }
     </script>
     <script>
-        $(document).ready(function () {
+        function ShowHouseList()
+        {
+            if($("#minPrice").val() > $("#maxPrice").val())
+            {
+                alert("minPrice shouldn't be larger than maxPrice!");
+                return;
+            }
+            $("#div_house_list").empty();
             var user = {user: "", token: ""};
             $.getJSON("./api/houses/", {"search": "blue"}, function (data) {
                 {#console.log(data);#}
@@ -57,6 +64,11 @@
                             value["title"], value["size"], value["address"], value["type"], value["price"]);
                 });
             });
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            ShowHouseList();
         });
     </script>
 
@@ -76,7 +88,7 @@
             <a class="right_top_font" style="float:left;" href="{% url 'registration' %}">Register</a>
         {% endif %}
     </div>
-    <div class="right_top_font" style="float:left;position:relative;right:20%;">Personal center</div>
+    <div class="right_top_font" style="float:left;position:relative;right:20%;" href="{% url 'registration' %}">Personal center</div>
 </div>
 
 <div>
@@ -154,8 +166,8 @@
             <div class="filtrate-address">
                 <ul class="clearfix">
                     <li><a href="javascript:void(0)">All</a></li>
-                    <li><a href="javascript:void(0)">Empty house</a></li>
-                    <li><a href="javascript:void(0)">Roommates exist</a></li>
+                    <li><a href="javascript:void(0)">Alone</a></li>
+                    <li><a href="javascript:void(0)">Group</a></li>
                 </ul>
             </div>
 

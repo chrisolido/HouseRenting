@@ -112,7 +112,8 @@
                     month = ("0" + (newDate.getMonth() + 1)).slice(-2);
                     var t_date = newDate.getFullYear() + "/" + (month) + "/" + (day);
                     $("#rentingtime").html(": "+f_date+"->"+t_date);
-                    $("#sizeroom").html(": "+data.size);
+                    $("#sizeroom").html(": "+data.size+"㎡");
+                    $("#housecontent").html(": "+data.roomnbr+" rooms");
                     $("#detailaddress").html(data.address.road+","+data.address.district+","+data.address.city);
                     $("#pnum").val(": "+data.contact);
                     $("#description").html(data.information);
@@ -162,13 +163,13 @@
     <p id="type">Renting type </p>
     <p id="typecontent">: Empty house renting</p>
     <p id="housetype">House type</p>
-    <p id="housecontent">: 2 bedrooms & 2 livingrooms</p>
+    <p id="housecontent">: 4 rooms</p>
     <p id="floor">Floor number</p>
     <p id="floornumber">: 6</p>
     <p id="time">Renting time</p>
     <p id="rentingtime">: 11/11/2011->11/11/2012</p>
     <p id="size">Size room</p>
-    <p id="sizeroom">: 3</p>
+    <p id="sizeroom">: 3 m2</p>
     <p id="address">Detail address</p>
     <p id="detailaddress">: Gong Hua Road,Lane 479,Pudong new district,Shanghai,China </p>
     <input type="text" name="phoneNumber" value=": 12345678910 " id="pnum" disabled="disabled">

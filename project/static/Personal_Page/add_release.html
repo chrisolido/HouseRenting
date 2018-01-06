@@ -20,6 +20,7 @@
             formD.append("from_date", $("#from_date").val());
             formD.append("to_date", $("#to_date").val());
             formD.append("size", $("#size").val());
+            formD.append("roomnbr", $("#roomnbr").val());
             formD.append("check", false);
             formD.append("type", $('input:radio:checked').val());
             formD.append("province", $("#province").val());
@@ -58,8 +59,8 @@
     <div id="left"></div>
     <p id="center">personal center</p>
     <hr id="hr1"/>
-    <a href="release.html"><p id="release" style="color: #1288c3">my release</p></a>
-    <a href="renting_history.html"><p id="history">my renting history</p></a>
+    <a href="release.html"><p id="release">my release</p></a>
+    <a href="renting_history.html"><p id="history" style="color: #1288c3">add release</p></a>
     <a href="personal_information.html"><p id="information">personal information</p></a>
     <p id="right_title">add release</p>
     <hr id="hr2"/>
@@ -81,6 +82,7 @@
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
+            <input type="text" id="roomnbr" class="s_input">room
             <input type="text" id="size" class="s_input">㎡
             <input type="text" class="s_input" id="floor">floor
         </div>
