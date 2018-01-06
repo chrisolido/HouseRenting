@@ -36,6 +36,7 @@ urlpatterns = [
                   url(r'add_release', add_release_view, {}, name='add_release'),
                   url(r'housedetail', house_detail_view, {}, name='housedetail'),
                   url(r'manualcheck', manual_check_view, {}, name='manualcheck'),
+                  url(r'personalinfo', personalinfo_view, {}, name='personalinfo'),
                   url(r'registration', user_register_view, {}, name='registration'),
                   url(r'login', user_login_view, {}, name='login'),
                   url(r'logout', user_logout_view, {}, r'logout')

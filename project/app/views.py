@@ -46,6 +46,9 @@ def add_release_view(request):
     context = {}
     return TemplateResponse(request, 'Personal_Page/add_release.html', context)
 
+def personalinfo_view(request):
+    context = {}
+    return TemplateResponse(request, 'Personal_Page/personal_information.html', context)
 
 def house_detail_view(request):
     context = {}
@@ -160,6 +163,7 @@ class ManualCheckView(viewsets.ViewSet):
                         "from_date": str(house.from_date),
                         "to_date": str(house.to_date),
                         "size": house.size,
+                        "roomnbr": house.roomnbr,
                         "check": house.check,
                         "information": house.information,
                         "type": house.type,
@@ -214,6 +218,7 @@ class ShowHouseDetailView(viewsets.ViewSet):
                         "from_date": str(house.from_date),
                         "to_date": str(house.to_date),
                         "size": house.size,
+                        "roomnbr": house.roomnbr,
                         "check": house.check,
                         "information": house.information,
                         "type": house.type,
@@ -248,6 +253,7 @@ class BadwordView(viewsets.ViewSet):
             to_date = str(to_date)
 
             size = request.POST.get("size", None)
+            roomnbr = request.POST.get("roomnbr", None)
             check = request.POST.get("check", None)
             type = request.POST.get("type", None)
             province = request.POST.get("province", None)
@@ -256,7 +262,7 @@ class BadwordView(viewsets.ViewSet):
             address = request.POST.get("address", None)
             floor = request.POST.get("floor", None)
 
-            my_content = str(rent_title) + " " + str(detail_text)
+            my_content = str(rent_title) + "" + str(detail_text)
 
             data = urllib.parse.urlencode(
                 {'user-id': 'stucafall', 'api-key': 'pvh6nD5e19etz0TFSE0TSguWanBq7umNUuMtZ6plUtu0gDIH',
@@ -291,6 +297,7 @@ class BadwordView(viewsets.ViewSet):
                                     "from_date": {"$date": ''' + from_date + '''},
                                     "to_date": {"$date": ''' + to_date + '''},
                                     "size": ''' + size + ''',
+                                    "roomnbr": ''' + roomnbr + ''',
                                     "check":''' + check + ''',
                                 "information": "''' + detail_text + '''",
                                 "type": "''' + type + '''",

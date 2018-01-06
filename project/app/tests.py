@@ -61,10 +61,48 @@ house_info = '''
         "from_date": {"$date": 1512980682785},
         "to_date": {"$date": 1512980682785},
         "size": 3,
+        "roomnbr": 2,
         "information": "Infolll",
         "type": "Group",
-        "contact": "5a2e135a59bfed19ea856ff7",
-        "check": true,
+        "check": false,
+        "address": {
+            "country": "China",
+            "city": "Shanghai",
+            "road": "879",
+            "province": "Shanghai",
+            "district": "Pudong",
+            "floor": 4
+        }
+    },
+    {
+        "title":"Small House",
+        "price": 56.0,
+        "from_date": {"$date": 1512980682785},
+        "to_date": {"$date": 1512980682785},
+        "size": 3,
+        "roomnbr": 4,
+        "information": "Infolll",
+        "type": "Group",
+        "check": false,
+        "address": {
+            "country": "China",
+            "city": "Shanghai",
+            "road": "Shanghai Automobile City",
+            "province": "Shanghai",
+            "district": "Jiading",
+            "floor": 4
+        }
+    },
+    {
+        "title":"Middle House",
+        "price": 56.0,
+        "from_date": {"$date": 1512980682785},
+        "to_date": {"$date": 1512980682785},
+        "size": 3,
+        "roomnbr": 6,
+        "information": "Infolll",
+        "type": "Group",
+        "check": false,
         "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
             "country": "China",
@@ -81,10 +119,10 @@ house_info = '''
         "from_date": {"$date": 1512980682785},
         "to_date": {"$date": 1512980682785},
         "size": 5,
+        "roomnbr": 1,
         "check": true,
         "information": "Information of house",
         "type": "Group",
-        "contact": "5a2e135a59bfed19ea856ff7",
         "address": {
             "country": "China",
             "city": "Shanghai",

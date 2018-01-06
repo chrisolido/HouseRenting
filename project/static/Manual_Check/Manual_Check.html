@@ -15,12 +15,13 @@
                     $("#city").val("");
                     $("#district").val("");
                     $("#address").val("");
+                    $("#roomnbr").val("");
                     $("#size").val("");
                     $("#floor").val("");
                     $("#price").val("");
 
-                    $('#from_date').val("yyyy/mm/dd");
-                    $('#to_date').val("yyyy/mm/dd");
+                    $('#from_date').val("0000-00-00");
+                    $('#to_date').val("0000-00-00");
                     $("#detail_text").val("");
             }
         function ShowAnUnchecked()
@@ -51,6 +52,7 @@
                         $("#district").val(data.address.district);
                         $("#address").val(data.address.road);
                         $("#size").val(data.size);
+                        $("#roomnbr").val(data.roomnbr);
                         $("#floor").val(data.address.floor);
                         $("#price").val(data.price);
 
@@ -153,6 +155,7 @@
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
+            <input id="roomnbr" type="text" class="s_input" disabled="disabled">room
             <input id="size" type="text" class="s_input" disabled="disabled">㎡
             <input id="floor" type="text" class="s_input" disabled="disabled">floor
         </div>
