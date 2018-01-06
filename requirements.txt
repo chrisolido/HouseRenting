@@ -3,3 +3,4 @@ djangorestframework==3.3.3
 mongoengine==0.9
 pymongo==2.7
 django-rest-framework-mongoengine
+pillow

@@ -56,7 +56,6 @@ class Tool(Document):
 # class Advertisement(Document):
 
 
-
 class Address(EmbeddedDocument):
     country = fields.StringField(required=True)
     city = fields.StringField(required=True)
@@ -73,9 +72,9 @@ class House(Document):
     price = fields.FloatField(required=True, verbose_name="Price")
     address = fields.EmbeddedDocumentField(Address)
     check = fields.BooleanField()
-    from_date = fields.DateTimeField(verbose_name="Available  date")
+    from_date = fields.DateTimeField(verbose_name="Available date")
     to_date = fields.DateTimeField(verbose_name="Available date")
     size = fields.IntField(verbose_name="Number of room")
     information = fields.DynamicField(verbose_name="Description")
     vars()['type'] = fields.StringField(required=True, choices=['Group', 'Alone'])
-    # pictures = fields.ListField(fields.ImageField(), required=False)
+    pictures = fields.ListField(fields.StringField())

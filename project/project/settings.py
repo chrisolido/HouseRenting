@@ -29,7 +29,13 @@ SECRET_KEY = 'nh2ssox)j-ewc41%n_gw1+1$#x*+^r2ekurk-p1c7y1-%tz=6d'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ikelive@hotmail.fr'
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'ikelive@hotmail.fr'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Application definition
 

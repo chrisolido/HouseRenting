@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 from rest_framework import status, exceptions
 from rest_framework.authentication import get_authorization_header, BaseAuthentication
 

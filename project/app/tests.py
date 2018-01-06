@@ -46,7 +46,8 @@ house_info = '''
             "province": "Shanghai",
             "district": "Xuhui",
             "floor": 1
-        }
+        },
+        "pictures": ["image.png", "image2.png"]
     }
 ]
 '''
