@@ -7,6 +7,51 @@ import json
 from app.models import House
 
 # Create your tests here.
+# house_info = '''
+# [
+#     {
+#         "title":"Big House",
+#         "price": 56.0,
+#         "from_date": {"$date": 1512980682785},
+#         "to_date": {"$date": 1512980682785},
+#         "size": 3,
+#         "information": "Infolll",
+#         "type": "Group",
+#         "contact": "5a2e135a59bfed19ea856ff7",
+#         "check": true,
+#         "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
+#         "address": {
+#             "country": "China",
+#             "city": "Shanghai",
+#             "road": "879",
+#             "province": "Shanghai",
+#             "district": "Luwan",
+#             "floor": 4
+#         }
+#     },
+#     {
+#         "title":"Funy house",
+#         "price": 546.0,
+#         "from_date": {"$date": 1512980682785},
+#         "to_date": {"$date": 1512980682785},
+#         "size": 5,
+#         "check": true,
+#         "information": "Information of house",
+#         "type": "Group",
+#         "contact": "5a2e135a59bfed19ea856ff7",
+#         "address": {
+#             "country": "China",
+#             "city": "Shanghai",
+#             "road": "No. 177 North Road, Longchuan",
+#             "province": "Shanghai",
+#             "district": "Xuhui",
+#             "floor": 1
+#         },
+#         "pictures": ["house_pic1.jpg", "house_pic1.jpg"]
+#     }
+# ]
+# '''
+
 
 house_info = '''
 [
@@ -19,7 +64,7 @@ house_info = '''
         "roomnbr": 2,
         "information": "Infolll",
         "type": "Group",
-        "check": false,
+        "check": true,
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -37,9 +82,9 @@ house_info = '''
         "to_date": {"$date": 1512980682785},
         "size": 3,
         "roomnbr": 4,
-        "information": "Infolll",
+        "information": "Blue house",
         "type": "Group",
-        "check": false,
+        "check": true,
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -59,7 +104,7 @@ house_info = '''
         "roomnbr": 6,
         "information": "Infolll",
         "type": "Group",
-        "check": false,
+        "check": true,
         "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
             "country": "China",

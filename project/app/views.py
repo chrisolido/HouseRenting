@@ -22,8 +22,8 @@ from django.contrib.auth.decorators import login_required
 from users.models import *
 from urllib import parse
 from django.core.mail import EmailMessage
+import ast
 USER = ("user", "{\"user\": \"\", \"auth\": \"\"}")
-
 
 email = EmailMessage('Subject', 'Body verification code is 423455', to=['kevin.barre@epitech.eu', 'ikelive@hotmail.fr'])
 
@@ -116,6 +116,34 @@ class HouseViewSet(MongoModelViewSet):
             # userid = user.id
             print(user.id)
         return House.objects.all()
+        houses = House.objects.all()
+        if self.request.GET.get("pricemin"):
+            filt = ast.literal_eval(self.request.GET.get("pricemin"))
+            print(filt)
+            houses = houses.filter(price__gt=filt)
+        if self.request.GET.get("pricemax"):
+            filt = ast.literal_eval(self.request.GET.get("pricemax"))
+            print(filt)
+            houses = houses.filter(price__lt=filt)
+        if self.request.GET.get("district") and self.request.GET.get("district") != "All":
+            filt = self.request.GET.get("district")
+            houses = houses.filter(address__district=filt)
+        if self.request.GET.get("roomnbr") and self.request.GET.get("roomnbr") != "All":
+            filt = ast.literal_eval(self.request.GET.get("roomnbr"))
+            print(filt)
+            if filt == 99:
+                houses = houses.filter(roomnbr__gt=3)
+            else:
+                houses = houses.filter(roomnbr=filt)
+        if self.request.GET.get("renttype") and self.request.GET.get("renttype") != "All":
+            filt = self.request.GET.get("renttype")
+            print(filt)
+            houses = houses.filter(type=filt)
+        if self.request.GET.get("search"):
+            filt = self.request.GET.get("search")
+            houses = houses.filter(information__icontains=filt)
+        print(houses)
+        return houses
 
 
 # class HouseViewSet(MongoModelViewSet):
@@ -192,6 +220,7 @@ class ManualCheckRejectView(viewsets.ViewSet):
                     house.delete()
         return HttpResponse("OK")
 
+
 class ShowHouseDetailView(viewsets.ViewSet):
     def create(self, request):
         print("ShowHouseDetailView")
@@ -199,7 +228,7 @@ class ShowHouseDetailView(viewsets.ViewSet):
             title = request.POST.get("title", None)
             for house in House.objects.all():
                 if house.title == title:
-                    #return this house's detail
+                    # return this house's detail
                     rhouse_json = {
                         "title": house.title,
                         "price": house.price,
@@ -222,6 +251,7 @@ class ShowHouseDetailView(viewsets.ViewSet):
                     }
                     return HttpResponse(json.dumps(rhouse_json), content_type="application/json")
         return HttpResponse("OK")
+
 
 class BadwordView(viewsets.ViewSet):
 

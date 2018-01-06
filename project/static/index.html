@@ -59,8 +59,11 @@
             if ($this.district)
                 search.district = $this.district;
             if ($this.roomnbr)
+                search.roomnbr = $this.roomnbr;
+            if ($this.renttype)
+                search.renttype = $this.renttype;
             console.log(search);
-            {#$("#div_house_list").html("");#}
+            $("#div_house_list").html("");
             $.getJSON("./api/houses/", search, function (data) {
                 $.each(data, function (index, value) {
                     console.log(value);
@@ -181,7 +184,7 @@
             </div>
             <div class="filtrate-address">
                 <ul class="clearfix">
-                    <li><a onclick="setsearch({roomnbr: 0})">All</a></li>
+                    <li><a onclick="setsearch({roomnbr: 'All'})">All</a></li>
                     <li><a onclick="setsearch({roomnbr: 1})">1 room</a></li>
                     <li><a onclick="setsearch({roomnbr: 2})">2 rooms</a></li>
                     <li><a onclick="setsearch({roomnbr: 3})">3 rooms</a></li>
