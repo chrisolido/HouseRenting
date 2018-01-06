@@ -64,7 +64,7 @@ house_info = '''
         "roomnbr": 2,
         "information": "Infolll",
         "type": "Group",
-        "check": false,
+        "check": true,
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -81,9 +81,9 @@ house_info = '''
         "to_date": {"$date": 1512980682785},
         "size": 3,
         "roomnbr": 4,
-        "information": "Infolll",
+        "information": "Blue house",
         "type": "Group",
-        "check": false,
+        "check": true,
         "address": {
             "country": "China",
             "city": "Shanghai",
@@ -102,7 +102,7 @@ house_info = '''
         "roomnbr": 6,
         "information": "Infolll",
         "type": "Group",
-        "check": false,
+        "check": true,
         "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
             "country": "China",

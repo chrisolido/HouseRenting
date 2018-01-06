@@ -105,7 +105,6 @@ class HouseViewSet(MongoModelViewSet):
 
     def get_queryset(self):
         print(self.request.GET)
-        print(House.objects.filter(price__gt=2).filter(price__lt=100))
         houses = House.objects.all()
         if self.request.GET.get("pricemin"):
             filt = ast.literal_eval(self.request.GET.get("pricemin"))
@@ -115,17 +114,24 @@ class HouseViewSet(MongoModelViewSet):
             filt = ast.literal_eval(self.request.GET.get("pricemax"))
             print(filt)
             houses = houses.filter(price__lt=filt)
-        if self.request.GET.get("district"):
+        if self.request.GET.get("district") and self.request.GET.get("district") != "All":
             filt = self.request.GET.get("district")
             houses = houses.filter(address__district=filt)
-        # pricemax = ast.literal_eval(self.request.GET.get("pricemax"))
-        # print(pricemin)
-        # for user in User.objects.all():
-        #     userid = user.id
-        # for house in houses:
-            # house.update(contact=userid)
-            # house.save()
-            # print(User.objects.filter(id=house.contact.id))
+        if self.request.GET.get("roomnbr") and self.request.GET.get("roomnbr") != "All":
+            filt = ast.literal_eval(self.request.GET.get("roomnbr"))
+            print(filt)
+            if filt == 99:
+                houses = houses.filter(roomnbr__gt=3)
+            else:
+                houses = houses.filter(roomnbr=filt)
+        if self.request.GET.get("renttype") and self.request.GET.get("renttype") != "All":
+            filt = self.request.GET.get("renttype")
+            print(filt)
+            houses = houses.filter(type=filt)
+        if self.request.GET.get("search"):
+            filt = self.request.GET.get("search")
+            houses = houses.filter(information__icontains=filt)
+        print(houses)
         return houses
 
 
