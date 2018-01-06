@@ -1,11 +1,12 @@
+/*所有px的地方均已修改，并且wechat新加width与height；in3的pading也作了修改*/
 .font01:link,.font01:visited {
-    font-size: 50px;
+    font-size: 15px;/**/
     color: #ffffff;
     font-style: italic;
     font-family: "Times New Roman";
     text-decoration:none;
-    left: 1700px;
-    top: 50px;
+    left: 425px;/**/
+    top: 12px;/**/
     position: absolute;
 }
 
@@ -19,14 +20,14 @@
     text-decoration: none;
 }
 .font02:link,.font02:visited{
-    font-size: 50px;
+    font-size: 15px;/**/
     color:#ffffff;
     font-style: italic;
     font-family: "Times New Roman";
     text-decoration: none;
     position: absolute;
-    left:3240px;
-    top: 50px;
+    left:810px;/**/
+    top: 12px;/**/
 
 
 }
@@ -45,99 +46,101 @@ body {
     background-size: cover;
     margin: 0px;
     overflow:auto;
-    width:3955px;
-    height:2012px;
+    width:989px;/**/
+    height:503px;/**/
 }
 #whole{
-    width:3955px;
+    width:989px;/**/
 }
 #first{
     position:inherit;
-    height:60px;
+    height:15px;/**/
 }
 #section {
     background-color:ghostwhite;
-    left: 1700px;
-    width: 1700px;
-    height: 1750px;
-    top: 150px;
+    left: 425px;/**/
+    width: 425px;/**/
+    height: 437px;/**/
+    top: 37px;/**/
     position: absolute;
 }
 #title{
     color:deepskyblue;
     font-family:"Arial Unicode MS";
-    font-size: 120px;
+    font-size: 30px;/**/
     margin-left: 26%;
     margin-top:2%;
 }
 #in{
-    border:4px solid lightgray;
+    border:1px solid lightgray;/**/
     padding:4% 34%;
     margin-left:16%;
-    padding-left: 20px;
+    padding-left: 10px;/**/
     background:transparent;
-    font-size: 45px;
+    font-size: 11px;/**/
     color:black;
     poositon:absolute;
-    margin-top: 50px;
+    margin-top: 12px;/**/
 }
 #in2{
-    border:4px solid lightgray;
+    border:1px solid lightgray;/**/
     padding:4% 34%;
     margin-left:16%;
-    padding-left: 20px;
+    padding-left: 5px;/**/
     background:transparent;
-    font-size: 45px;
+    font-size: 11px;/**/
     color:black;
     poositon:absolute;
-    margin-top: 120px;
+    margin-top: 30px;/**/
 
 }
 #in3{
-    padding:3% 29%;
+    padding:2.8% 28%;/**/
     margin-left:16%;
-    margin-top:220px;
+    margin-top:55px;/**/
     background-color: deepskyblue;
     font-family: "Times New Roman";
-    font-size: 65px;
+    font-size: 16px;/**/
     color:white;
 }
 input::-webkit-input-placeholder{
     color:gray;
     font-style: italic;
-    font-size: 45px;
+    font-size: 11px;/**/
     font-family:"Times New Roman";
 
 }
 input::-moz-placeholder{
     color:gray;
     font-style: italic;
-    font-size: 45px;
+    font-size: 11px;/**/
     font-family:"Times New Roman";
-    padding-left:20px;
+    padding-left:5px;/**/
 }
 input:-moz-placeholder{
     color:gray;
     font-style: italic;
-    font-size: 40px;
+    font-size: 5px;/**/
     font-family:"Times New Roman";
-    padding-left: 20px;
+    padding-left: 5px;/**/
 }
 input:-ms-input-placeholder{
     color:gray;
     font-style: italic;
-    font-size: 40px;
+    font-size: 10px;/**/
     font-family:"Times New Roman";
-    padding-left:20px;
+    padding-left:5px;/**/
 }
 #wechat{
-    margin-left: 45%;
-    margin-top:70px;
+    margin-left: 43%;
+    margin-top:27px;/**/
+    width:50px;/**/
+    height:50px;/**/
 }
 #wechat_font:link,#wechat_font:visited{
     margin-left: 43%;
     font-family: "Times New Roman";
-    font-size: 40px;
+    font-size: 10px;/**/
     font-style: italic;
     color:gray;
     text-decoration: none;
@@ -151,14 +154,14 @@ input:-ms-input-placeholder{
     text-decoration: none;
 }
 .font03:link,.font03:visited{
-    font-size: 50px;
+    font-size: 15px;/**/
     color:#ffffff;
     font-style: italic;
     font-family: "Times New Roman";
     text-decoration: none;
     position: absolute;
-    left:3280px;
-    top: 50px;
+    left:820px;/**/
+    top: 12px;/**/
 
 
 }
@@ -171,55 +174,55 @@ input:-ms-input-placeholder{
     text-decoration: none;
 }
 #Inrd{
-    border:4px solid lightgray;
+    border:1px solid lightgray;/**/
     padding:4% 34%;
     margin-left:16%;
-    padding-left: 20px;
+    padding-left: 5px;/**/
     background:transparent;
-    font-size: 45px;
+    font-size: 11px;/**/
     color:black;
     poositon:absolute;
-    margin-top: 60px;
+    margin-top: 15px;/**/
 }
 #Insp{
-    border:4px solid lightgray;
+    border:1px solid lightgray;/**/
     padding:4% 34%;
     margin-left:16%;
-    padding-left: 20px;
+    padding-left: 5px;/**/
     background:transparent;
-    font-size: 45px;
+    font-size: 11px;/**/
     color:black;
     poositon:absolute;
-    margin-top: 60px;
+    margin-top: 15px;/**/
 }
 #Incp{
-    border:4px solid lightgray;
+    border:1px solid lightgray;/**/
     padding:4% 34%;
     margin-left:16%;
-    padding-left: 20px;
+    padding-left: 5px;/**/
     background:transparent;
-    font-size: 45px;
+    font-size: 11px;/**/
     color:black;
     poositon:absolute;
-    margin-top: 60px;
+    margin-top: 15px;/**/
 }
 #InRE{
     padding:4% 27%;
     margin-left:16%;
-    margin-top:130px;
+    margin-top:32px;/**/
     background-color: deepskyblue;
     font-family: "Times New Roman";
-    font-size: 65px;
+    font-size: 16px;/**/
     color:white;
 }
 #get{
     font-style: italic;
     font-family: "Times New Roman";
-    font-size: 45px;
+    font-size: 11px;/**/
     left:55%;
     top:23%;
     position: absolute;
     background-color: darkgrey;
     color:ghostwhite;
-    padding:2% 1.5%;
+    padding:1% 0.5%;
 }

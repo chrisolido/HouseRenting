@@ -101,6 +101,7 @@ body{
 .house_list_block{
 	height:370px;
 	border-bottom:1px solid #1E90FF;
+	cursor:pointer;
 }
 /////
 

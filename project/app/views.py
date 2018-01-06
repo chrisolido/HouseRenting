@@ -154,8 +154,8 @@ class ManualCheckView(viewsets.ViewSet):
 class ManualCheckPassView(viewsets.ViewSet):
     def create(self, request):
         print("ManualCheckPass")
-        title = request.POST.get("title", None)
         if request.method == "POST":
+            title = request.POST.get("title", None)
             for house in House.objects.all():
                 if house.title == title:
                     house.check = True
@@ -166,13 +166,42 @@ class ManualCheckPassView(viewsets.ViewSet):
 class ManualCheckRejectView(viewsets.ViewSet):
     def create(self, request):
         print("ManualCheckReject")
-        title = request.POST.get("title", None)
         if request.method == "POST":
+            title = request.POST.get("title", None)
             for house in House.objects.all():
                 if house.title == title:
                     house.delete()
         return HttpResponse("OK")
 
+class ShowHouseDetailView(viewsets.ViewSet):
+    def create(self, request):
+        print("ShowHouseDetailView")
+        if request.method == "POST":
+            title = request.POST.get("title", None)
+            for house in House.objects.all():
+                if house.title == title:
+                    #return this house's detail
+                    rhouse_json = {
+                        "title": house.title,
+                        "price": house.price,
+                        "from_date": str(house.from_date),
+                        "to_date": str(house.to_date),
+                        "size": house.size,
+                        "check": house.check,
+                        "information": house.information,
+                        "type": house.type,
+                        "contact": "5a2e135a59bfed19ea856ff7",
+                        "address": {
+                            "country": "China",
+                            "city": house.address.city,
+                            "road": house.address.road,
+                            "province": house.address.province,
+                            "district": house.address.district,
+                            "floor": house.address.floor
+                        }
+                    }
+                    return HttpResponse(json.dumps(rhouse_json), content_type="application/json")
+        return HttpResponse("OK")
 
 class BadwordView(viewsets.ViewSet):
 
