@@ -11,6 +11,7 @@ from app.serializers import *
 from app.models import Tool, Book, Author, House
 from users.models import User
 import json
+import os
 import urllib
 import smtplib
 import time
@@ -272,6 +273,18 @@ class BadwordView(viewsets.ViewSet):
             district = request.POST.get("district", None)
             address = request.POST.get("address", None)
             floor = request.POST.get("floor", None)
+            username = request.POST.get("username", None)
+            #upload an image into static package
+            img = request.FILES.get('img')
+
+            if os.path.exists(os.path.join('project/static/img', img.name)):
+                return HttpResponse("This Image Exists!")
+            else:
+                f = open(os.path.join('project/static/img', img.name), 'wb')
+            for chunk in img.chunks(chunk_size=1024):
+                f.write(chunk)
+            picture = img.name;
+            #
 
             my_content = str(rent_title) + "" + str(detail_text)
 
@@ -287,7 +300,13 @@ class BadwordView(viewsets.ViewSet):
             result = json.loads(response)
 
             if result['is-bad']:  # have bad words
-                to_email_address = "2606449422@qq.com"
+                to_email_address = ""  # username
+                print("username is "+username)
+                for user in User.objects.all():
+                    print(user.username)
+                    if user.username == username:
+                        to_email_address = user.email
+
                 username = "SmallCircle"
                 email_topic = "Add House Release Information Fail"
                 email_content = ("Dear " + username + ", your adding house release information failed"
@@ -308,6 +327,7 @@ class BadwordView(viewsets.ViewSet):
                                     "from_date": {"$date": ''' + from_date + '''},
                                     "to_date": {"$date": ''' + to_date + '''},
                                     "size": ''' + size + ''',
+                                    "username":"''' + username + '''",
                                     "roomnbr": ''' + roomnbr + ''',
                                     "check":''' + check + ''',
                                 "information": "''' + detail_text + '''",
@@ -320,7 +340,8 @@ class BadwordView(viewsets.ViewSet):
                                         "province": "''' + province + '''",
                                         "district": "''' + district + '''",
                                         "floor": ''' + floor + '''
-                                        }
+                                        },
+                                    "pictures": ["''' + picture + '''"]
                                     }
                                 ]
                                 '''
@@ -347,6 +368,7 @@ class Email_Service:
         msg_from = '2606449422@qq.com'  # from my email address
         passwd = 'cwnspgrabbfsebjg'  # privilege code
         msg_to = str(to_email_address)  # user's email address
+        print("To Email is"+msg_to)
 
         subject = email_topic  # topic
         content = email_content  # content

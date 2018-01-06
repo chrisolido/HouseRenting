@@ -11,7 +11,7 @@ def create_superuser():
     """
     new_admin = User(
         username="admin@example.com",
-        email="admin@example.com",
+        email="2606449422@qq.com", #Small Circle's email
         name="admin",
         is_active=True,
         is_staff=True
@@ -27,7 +27,7 @@ def create_user():
     """
     new_user = User(
         username="user@example.com",
-        email="user@example.com",
+        email="2606449422@qq.com", #Small Circle's email
         name="user",
         is_active=True,
         is_staff=False,
@@ -79,10 +79,12 @@ class UserViewSetTestCase(APITestCase):
     def doCleanups(self):
         print(User.objects.all())
         print(Token.objects.all())
-        User.drop_collection()
-        Token.drop_collection()
+        # User.drop_collection()
+        # Token.drop_collection()
 
     def test_get_unauthorized(self):
+        User.drop_collection()
+        Token.drop_collection()
         c = APIClient()
 
         response = c.get(self.url)
@@ -93,3 +95,7 @@ class UserViewSetTestCase(APITestCase):
 
         response = c.get(self.url, HTTP_AUTHORIZATION=self.auth_header)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_show_username(self):
+        for user in User.objects.all():
+           print("username is "+user.username)

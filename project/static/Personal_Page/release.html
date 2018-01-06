@@ -33,7 +33,7 @@
                 {#console.log(data);#}
                 $.each(data, function (index, value) {
                     console.log(value);
-                    if (value["check"] && value["title"]=="Small House")
+                    if (value["check"] && value["username"]==$("#p2").val())
                         append_house_list("/static/img/" + value["pictures"][0],
                             value["title"], value["size"], value["address"].country+","+value["address"].city+","+
                                 value["address"].district+","+value["address"].road
@@ -52,7 +52,7 @@
 <div id="wrapper">
     <div id="head">
         <a href="release.html" ><p id="p1">House Renting</p></a>
-        <a href="renting_history.html"><p id="p2">15901776523(log out)</p></a>
+        <a href="renting_history.html"><p id="p2">user@example.com</p></a>
     </div>
     <div id="left"></div>
     <p id="center">personal center</p>

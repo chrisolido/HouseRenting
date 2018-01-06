@@ -64,6 +64,7 @@ house_info = '''
         "roomnbr": 2,
         "information": "Infolll",
         "type": "Group",
+        "username": "user@example.com",
         "check": false,
         "address": {
             "country": "China",
@@ -84,6 +85,7 @@ house_info = '''
         "roomnbr": 4,
         "information": "Blue house",
         "type": "Group",
+        "username": "user@example.com",
         "check": true,
         "address": {
             "country": "China",
@@ -104,6 +106,7 @@ house_info = '''
         "roomnbr": 6,
         "information": "Infolll",
         "type": "Group",
+        "username": "user@example.com",
         "check": true,
         "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
@@ -126,6 +129,7 @@ house_info = '''
         "check": true,
         "information": "Information of house",
         "type": "Group",
+        "username": "user@example.com",
         "address": {
             "country": "China",
             "city": "Shanghai",
