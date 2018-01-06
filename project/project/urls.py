@@ -20,6 +20,7 @@ router.register(r'badwords', BadwordView, r'badwords')
 router.register(r'ManualCheck', ManualCheckView, r'ManualCheck')
 router.register(r'ManualCheckPass', ManualCheckPassView, r'ManualCheckPass')
 router.register(r'ManualCheckReject', ManualCheckRejectView, r'ManualCheckReject')
+router.register(r'ShowHouseDetail', ShowHouseDetailView, r'ShowHouseDetail')
 router.add_api_view(r'auth', url(r'^auth/$', ObtainAuthToken.as_view(), name=r"auth"))
 
 urlpatterns = [

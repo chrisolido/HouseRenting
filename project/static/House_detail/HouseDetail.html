@@ -5,7 +5,135 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" type="text/css" href="{% static "css/House_detail/house.css" %}" >
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src={% static "js/md5.js" %}></script>
     <title>HouseRenting</title>
+
+    <script type="text/javascript">
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  decodeURI(r[2]); return null;
+        }
+        function TransEnToCH(EnString) {
+            var appid = '20180104000111874';
+            var key = 'u2GBEsEwnJ4_oJ6knsDP';
+            var salt = (new Date).getTime();
+            var query = EnString;
+            // 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+            var from = 'en';
+            var to = 'zh';
+            var str1 = appid + query + salt + key;
+            var sign = MD5(str1);
+            var transstr = "variable";
+            $.ajax({
+                url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+                type: 'post',
+                dataType: 'jsonp',
+                data: {
+                    q: query,
+                    appid: appid,
+                    salt: salt,
+                    from: from,
+                    to: to,
+                    sign: sign
+                },
+                success: function (data) {
+                    transstr = String(data.trans_result[0].dst);
+                    console.log("翻译成中文"+transstr);
+                    showBaiDuMap(transstr);
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+
+        function showBaiDuMap(transstr)
+        {
+            // 百度地图API功能
+            console.log(transstr);
+            var map = new BMap.Map("allmap");
+            //var point = new BMap.Point(116.404, 39.915);
+            map.centerAndZoom("上海", 15);
+            map.enableScrollWheelZoom();
+
+            var localSearch = new BMap.LocalSearch(map);
+            localSearch.enableAutoViewport(); //允许自动调节窗体大小
+            function searchByStationName(keyword) {
+                map.clearOverlays();//清空原来的标注
+                localSearch.setSearchCompleteCallback(function (searchResult) {
+                    var poi = searchResult.getPoi(0);
+                    map.centerAndZoom(poi.point, 13);
+                    var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度map.addOverlay(marker);
+                    map.addOverlay(marker);
+                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+                });
+                localSearch.search(keyword);
+            }
+            searchByStationName(transstr);
+            //searchByStationName("上海浦东高新区龚华路");
+        }
+    </script>
+    <script>
+        function EditPageElements(mytitle)
+        {
+            var formD = new FormData();
+            formD.append("title", mytitle);
+            formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+            $.ajax({
+                type: 'POST',
+                sync: false,
+                url: '/api/ShowHouseDetail/',
+                data: formD,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    //data is a house info wait to be shown
+                    console.log(data);
+                    $("#Des_title").html(data.title);
+                    // $("#city").val(data.address.city);
+                    // $("#district").val(data.address.district);
+                    // $("#address").val(data.address.road);
+                    // $("#size").val(data.size);
+                    $("#floornumber").html(": "+String(data.address.floor));
+                    $("#price").html(data.price+"yuan/month");
+                    $("#typecontent").html(": "+data.type);
+                    var val = Date.parse(data.from_date);
+                    var newDate = new Date(val);
+                    var day = ("0" + newDate.getDate()).slice(-2);
+                    var month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+                    var f_date = newDate.getFullYear() + "/" + (month) + "/" + (day);
+
+                    val = Date.parse(data.to_date);
+                    newDate = new Date(val);
+                    day = ("0" + newDate.getDate()).slice(-2);
+                    month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+                    var t_date = newDate.getFullYear() + "/" + (month) + "/" + (day);
+                    $("#rentingtime").html(": "+f_date+"->"+t_date);
+                    $("#sizeroom").html(": "+data.size);
+                    $("#detailaddress").html(data.address.road+","+data.address.district+","+data.address.city);
+                    $("#pnum").val(": "+data.contact);
+                    $("#description").html(data.information);
+                    window.EnAdress = data.address.city+","+data.address.district+" district"+","+data.address.road;
+                    console.log(window.EnAdress);
+                    TransEnToCH(window.EnAdress);
+                },
+                error: function () {
+                    alert('error');
+                }});
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            var mytitle = GetQueryString("title");
+            var EnAdress = "";
+            alert(mytitle);
+            EditPageElements(mytitle);
+            /*$("#mapdiv").append("<script>TransEnToCH("+window.EnAdress+");*/
+        });
+    </script>
 </head>
 <body>
 <div id="whole">
@@ -20,7 +148,6 @@
     <p id="title"><strong>House Renting</strong></p>
     <p id="Des_title"><strong>Gong road new town,rent in good faith</strong></p>
     <p id="number">Number:56705636</p>
-    <p id="date">11-17</p>
     <!unable to achieve changing picture>
     <form action="">
         <img src="/static/img/House_detail/timg.jpg" id="mainpic">
@@ -44,7 +171,7 @@
     <p id="sizeroom">: 3</p>
     <p id="address">Detail address</p>
     <p id="detailaddress">: Gong Hua Road,Lane 479,Pudong new district,Shanghai,China </p>
-    <input type="text" name="phoneNumber" value=": 12345678910 " id="pnum">
+    <input type="text" name="phoneNumber" value=": 12345678910 " id="pnum" disabled="disabled">
     <img src="/static/img/House_detail/phone.jpg" id="ppic">
     <a href="#"><img src="/static/img/House_detail/wetalk.jpg"id="wetalk"></a>
     <a href="#" id="talk">Talk</a>
@@ -55,47 +182,13 @@
     <a href="#district" id="mapbutton">District Map</a>
     </div>
     <div id="housedescription">
-        <p id="description">1.Gong Hua Road,Lane 479<br><br>2.Support bag, call in advance at the house ,24 hours online mobile phone service for you, the good location,house price good.<br><br>3.a new and simple design style,low carbon and environmental protection, home appliances brand allocation and living,quality.</p>
+        <p id="description">House Info</p>
 </div>
     <div id="district"></div>
         <p id="content">District Map</p>
     <div id="allmap"></div>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fO4I1gYGQnGC5DbPCH1rRMWdG0vjwMZM"></script>
-    <!--<script>-->
-        <!--function searchByStationName(keyword) {-->
-            <!--map.clearOverlays();//清空原来的标注-->
-            <!--//var keyword = "同济大学嘉定校区";-->
-            <!--localSearch.setSearchCompleteCallback(function (searchResult) {-->
-            <!--var poi = searchResult.getPoi(0);-->
-            <!--map.centerAndZoom(poi.point, 13);-->
-            <!--var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地址对应的经纬度-->
-            <!--map.addOverlay(marker);-->
-        <!--});-->
-            <!--localSearch.search(keyword);-->
-        <!--}-->
-    <!--</script>-->
-    <script type="text/javascript">
-        // 百度地图API功能
-        var map = new BMap.Map("allmap");
-	    //var point = new BMap.Point(116.404, 39.915);
-	    map.centerAndZoom("上海", 15);
-	    map.enableScrollWheelZoom();
 
-	    var localSearch = new BMap.LocalSearch(map);
-        localSearch.enableAutoViewport(); //允许自动调节窗体大小
-        function searchByStationName(keyword) {
-            map.clearOverlays();//清空原来的标注
-            localSearch.setSearchCompleteCallback(function (searchResult) {
-            var poi = searchResult.getPoi(0);
-            map.centerAndZoom(poi.point, 13);
-            var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度map.addOverlay(marker);
-            map.addOverlay(marker);
-            // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        });
-        localSearch.search(keyword);
-    }
-    searchByStationName("同济大学嘉定校区");
-    </script>
    <div id="like">
    </div><p id="liketitle">Do you like these houses?</p>
     <div id="likecontentbd">

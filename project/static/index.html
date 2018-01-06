@@ -17,9 +17,11 @@
     <script src={% static "js/jquery-1.10.1.min.js" %}></script>
     <script src={% static "js/jquery.filter.js" %}></script>
     <!--<script src="jquery.min.js"></script>-->
+
     <script>
         function append_house_list(image_path, topic, size, address, floor_number, price) {
-            var htmlString = '<div class="house_list_block">'
+            var htmlString = '<div class="house_list_block" onclick="jmpToDetailPage('+topic+')">'
+                + '<a href="/housedetail?title='+encodeURI(topic)+'" >'
                 + '<div style="float:left;">'
                 + '<img src="' + image_path + '" width="400" height="300" alt="house_pic1"></div>'
                 + '<div style="float:left;width:700px;position:relative;left:30px;">'
@@ -38,6 +40,7 @@
                 + '<div style="float:left;">Type :&nbsp;&nbsp;</div><div style="float:left;">' + floor_number + '</div></div>'
                 + '</div>'
                 + '<div style="float:left;position:relative;left:30px;"><div class="house_list_text3">￥' + price + '/Month</div></div>'
+                + '</a>'
                 + '</div><br><br>';
             $("#div_house_list").append(htmlString);
         }
@@ -49,8 +52,9 @@
                 {#console.log(data);#}
                 $.each(data, function (index, value) {
                     console.log(value);
-                    append_house_list("/static/img/house_pic1.jpg",
-                        value["title"], value["size"], value["address"], value["type"], value["price"]);
+                    if(value["check"])
+                        append_house_list("/static/img/house_pic1.jpg",
+                            value["title"], value["size"], value["address"], value["type"], value["price"]);
                 });
             });
         });
