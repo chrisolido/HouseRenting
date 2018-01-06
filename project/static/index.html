@@ -124,8 +124,11 @@
 
     <div id="header" class="wap-header" style="float:left;position:absolute;left:450px;top:40px;width:500px;">
         <section class="wap-search">
-            <div class="wap-search-text"><input type="text" placeholder="Search for house for rent" value=""
-                                                onchange="setsearch({searchbar: this.value})"/></div>
+            <!--<form method="post">-->
+                <div class="wap-search-text"><input type="text" placeholder="Search for house for rent" value=""
+                                                    onchange="setsearch({searchbar: this.value})"/></div>
+                <input type="submit" value="" />
+            <!--</form>-->
         </section>
     </div>
 </div>
@@ -154,22 +157,22 @@
                 <ul class="clearfix">
                     <li><a onclick="setsearch({district: 'All'})">All</a></li>
                     <li><a onclick="setsearch({district: 'Yangpu'})">Yangpu</a></li>
-                    <li><a href="javascript:void(0)">Jiading</a></li>
-                    <li><a href="javascript:void(0)">Jingan</a></li>
-                    <li><a href="javascript:void(0)">Pudong</a></li>
-                    <li><a href="javascript:void(0)">Putuo</a></li>
-                    <li><a href="javascript:void(0)">Zhabei</a></li>
-                    <li><a href="javascript:void(0)">Hongkou</a></li>
-                    <li><a href="javascript:void(0)">Changning</a></li>
-                    <li><a href="javascript:void(0)">Qingpu</a></li>
-                    <li><a href="javascript:void(0)">Minxing</a></li>
-                    <li><a href="javascript:void(0)">BaoShan</a></li>
-                    <li><a href="javascript:void(0)">Fengxian</a></li>
-                    <li><a href="javascript:void(0)">Jinshan</a></li>
-                    <li><a href="javascript:void(0)">Songjiang</a></li>
-                    <li><a href="javascript:void(0)">Xuhui</a></li>
-                    <li><a href="javascript:void(0)">Luwan</a></li>
-                    <li><a href="javascript:void(0)">Huangpu</a></li>
+                    <li><a onclick="setsearch({district: 'Jiading'})">Jiading</a></li>
+                    <li><a onclick="setsearch({district: 'Jingan'})">Jingan</a></li>
+                    <li><a onclick="setsearch({district: 'Pudong'})">Pudong</a></li>
+                    <li><a onclick="setsearch({district: 'Putuo'})">Putuo</a></li>
+                    <li><a onclick="setsearch({district: 'Zhabei'})">Zhabei</a></li>
+                    <li><a onclick="setsearch({district: 'Hongkou'})">Hongkou</a></li>
+                    <li><a onclick="setsearch({district: 'Changning'})">Changning</a></li>
+                    <li><a onclick="setsearch({district: 'Qingpu'})">Qingpu</a></li>
+                    <li><a onclick="setsearch({district: 'Minxing'})">Minxing</a></li>
+                    <li><a onclick="setsearch({district: 'Baoshan'})">BaoShan</a></li>
+                    <li><a onclick="setsearch({district: 'Fengxian'})">Fengxian</a></li>
+                    <li><a onclick="setsearch({district: 'Jinshan'})">Jinshan</a></li>
+                    <li><a onclick="setsearch({district: 'Songjiang'})">Songjiang</a></li>
+                    <li><a onclick="setsearch({district: 'Xuhui'})">Xuhui</a></li>
+                    <li><a onclick="setsearch({district: 'Luwan'})">Luwan</a></li>
+                    <li><a onclick="setsearch({district: 'Huangpu'})">Huangpu</a></li>
                 </ul>
             </div>
 
@@ -178,11 +181,11 @@
             </div>
             <div class="filtrate-address">
                 <ul class="clearfix">
-                    <li><a href="javascript:void(0)">All</a></li>
-                    <li><a href="javascript:void(0)">1 room</a></li>
-                    <li><a href="javascript:void(0)">2 rooms</a></li>
-                    <li><a href="javascript:void(0)">3 rooms</a></li>
-                    <li><a href="javascript:void(0)">More than 3 rooms</a></li>
+                    <li><a onclick="setsearch({roomnbr: 0})">All</a></li>
+                    <li><a onclick="setsearch({roomnbr: 1})">1 room</a></li>
+                    <li><a onclick="setsearch({roomnbr: 2})">2 rooms</a></li>
+                    <li><a onclick="setsearch({roomnbr: 3})">3 rooms</a></li>
+                    <li><a onclick="setsearch({roomnbr: 99})">More than 3 rooms</a></li>
                 </ul>
             </div>
             <div id="rent_type" class="filtrate-category" style="color:#646464;">
@@ -190,9 +193,9 @@
             </div>
             <div class="filtrate-address">
                 <ul class="clearfix">
-                    <li><a href="javascript:void(0)">All</a></li>
-                    <li><a href="javascript:void(0)">Alone</a></li>
-                    <li><a href="javascript:void(0)">Group</a></li>
+                    <li><a onclick="setsearch({renttype: 'All'})">All</a></li>
+                    <li><a onclick="setsearch({renttype: 'Alone'})">Alone</a></li>
+                    <li><a onclick="setsearch({renttype: 'Group'})">Group</a></li>
                 </ul>
             </div>
 

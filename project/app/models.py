@@ -67,17 +67,13 @@ class Address(EmbeddedDocument):
 
 class House(Document):
 
-    contact = fields.ReferenceField(User)
+    contact = fields.ReferenceField(User, required=False)
     title = fields.StringField(required=True, verbose_name="Title")
     price = fields.FloatField(required=True, verbose_name="Price")
     address = fields.EmbeddedDocumentField(Address)
     check = fields.BooleanField()
-<<<<<<< HEAD
     roomnbr = fields.IntField(verbose_name='room number')
     from_date = fields.DateTimeField(verbose_name="Available  date")
-=======
-    from_date = fields.DateTimeField(verbose_name="Available date")
->>>>>>> 05ccaac456ae80cff185e2ebb4a5fc0ad8a9abf5
     to_date = fields.DateTimeField(verbose_name="Available date")
     size = fields.IntField(verbose_name="Number of room")
     information = fields.DynamicField(verbose_name="Description")

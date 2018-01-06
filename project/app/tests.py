@@ -19,14 +19,13 @@ house_info = '''
         "roomnbr": 2,
         "information": "Infolll",
         "type": "Group",
-        "contact": "15901962888",
         "check": false,
         "address": {
             "country": "China",
             "city": "Shanghai",
             "road": "879",
             "province": "Shanghai",
-            "district": "Luwan",
+            "district": "Pudong",
             "floor": 4
         }
     },
@@ -39,14 +38,13 @@ house_info = '''
         "roomnbr": 4,
         "information": "Infolll",
         "type": "Group",
-        "contact": "15901962888",
         "check": false,
         "address": {
             "country": "China",
             "city": "Shanghai",
-            "road": "879",
+            "road": "Shanghai Automobile City",
             "province": "Shanghai",
-            "district": "Luwan",
+            "district": "Jiading",
             "floor": 4
         }
     },
@@ -59,7 +57,6 @@ house_info = '''
         "roomnbr": 6,
         "information": "Infolll",
         "type": "Group",
-        "contact": "15901962888",
         "check": false,
         "pictures": ["house_pic1.jpg", "house_pic1.jpg"],
         "address": {
@@ -81,7 +78,6 @@ house_info = '''
         "check": true,
         "information": "Information of house",
         "type": "Group",
-        "contact": "15901962888",
         "address": {
             "country": "China",
             "city": "Shanghai",

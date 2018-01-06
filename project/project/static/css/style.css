@@ -111,11 +111,11 @@ body{
 /*顶部*/
 .wap-header { background-color: #fff; }
 .wap-header h1 { padding: 0 2.4rem; text-align: center; font-size: 1rem; line-height: 2.2rem; }
-.wap-search { height: 2.2rem;  padding: .36rem 2.4rem; }
-.wap-search form { position: relative; background-color: #e4e4e4; border-radius: 1.1rem; overflow: hidden; }
-.wap-search form input[type="submit"] { position: absolute; top: 0; right: 0; width: 1.75rem; height: 1.48rem; border: none; background: url(../img/search-btn.png) no-repeat center; background-size: 50%; }
+.wap-search { height: 1.6rem;  padding: .36rem 2.4rem; }
+.wap-search { position: relative; background-color: #e4e4e4; border-radius: 1.1rem; overflow: hidden; }
+.wap-search input[type="submit"] { position: absolute; top: 0; right: 0; width: 1.75rem; height: 1.48rem; border: none; background: url(../img/search-btn.png) no-repeat center; background-size: 50%; }
 .wap-search-text { margin-right: 1.75rem; }
-.wap-search-text input[type="text"] { display: block; width: 100%; height: 1.48rem; padding-right: 1rem; padding-left: 1rem; border: none; background: none; }
+.wap-search-text input[type="text"] { display: block; width: 100%; height: 0.98rem; padding-right: 1rem; padding-left: 5rem; border: none; background: none; }
 .wap-search-text input[type="text"]:focus { color: #ff2832; outline: none; }
 a.wap-header-l, a.wap-header-r { position: absolute; top: 0; display: block; width: 2.2rem; height: 2.2rem; text-align: center; font-size: .7rem; line-height: 2.2rem; }
 a.wap-header-l { left: 0; }
