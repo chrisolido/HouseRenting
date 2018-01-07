@@ -28,7 +28,7 @@ def create_user():
     new_user = User(
         username="user@example.com",
         email="2606449422@qq.com", #Small Circle's email
-        name="user",
+        name="user@example.com",
         is_active=True,
         is_staff=False,
         phone="06787654"
@@ -73,18 +73,17 @@ class UserViewSetTestCase(APITestCase):
         # print(self.new_user.to_json())
         self.url = reverse("api:user-list")
         self.auth_header = 'Token 2c7e9e9465e917dcd34e620193ed2a7447140e5b'
-
         Token.objects.create(key='2c7e9e9465e917dcd34e620193ed2a7447140e5b', user=self.new_user)
 
     def doCleanups(self):
         print(User.objects.all())
         print(Token.objects.all())
-        # User.drop_collection()
-        # Token.drop_collection()
+        #User.drop_collection()
+        #Token.drop_collection()
 
     def test_get_unauthorized(self):
-        User.drop_collection()
-        Token.drop_collection()
+        #User.drop_collection()
+        #Token.drop_collection()
         c = APIClient()
 
         response = c.get(self.url)

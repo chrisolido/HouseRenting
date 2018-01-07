@@ -84,6 +84,7 @@
             }
             $("#div_house_list").empty();
             var user = {user: "", token: ""};
+            //console.log(user);
 
             $.getJSON("./api/houses/", search, function (data) {
                 {#console.log(data);#}
@@ -96,6 +97,15 @@
             });
         }
     </script>
+    <script>
+        function jmp_add_release()
+        {
+            var astr = $("#username_a").text();
+            var arr = astr.split(" ");
+            var add_username = arr[0];
+            window.location.href="/add_release?username="+encodeURI(add_username);
+        }
+        </script>
     <script>
         $(document).ready(function () {
             ShowHouseList();
@@ -111,14 +121,21 @@
 <div style="float:left;position:absolute;right:5%;">
     <div style="float:left;position:relative;right:30%;">
         {% if user %}
-            <a class="right_top_font" style="float:left;" href="{% url "logout" %}">{{ user }} Logout</a>
+            <a class="right_top_font" id="username_a" style="float:left;" href="{% url "logout" %}">{{ user }} Logout</a>
         {% else %}
             <a class="right_top_font" style="float:left;" href="{% url "login" %}">Login</a>
             <div class="right_top_font" style="float:left;">/</div>
             <a class="right_top_font" style="float:left;" href="{% url 'registration' %}">Register</a>
         {% endif %}
+    </div> <!--href="{% url 'registration' %}"-->
+
+    <div class="right_top_font" style="float:left;position:relative;right:20%;" >
+        {% if user %}
+            <p style="cursor:pointer" onclick="jmp_add_release()">Personal Center</p>
+        {% else %} <!--href="/housedetail?title=' + encodeURI(topic) + '"-->
+            <a href="{% url "registration" %}">Personal Center</a>
+        {% endif %}
     </div>
-    <div class="right_top_font" style="float:left;position:relative;right:20%;" href="{% url 'registration' %}">Personal center</div>
 </div>
 
 <div>
