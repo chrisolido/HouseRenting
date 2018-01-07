@@ -72,6 +72,7 @@ class House(Document):
     price = fields.FloatField(required=True, verbose_name="Price")
     address = fields.EmbeddedDocumentField(Address)
     check = fields.BooleanField()
+    username = fields.StringField(verbose_name='username of room host')
     roomnbr = fields.IntField(verbose_name='room number')
     from_date = fields.DateTimeField(verbose_name="Available  date")
     to_date = fields.DateTimeField(verbose_name="Available date")

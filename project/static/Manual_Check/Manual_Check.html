@@ -23,6 +23,7 @@
                     $('#from_date').val("0000-00-00");
                     $('#to_date').val("0000-00-00");
                     $("#detail_text").val("");
+                    $('#show_image').attr("src", "");
             }
         function ShowAnUnchecked()
         {
@@ -69,6 +70,10 @@
                         f_date = newDate.getFullYear() + "-" + (month) + "-" + (day);
                         $('#to_date').val(f_date);
                         $("#detail_text").val(data.information);
+                        alert(1);
+                        console.log(data);
+                        alert(data.pictures[0]);
+                        $('#show_image').attr("src","{% static 'img/"+data.pictures[0]+"' %}");//{% static 'img/house.png' %}
                     }
                 },
                 error: function () {
@@ -149,9 +154,9 @@
 		</div>
         <div class="add_info">
             <div class="p_div">community address:</div>
-            <input id="city" class="s_input"  type="text" disabled="disabled">city
+            <input id="city" style="width:120px" class="s_input"  type="text" disabled="disabled">city
             <input id="district" type="text" class="s_input" disabled="disabled">district
-            <input id="address" type="text" class="s_input" disabled="disabled">address
+            <input id="address" style="width:120px" type="text" class="s_input" disabled="disabled">address
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>

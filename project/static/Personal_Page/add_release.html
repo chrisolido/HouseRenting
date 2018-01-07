@@ -8,12 +8,17 @@
     <link rel="stylesheet" media="screen" href="{% static "css/personal_page/style.css" %}"/>
     <script>
         function click_add() {
+            var fileobj = $("#img")[0].files[0];
+            if(!fileobj)
+                alert("Must upload a picture!");
+            console.log(fileobj);
+
             var formD = new FormData();
             if($("#rent_title").val() == "")
             {
                 alert("Title can't be blank!");
                 return;
-            }
+            }//"username": "user@example.com",
             formD.append("rent_title", $("#rent_title").val());
             formD.append("detail_text", $("#detail_text").val());
             formD.append("price", $("#price").val());
@@ -23,11 +28,13 @@
             formD.append("roomnbr", $("#roomnbr").val());
             formD.append("check", false);
             formD.append("type", $('input:radio:checked').val());
+            formD.append("username", $("#p2").text());
             formD.append("province", $("#province").val());
             formD.append("city", $("#city").val());
             formD.append("district", $("#district").val());
             formD.append("address", $("#address").val());
             formD.append("floor", $("#floor").val());
+            formD.append("img", fileobj);
             formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
             console.log(formD);
             $.ajax({
@@ -54,7 +61,7 @@
 <div id="wrapper">
     <div id="head">
         <a href="release.html"><p id="p1">House Renting</p></a>
-        <a href="renting_history.html"><p id="p2">15901776523(log out)</p></a>
+        <a href="renting_history.html"><p id="p2">user@example.com</p></a>
     </div>
     <div id="left"></div>
     <p id="center">personal center</p>
@@ -78,7 +85,7 @@
             <input class="s_input" type="text" id="province">province
             <input class="s_input" type="text" id="city">city
             <input type="text" class="s_input" id="district">district
-            <input type="text" class="s_input" id="address">address <!--road==address-->
+            <input type="text" style="width:120px" class="s_input" id="address">address <!--road==address-->
         </div>
         <div class="add_info">
             <div class="p_div">house type:</div>
@@ -102,7 +109,7 @@
         </div>
         <div class="add_info">
             <div class="p_div">upload picture:</div>
-            <input type="file" style="height: 50px;font-size: 15px">
+            <input id="img" type="file" style="height: 50px;font-size: 15px">
         </div>
             <div id="submit" onclick="click_add()">+add</div>
     </div>
