@@ -37,7 +37,7 @@ class User(Document):
             return str(int(no) + 1)
 
     # id = fields.StringField(primary_key=True, required=True, validation=number)
-    username = fields.StringField(required=True)
+    username = fields.StringField(required=True, unique=True)
     email = fields.EmailField(required=False)
     phone = fields.StringField(required=False)
 
