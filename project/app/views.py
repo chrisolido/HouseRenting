@@ -24,15 +24,26 @@ from users.models import *
 from urllib import parse
 from django.core.mail import EmailMessage
 import ast
-USER = ("user", "{\"user\": \"\", \"auth\": \"\"}")
+from django.core.exceptions import ObjectDoesNotExist
 
-email = EmailMessage('Subject', 'Body verification code is 423455', to=['kevin.barre@epitech.eu', 'ikelive@hotmail.fr'])
+USER = ("user", "{\"username\": \"\", \"auth\": \"\"}")
+
+email = EmailMessage('Subject', 'Verification code is 423455', to=['kevin.barre@epitech.eu', 'ikelive@hotmail.fr'])
 
 
 def index_view(request):
     username = json.loads(parse.unquote(request.COOKIES.get(*USER)))
+    user = None
+    print(username["username"])
+    if username["username"]:
+        try:
+            user = User.objects.get(username=username["username"])
+        except ObjectDoesNotExist:
+            user = None
+            print("User doesn't exist.")
     context = {
-        "user": username["user"]
+        "username": username["username"],
+        "user": user
     }
     print(request.COOKIES)
     return TemplateResponse(request, 'index.html', context)
@@ -95,12 +106,17 @@ def user_login_view(request):
     if request.method == "POST":
         userauth = request.COOKIES.get(*USER)
         userauth = json.loads(parse.unquote(userauth))
-        user = authenticate(username=request.POST.get("PhoneNumber"), password=request.POST.get("Password"))
-        userauth["user"] = user.name
-        userauth["auth"] = str(Token.objects.get_or_create(user=user)[0])
-        response = HttpResponseRedirect(reverse('index', request=request))
-        response.set_cookie("user", json.dumps(userauth))
-        return response
+        print(request.POST)
+        user = authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
+        if user:
+            userauth["username"] = user.username
+            userauth["auth"] = str(Token.objects.get_or_create(user=user)[0])
+            if user.is_staff:
+                response = HttpResponseRedirect(reverse('manualcheck', request=request))
+            else:
+                response = HttpResponseRedirect(reverse('index', request=request))
+            response.set_cookie("user", json.dumps(userauth))
+            return response
     return TemplateResponse(request, 'House_detail/login.html', context)
 
 
