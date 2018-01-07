@@ -30,10 +30,10 @@ def create_user():
     new_user = User(
         username="user@example.com",
         email="2606449422@qq.com", #Small Circle's email
-        name="user@example.com",
+        name="user",
         is_active=True,
-        is_staff=True,
-        is_superuser=True,
+        is_staff=False,
+        is_superuser=False,
         phone="06787654"
     )
     new_user.set_password('foobar')
@@ -80,6 +80,8 @@ class UserViewSetTestCase(APITestCase):
         self.url = reverse("api:user-list")
         self.auth_header = 'Token 2c7e9e9465e917dcd34e620193ed2a7447140e5b'
         Token.objects.create(key='2c7e9e9465e917dcd34e620193ed2a7447140e5b', user=self.new_user)
+        create_user()
+
 
     def doCleanups(self):
         print(User.objects.all())

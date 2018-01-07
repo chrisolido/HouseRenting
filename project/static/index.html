@@ -121,16 +121,15 @@
 <div style="float:left;position:absolute;right:5%;">
     <div style="float:left;position:relative;right:30%;">
         {% if user %}
-            <a class="right_top_font" id="username_a" style="float:left;" href="{% url "logout" %}">{{ user }} Logout</a>
-            <!--{{ user.username }}
-            {{ user.email }}
-            {{ user.phone }}
-            {{ user.name }}
-            {{ user.is_staff }}
-            {{ user.is_active }}
-            {{ user.is_superuser }}
-            {{ user.last_login }}-->
-            <a class="right_top_font" style="float:left;" href="{% url "logout" %}">{{ user }} Logout</a>
+            <a class="right_top_font" id="username_a" style="float:left;" href="{% url "logout" %}">{{ user.username}} Logout</a>
+            <!--&lt;!&ndash;{{ user.username }}-->
+            <!--{{ user.email }}-->
+            <!--{{ user.phone }}-->
+            <!--{{ user.name }}-->
+            <!--{{ user.is_staff }}-->
+            <!--{{ user.is_active }}-->
+            <!--{{ user.is_superuser }}-->
+            <!--{{ user.last_login }}&ndash;&gt;-->
         {% else %}
             <a class="right_top_font" style="float:left;" href="{% url "login" %}">Login</a>
             <div class="right_top_font" style="float:left;">/</div>

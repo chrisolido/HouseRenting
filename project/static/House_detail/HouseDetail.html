@@ -77,6 +77,38 @@
         }
     </script>
     <script>
+        function append_rec_list(recnum,title, price, pic) {
+            var htmlString = '<a href="/housedetail?title=' + encodeURI(title) + '">'+
+                '<img src="'+pic+'" id="likepc'+String(recnum)+'"></a>'
+            + '<input type="submit" id="pc'+String(recnum)+'price" value="'+String(price)+"yuan/month"+'">';
+            $("#recdiv").append(htmlString);
+        }
+        function ShowRecommendations(price)
+        {
+            var formD = new FormData();
+            formD.append("price", price);
+            formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+            $.ajax({
+                type: 'POST',
+                sync: false,
+                url: '/api/HouseRecommendation/',
+                data: formD,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    //data is a house recommendations
+                    console.log(data);
+                    for(var i=0;i < data.recnum; i++)
+                    {
+                        append_rec_list(i+1,data.title[i], data.price[i], "/static/img/" + data.pictures[i]);
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }});
+        }
+        </script>
+    <script>
         function EditPageElements(mytitle)
         {
             var formD = new FormData();
@@ -93,12 +125,12 @@
                     //data is a house info wait to be shown
                     console.log(data);
                     $("#Des_title").html(data.title);
-                    // $("#city").val(data.address.city);
-                    // $("#district").val(data.address.district);
-                    // $("#address").val(data.address.road);
-                    // $("#size").val(data.size);
+
                     $("#floornumber").html(": "+String(data.address.floor));
                     $("#price").html(data.price+"yuan/month");
+                    //// Recommmendation
+                    ShowRecommendations(data.price);
+                    ////
                     $("#typecontent").html(": "+data.type);
                     var val = Date.parse(data.from_date);
                     var newDate = new Date(val);
@@ -115,8 +147,10 @@
                     $("#sizeroom").html(": "+data.size+"㎡");
                     $("#housecontent").html(": "+data.roomnbr+" rooms");
                     $("#detailaddress").html(data.address.road+","+data.address.district+","+data.address.city);
-                    //$("#pnum").val(": "+data.contact);
+                    $("#pnum").val(": "+data.phone);
                     $("#description").html(data.information);
+                    $("#mainpic").attr("src", "/static/img/"+data.pictures[0]);
+
                     window.EnAdress = data.address.city+","+data.address.district+" district"+","+data.address.road;
                     console.log(window.EnAdress);
                     TransEnToCH(window.EnAdress);
@@ -130,8 +164,9 @@
         $(document).ready(function () {
             var mytitle = GetQueryString("title");
             var EnAdress = "";
-            alert(mytitle);
+            //alert(mytitle);
             EditPageElements(mytitle);
+
             /*$("#mapdiv").append("<script>TransEnToCH("+window.EnAdress+");*/
         });
     </script>
@@ -150,14 +185,14 @@
     <p id="Des_title"><strong>Gong road new town,rent in good faith</strong></p>
     <p id="number">Number:56705636</p>
     <!unable to achieve changing picture>
-    <form action="">
+    <!--<form action="">-->
         <img src="/static/img/House_detail/timg.jpg" id="mainpic">
         <input type="submit" name="up"id="up" value="/\">
         <img src="/static/img/House_detail/example.jpg" id="example">
         <img src="/static/img/House_detail/example2.jpg"id="example2">
         <img src="/static/img/House_detail/example3.jpg" id="example3">
         <input type="submit" name="down" value="\/" id="down">
-    </form>
+   <!-- </form>-->
     <div id="bd"></div>
     <strong><p id="price">3000yuan/month</p></strong>
     <p id="type">Renting type </p>
@@ -194,14 +229,8 @@
    </div><p id="liketitle">Do you like these houses?</p>
     <div id="likecontentbd">
     </div>
-    <a href="#"><img src="/static/img/House_detail/example2.jpg" id="likepc1"></a>
-    <input type="submit" id="pc1price" value="2000yuan/month">
-    <a href="#"><img src="/static/img/House_detail/example2.jpg" id="likepc2"></a>
-    <input type="submit" id="pc2price" value="3000yuan/month">
-    <a href="#"><img src="/static/img/House_detail/example2.jpg" id="likepc3"></a>
-    <input type="submit" id="pc3price" value="1500yuan/month">
-    <a href="#"><img src="/static/img/House_detail/example2.jpg" id="likepc4"></a>
-    <input type="submit"id="pc4price" value="2000yuan/month">
+    <div id="recdiv">
+    </div>
     <div id="ad"></div>
     <strong><p id="adtitle">AD Click here to learn more</p></strong>
     <a href="#"><img src="/static/img/House_detail/ad.jpg"id="ad1"></a>

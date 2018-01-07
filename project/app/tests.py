@@ -83,7 +83,7 @@ house_info = '''
         "to_date": {"$date": 1512980682785},
         "size": 3,
         "roomnbr": 4,
-        "information": "Blue house",
+        "information": "Blue house, very very comfortable! Near university, convenient for out work. Expect quick business,its your best choice",
         "type": "Group",
         "username": "user@example.com",
         "check": true,

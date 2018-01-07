@@ -231,6 +231,32 @@ class ManualCheckRejectView(viewsets.ViewSet):
                     house.delete()
         return HttpResponse("OK")
 
+class HouseRecommendationView(viewsets.ViewSet):
+    def create(self, request):
+        print("HouseRecommendationView")
+        if request.method == "POST":
+            price = request.POST.get("price", None)
+            recnum = 0
+            titlelst = []
+            pricelst = []
+            pictureslst = []
+            for house in House.objects.all():
+                if house.price >= 0.7*int(price) and house.price <= 1.3*int(price) and house.check and recnum < 4:
+                    recnum += 1
+                    titlelst += [house.title]
+                    pricelst += [house.price]
+                    pictureslst += [house.pictures[0]]
+
+            rhouse_json = {
+                "recnum": recnum,
+                "title": titlelst,
+                "price": pricelst,
+                "pictures": pictureslst
+            }
+            return HttpResponse(json.dumps(rhouse_json), content_type="application/json")
+
+        return HttpResponse("OK")
+
 
 class ShowHouseDetailView(viewsets.ViewSet):
     def create(self, request):
@@ -240,6 +266,9 @@ class ShowHouseDetailView(viewsets.ViewSet):
             for house in House.objects.all():
                 if house.title == title:
                     # return this house's detail
+                    phone = ""
+                    for user in User.objects.all():
+                        phone = user.phone
                     rhouse_json = {
                         "title": house.title,
                         "price": house.price,
@@ -249,6 +278,8 @@ class ShowHouseDetailView(viewsets.ViewSet):
                         "roomnbr": house.roomnbr,
                         "check": house.check,
                         "information": house.information,
+                        "username": house.username,
+                        "phone": phone,
                         "type": house.type,
                         "contact": "5a2e135a59bfed19ea856ff7",
                         "address": {
@@ -258,7 +289,8 @@ class ShowHouseDetailView(viewsets.ViewSet):
                             "province": house.address.province,
                             "district": house.address.district,
                             "floor": house.address.floor
-                        }
+                        },
+                        "pictures": [house.pictures[0]]
                     }
                     return HttpResponse(json.dumps(rhouse_json), content_type="application/json")
         return HttpResponse("OK")
