@@ -65,7 +65,7 @@
     <script>
         $(document).ready(function () {
             var myusername = GetQueryString("username");
-            alert(myusername);
+
             $("#p2").text(myusername);
         });
     </script>
@@ -75,6 +75,7 @@
     <div id="head">
         <a href="release.html"><p id="p1">House Renting</p></a>
         <a href="renting_history.html"><p id="p2">user@example.com</p></a>
+        <a href="{% url "logout" %}"><p id="p3">Log Out</p></a>
     </div>
     <div id="left"></div>
     <p id="center">personal center</p>

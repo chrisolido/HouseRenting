@@ -141,7 +141,7 @@
         {% if user %}
             <p style="cursor:pointer" onclick="jmp_add_release()">Personal Center</p>
         {% else %} <!--href="/housedetail?title=' + encodeURI(topic) + '"-->
-            <a href="{% url "registration" %}">Personal Center</a>
+            <a href="{% url "login" %}">Personal Center</a>
         {% endif %}
     </div>
 </div>
@@ -194,7 +194,7 @@
                     <li><a onclick="setsearch({district: 'Changning'})">Changning</a></li>
                     <li><a onclick="setsearch({district: 'Qingpu'})">Qingpu</a></li>
                     <li><a onclick="setsearch({district: 'Minxing'})">Minxing</a></li>
-                    <li><a onclick="setsearch({district: 'Baoshan'})">BaoShan</a></li>
+                    <li><a onclick="setsearch({district: 'Baoshan'})">Baoshan</a></li>
                     <li><a onclick="setsearch({district: 'Fengxian'})">Fengxian</a></li>
                     <li><a onclick="setsearch({district: 'Jinshan'})">Jinshan</a></li>
                     <li><a onclick="setsearch({district: 'Songjiang'})">Songjiang</a></li>

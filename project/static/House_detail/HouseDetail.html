@@ -83,10 +83,11 @@
             + '<input type="submit" id="pc'+String(recnum)+'price" value="'+String(price)+"yuan/month"+'">';
             $("#recdiv").append(htmlString);
         }
-        function ShowRecommendations(price)
+        function ShowRecommendations(price,title)
         {
             var formD = new FormData();
             formD.append("price", price);
+            formD.append("title", title);
             formD.append("csrfmiddlewaretoken", "{{ csrf_token }}");
             $.ajax({
                 type: 'POST',
@@ -129,7 +130,7 @@
                     $("#floornumber").html(": "+String(data.address.floor));
                     $("#price").html(data.price+"yuan/month");
                     //// Recommmendation
-                    ShowRecommendations(data.price);
+                    ShowRecommendations(data.price, data.title);
                     ////
                     $("#typecontent").html(": "+data.type);
                     var val = Date.parse(data.from_date);
@@ -169,6 +170,13 @@
 
             /*$("#mapdiv").append("<script>TransEnToCH("+window.EnAdress+");*/
         });
+        function jmp_add_release()
+        {
+            var astr = $("#Username").text();
+            var arr = astr.split(" ");
+            var add_username = arr[0];
+            window.location.href="/add_release?username="+encodeURI(add_username);
+        }
     </script>
 </head>
 <body>
@@ -176,9 +184,26 @@
     <div id="head">
         <p id="position">ShangHai</p>
         <a href="#" id="change">[Change]</a>
-        <a href="#" id="Register">Register/</a>
-        <a href="#" id="Login">Login</a>
-        <a href="#"id="PersonalCenter">Personal center</a>
+        {% if user %}
+            <a href="{% url 'logout' %}" id="Username">{{ user.username }} Logout</a>
+            <div style="cursor:pointer" id="PersonalCenter" onclick="jmp_add_release()">Personal Center</div>
+        {% else %}
+            <a href="{% url 'registration' %}" id="Register">Register/</a>
+            <a href="{% url 'login' %}" id="Login">Login</a>
+            <a id="PersonalCenter" href="{% url 'login' %}">Personal Center</a>
+        {% endif %}
+
+        <!--{% if user %}
+            <a id="Username" style="float:left;" href="{% url 'logout' %}">{{ user.username}} Logout</a>
+        {% else %}
+        <a id="Login" href="{% url 'login' %}">Login</a>
+        <a id="Register" href="{% url 'registration' %}">Register</a>-->
+        <!--{% endif %}
+        {% if user %}
+            <p style="cursor:pointer" id="PersonalCenter" onclick="jmp_add_release()">Personal Center</p>
+        {% else %} <!--href="/housedetail?title=' + encodeURI(topic) + '"-->
+        <!--<a id="PersonalCenter" href="{% url 'registration' %}">Personal Center</a>-->
+        <!--{% endif %}-->
     </div>
     <hr id="hr1">
     <p id="title"><strong>House Renting</strong></p>

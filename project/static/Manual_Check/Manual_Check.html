@@ -70,9 +70,9 @@
                         f_date = newDate.getFullYear() + "-" + (month) + "-" + (day);
                         $('#to_date').val(f_date);
                         $("#detail_text").val(data.information);
-                        alert(1);
+
                         console.log(data);
-                        alert(data.pictures[0]);
+
                         $('#show_image').attr("src","{% static 'img/"+data.pictures[0]+"' %}");//{% static 'img/house.png' %}
                     }
                 },
@@ -138,6 +138,7 @@
     <div id="head">
         <p id="p1">House Renting</p>
         <p id="p2">Admin</p>
+        <a href="{% url "logout" %}"><p id="p3">Log Out</p></a>
     </div>
    
     <p id="right_title">Manual Check</p>

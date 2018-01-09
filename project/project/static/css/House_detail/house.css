@@ -67,7 +67,29 @@ body {
     text-decoration: blink;
 }
 
-#PersonalCenter:link, #PersonalCenter:visited {
+#Username:link, #Username:visited {
+    right: 160px;
+    font-size: 15px;
+    font-family: "Times New Roman";
+    color: dimgray;
+    text-decoration: none;
+    position: absolute;
+
+}
+
+#Username:hover {
+    color: #5cc0f7;
+    text-decoration: blink;
+}
+#PersonalCenter{
+    right: 30px;
+    font-size: 15px;
+    font-family: "Times New Roman";
+    color: dimgrey;
+    text-decoration: none;
+    position: absolute;
+}
+/*#PersonalCenter:link, #PersonalCenter:visited {
     right: 30px;
     font-size: 15px;
     font-family: "Times New Roman";
@@ -80,7 +102,7 @@ body {
 #PersonalCenter:hover {
     color: #5cc0f7;
     text-decoration: blink;
-}
+}*/
 
 #hr1 {
     top: 10px;

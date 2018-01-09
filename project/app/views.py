@@ -67,7 +67,20 @@ def personalinfo_view(request):
     return TemplateResponse(request, 'Personal_Page/personal_information.html', context)
 
 def house_detail_view(request):
-    context = {}
+    username = json.loads(parse.unquote(request.COOKIES.get(*USER)))
+    user = None
+    print(username["username"])
+    if username["username"]:
+        try:
+            user = User.objects.get(username=username["username"])
+        except ObjectDoesNotExist:
+            user = None
+            print("User doesn't exist.")
+    context = {
+        "username": username["username"],
+        "user": user
+    }
+    print(request.COOKIES)
     return TemplateResponse(request, 'House_detail/HouseDetail.html', context)
 
 
@@ -229,6 +242,18 @@ class ManualCheckRejectView(viewsets.ViewSet):
             for house in House.objects.all():
                 if house.title == title:
                     house.delete()
+                    username = house.username
+                    to_email_address = ""  # username
+                    print("username is " + username)
+                    for user in User.objects.all():
+                        print(user.username)
+                        if user.username == username:
+                            to_email_address = user.email
+                            email_topic = "Add House Release Information Fail"
+                            email_content = ("Dear " + username + ", your adding house release information failed"
+                                  " due to bad words in topic/house_detail, please check on House Renting Website")
+                            email_inst = Email_Service()
+                            email_inst.send_email(to_email_address, username, email_topic, email_content)
         return HttpResponse("OK")
 
 class HouseRecommendationView(viewsets.ViewSet):
@@ -236,12 +261,13 @@ class HouseRecommendationView(viewsets.ViewSet):
         print("HouseRecommendationView")
         if request.method == "POST":
             price = request.POST.get("price", None)
+            title = request.POST.get("title", None)
             recnum = 0
             titlelst = []
             pricelst = []
             pictureslst = []
             for house in House.objects.all():
-                if house.price >= 0.7*int(price) and house.price <= 1.3*int(price) and house.check and recnum < 4:
+                if house.price >= 0.7*int(price) and house.price <= 1.3*int(price) and house.check and recnum < 4 and title!=house.title:
                     recnum += 1
                     titlelst += [house.title]
                     pricelst += [house.price]
@@ -324,6 +350,7 @@ class BadwordView(viewsets.ViewSet):
             username = request.POST.get("username", None)
             #upload an image into static package
             img = request.FILES.get('img')
+            img.name = str(int(time.time()))
 
             if os.path.exists(os.path.join('project/static/img', img.name)):
                 return HttpResponse("This Image Exists!")
@@ -355,7 +382,7 @@ class BadwordView(viewsets.ViewSet):
                     if user.username == username:
                         to_email_address = user.email
 
-                username = "SmallCircle"
+                #username = "SmallCircle"
                 email_topic = "Add House Release Information Fail"
                 email_content = ("Dear " + username + ", your adding house release information failed"
                                                       " due to bad words in topic/house_detail, please check on House Renting Website")
